@@ -45,3 +45,7 @@ Penpot es la fuente de verdad. La copia exacta del export se encuentra en `docs/
 ## Estado
 
 La Etapa 1 — base técnica — está completada. La Etapa 2 (WordPress y modelo de contenido) requiere una nueva aprobación.
+
+## Pruebas UI
+
+`npm run test:e2e` requiere Google Chrome local y usa los viewports 375×812, 768×1024, 1024×768 y 1440×1000. Las capturas se guardan en `artifacts/ui-review/`, ignorado por Git. El menú móvil es un desplegable no modal: mueve foco al primer enlace al abrir y restaura el disparador al cerrar con Escape.

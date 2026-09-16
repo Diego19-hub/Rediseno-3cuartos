@@ -3,3 +3,4 @@
 .primary:hover { background: var(--color-action-primary-hover); }
 .primary:active { background: var(--color-action-primary-active); }
 .secondary { color: var(--color-text-primary); border-color: var(--color-text-primary); }
+.button:disabled { cursor: not-allowed; color: var(--color-text-muted); background: var(--color-action-disabled); }
