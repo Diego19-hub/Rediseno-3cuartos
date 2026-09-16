@@ -1,0 +1,30 @@
+import type { CaseStudy, GlobalSettings, Resource, Service, TeamMember, Testimonial } from "../../types/wordpress";
+import { wordpressFetch } from "./client";
+import { collectionEndpoint, globalSettingsEndpoint, type CollectionName, type CollectionParams } from "./endpoints";
+import { caseStudy, globalSettings, resource, service, teamMember, testimonial } from "./normalizers";
+import { WordPressApiError } from "./errors";
+
+export type PageResult<T> = { items: T[]; page: number; totalPages: number; total: number };
+type Normalizer<T> = (value: never) => T;
+const normalizers: Record<CollectionName, Normalizer<Service | CaseStudy | Testimonial | TeamMember | Resource>> = { services: service as Normalizer<Service>, caseStudies: caseStudy as Normalizer<CaseStudy>, testimonials: testimonial as Normalizer<Testimonial>, teamMembers: teamMember as Normalizer<TeamMember>, resources: resource as Normalizer<Resource> };
+
+export async function getCollection<T>(name: CollectionName, params: CollectionParams = {}): Promise<PageResult<T>> {
+  try {
+    const { data, response } = await wordpressFetch<never[]>(collectionEndpoint(name, { ...params, embed: true }));
+    return { items: data.map(normalizers[name]) as T[], page: params.page ?? 1, total: Number(response.headers.get("X-WP-Total") ?? 0), totalPages: Number(response.headers.get("X-WP-TotalPages") ?? 0) };
+  } catch (error) {
+    if (error instanceof WordPressApiError && error.status === 404) return { items: [], page: params.page ?? 1, total: 0, totalPages: 0 };
+    throw error;
+  }
+}
+
+export const getServices = (params?: CollectionParams) => getCollection<Service>("services", params);
+export const getCaseStudies = (params?: CollectionParams) => getCollection<CaseStudy>("caseStudies", params);
+export const getTestimonials = (params?: CollectionParams) => getCollection<Testimonial>("testimonials", params);
+export const getTeamMembers = (params?: CollectionParams) => getCollection<TeamMember>("teamMembers", params);
+export const getResources = (params?: CollectionParams) => getCollection<Resource>("resources", params);
+
+export async function getGlobalSettings(): Promise<GlobalSettings | null> {
+  try { return globalSettings((await wordpressFetch<unknown>(globalSettingsEndpoint)).data); }
+  catch (error) { if (error instanceof WordPressApiError && error.status === 404) return null; throw error; }
+}

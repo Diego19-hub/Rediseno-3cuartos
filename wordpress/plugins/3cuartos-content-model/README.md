@@ -1,5 +1,3 @@
 # 3cuartos Content Model
 
-El modelo de WordPress se versionará aquí durante la etapa de CMS.
-
-La decisión provisional es implementar Custom Post Types, taxonomías y metadatos con APIs nativas de WordPress (`register_post_type`, `register_taxonomy` y `register_post_meta`) y `show_in_rest: true`. Esto evita depender de ACF/ACF Pro y de licencias no autorizadas. Si un campo editorial complejo justificara ACF más adelante, se documentará y requerirá aprobación previa.
+Plugin nativo para WordPress 6.4+/PHP 8.1+. Copia esta carpeta a `wp-content/plugins`, actívalo y visita los CPTs en el administrador. No usa ACF, no crea contenido al activarse y no borra contenido al desinstalarse.
