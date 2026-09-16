@@ -1,0 +1,1 @@
+.section { padding-block: clamp(var(--space-12), 8vw, var(--space-24)); }

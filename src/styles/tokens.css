@@ -1,0 +1,137 @@
+:root {
+  /* Foundations — fuente: Penpot / conjunto: core */
+  /* Espaciado: Penpot core.space.* */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+
+  /* Dimensiones: Penpot core.breakpoint.*, core.duration.* y core.container.* */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 450ms;
+  --duration-reveal: 700ms;
+  --duration-story: 1000ms;
+  --container-reading: 720px;
+  --container-content: 1200px;
+  --container-wide: 1440px;
+
+  /* Radio: Penpot core.radius.* */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Sombra: Penpot core.shadow.* */
+  --shadow-sm: 0px 1px 2px 0px rgba(16, 16, 15, 0.06);
+  --shadow-md: 0px 8px 24px 0px rgba(16, 16, 15, 0.14);
+  --shadow-lg: 0px 24px 56px 0px rgba(16, 16, 15, 0.2);
+
+  /* Tipografía primitiva: Penpot core.font.* */
+  --font-family-display: "DM Sans";
+  --font-family-body: "DM Sans";
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
+  --font-size-32: 32px;
+  --font-size-40: 40px;
+  --font-size-48: 48px;
+  --font-size-64: 64px;
+  --font-size-80: 80px;
+  --font-size-96: 96px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.08em;
+
+  /* Color primitivo: Penpot core.color.neutral.*, base.white y accent.* */
+  --color-neutral-50: #f7f7f5;
+  --color-neutral-100: #e9e9e5;
+  --color-neutral-200: #d4d4ce;
+  --color-neutral-500: #777770;
+  --color-neutral-700: #3b3b37;
+  --color-neutral-900: #171716;
+  --color-neutral-950: #10100f;
+  --color-base-white: #ffffff;
+  --color-accent-500: #245b68;
+  --color-accent-600: #1c4853;
+
+  /* Color semántico: aliases de Penpot; se conserva la referencia y valor resuelto. */
+  /* Penpot: core.color.border.default → {color.neutral.200}; resuelto: #D4D4CE */
+  --color-border-default: var(--color-neutral-200);
+  /* Penpot: core.color.border.strong → {color.neutral.500}; resuelto: #777770 */
+  --color-border-strong: var(--color-neutral-500);
+  /* Penpot: core.color.focus.ring → {color.accent.500}; resuelto: #245B68 */
+  --color-focus-ring: var(--color-accent-500);
+  /* Penpot: core.color.surface.canvas → {color.neutral.50}; resuelto: #F7F7F5 */
+  --color-surface-canvas: var(--color-neutral-50);
+  /* Penpot: core.color.surface.default → {color.base.white}; resuelto: #FFFFFF */
+  --color-surface-default: var(--color-base-white);
+  /* Penpot: core.color.surface.inverse → {color.neutral.950}; resuelto: #10100F */
+  --color-surface-inverse: var(--color-neutral-950);
+  /* Penpot: core.color.status.error; resuelto: #8E2C22 */
+  --color-status-error: #8e2c22;
+  /* Penpot: core.color.text.primary → {color.neutral.900}; resuelto: #171716 */
+  --color-text-primary: var(--color-neutral-900);
+  /* Penpot: core.color.text.secondary → {color.neutral.700}; resuelto: #3B3B37 */
+  --color-text-secondary: var(--color-neutral-700);
+  /* Penpot: core.color.text.muted → {color.neutral.500}; resuelto: #777770 */
+  --color-text-muted: var(--color-neutral-500);
+  /* Penpot: core.color.text.inverse → {color.base.white}; resuelto: #FFFFFF */
+  --color-text-inverse: var(--color-base-white);
+  /* Penpot: core.color.action.primary → {color.accent.500}; resuelto: #245B68 */
+  --color-action-primary: var(--color-accent-500);
+  /* Penpot: core.color.action.primary-hover → {color.accent.600}; resuelto: #1C4853 */
+  --color-action-primary-hover: var(--color-accent-600);
+  /* Penpot: core.color.action.disabled → {color.neutral.200}; resuelto: #D4D4CE */
+  --color-action-disabled: var(--color-neutral-200);
+  /* Penpot: core.color.action.primary-active; resuelto: #163A43 */
+  --color-action-primary-active: #163a43;
+
+  /* Tipografía semántica: Penpot core.type.*; los objetos se expanden a propiedades CSS. */
+  --type-heading-3-font-family: "DM Sans"; --type-heading-3-font-size: 40px; --type-heading-3-font-weight: 600; --type-heading-3-letter-spacing: -0.03em; --type-heading-3-line-height: 1.16; --type-heading-3-text-transform: none; --type-heading-3-text-decoration: none;
+  --type-display-l-font-family: "DM Sans"; --type-display-l-font-size: 80px; --type-display-l-font-weight: 700; --type-display-l-letter-spacing: -0.03em; --type-display-l-line-height: 1.04; --type-display-l-text-transform: none; --type-display-l-text-decoration: none;
+  --type-heading-2-font-family: "DM Sans"; --type-heading-2-font-size: 48px; --type-heading-2-font-weight: 600; --type-heading-2-letter-spacing: -0.03em; --type-heading-2-line-height: 1.12; --type-heading-2-text-transform: none; --type-heading-2-text-decoration: none;
+  --type-label-font-family: "DM Sans"; --type-label-font-size: 14px; --type-label-font-weight: 600; --type-label-letter-spacing: 0.08em; --type-label-line-height: 1.2; --type-label-text-transform: uppercase; --type-label-text-decoration: none;
+  --type-heading-1-font-family: "DM Sans"; --type-heading-1-font-size: 64px; --type-heading-1-font-weight: 700; --type-heading-1-letter-spacing: -0.03em; --type-heading-1-line-height: 1.08; --type-heading-1-text-transform: none; --type-heading-1-text-decoration: none;
+  --type-body-s-font-family: "DM Sans"; --type-body-s-font-size: 14px; --type-body-s-font-weight: 400; --type-body-s-letter-spacing: 0em; --type-body-s-line-height: 1.45; --type-body-s-text-transform: none; --type-body-s-text-decoration: none;
+  --type-heading-4-font-family: "DM Sans"; --type-heading-4-font-size: 32px; --type-heading-4-font-weight: 600; --type-heading-4-letter-spacing: -0.03em; --type-heading-4-line-height: 1.2; --type-heading-4-text-transform: none; --type-heading-4-text-decoration: none;
+  --type-body-l-font-family: "DM Sans"; --type-body-l-font-size: 20px; --type-body-l-font-weight: 400; --type-body-l-letter-spacing: 0em; --type-body-l-line-height: 1.5; --type-body-l-text-transform: none; --type-body-l-text-decoration: none;
+  --type-caption-font-family: "DM Sans"; --type-caption-font-size: 12px; --type-caption-font-weight: 400; --type-caption-letter-spacing: 0em; --type-caption-line-height: 1.35; --type-caption-text-transform: none; --type-caption-text-decoration: none;
+  --type-body-m-font-family: "DM Sans"; --type-body-m-font-size: 16px; --type-body-m-font-weight: 400; --type-body-m-letter-spacing: 0em; --type-body-m-line-height: 1.5; --type-body-m-text-transform: none; --type-body-m-text-decoration: none;
+  --type-display-xl-font-family: "DM Sans"; --type-display-xl-font-size: 96px; --type-display-xl-font-weight: 700; --type-display-xl-letter-spacing: -0.03em; --type-display-xl-line-height: 1.04; --type-display-xl-text-transform: none; --type-display-xl-text-decoration: none;
+
+  /* Extensiones técnicas temporales — no pertenecen a los 95 tokens de Penpot. */
+  /* Fallback web requerido por la implementación; eliminar si Foundations lo incorpora. */
+  --font-sans: var(--font-dm-sans), "DM Sans", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Contrato fluido CSS; no existe como valor nativo de Penpot. */
+  --container-gutter: clamp(16px, 4vw, 48px);
+  /* Curvas CSS; no existen tokens de easing en el export actual de Penpot. */
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,11 @@
+.hero { display: grid; gap: var(--space-12); align-items: center; }
+.eyebrow { margin-bottom: var(--space-3); color: var(--color-action-primary); font-size: 0.875rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.hero h1, .hero h2 { max-width: 12ch; margin: 0; font-size: clamp(3rem, 9vw, 6rem); line-height: 0.95; letter-spacing: -0.065em; }
+.copy { max-width: 42rem; margin-block: var(--space-6); color: var(--color-text-secondary); font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.6; }
+.modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.module { display: flex; min-height: 10rem; flex-direction: column; justify-content: space-between; padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-neutral-200); }
+.module:nth-child(2) { color: var(--color-text-inverse); background: var(--color-action-primary); }
+.module:nth-child(3) { grid-column: 1 / -1; }
+.module span, .module small { font-size: 0.75rem; }
+.module strong { font-size: 1.125rem; }
+@media (min-width: 768px) { .hero { grid-template-columns: repeat(2, minmax(0, 1fr)); } .modules { grid-template-columns: repeat(3, minmax(0, 1fr)); } .module:nth-child(2) { transform: translateY(-1.5rem); } .module:nth-child(3) { grid-column: auto; transform: translateY(1.5rem); } }
