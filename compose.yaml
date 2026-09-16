@@ -1,0 +1,40 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    restart: unless-stopped
+    env_file: .env.wordpress
+    volumes:
+      - wordpress_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [wordpress_internal]
+
+  wordpress:
+    image: wordpress:6.8-php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    env_file: .env.wordpress
+    ports:
+      - "8080:80"
+    volumes:
+      - wordpress_content:/var/www/html/wp-content
+      - ./wordpress/plugins/3cuartos-content-model:/var/www/html/wp-content/plugins/3cuartos-content-model
+    healthcheck:
+      test: ["CMD-SHELL", "php -r 'exit(@file_get_contents(\"http://localhost/wp-login.php\") ? 0 : 1);'"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    networks: [wordpress_internal]
+
+volumes:
+  wordpress_db:
+  wordpress_content:
+
+networks:
+  wordpress_internal:
+    driver: bridge
