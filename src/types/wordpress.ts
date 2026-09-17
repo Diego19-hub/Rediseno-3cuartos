@@ -21,6 +21,7 @@ export type Service = {
   slug: string;
   name: string;
   summary: string;
+  visualIdentifier: string;
   description: string;
   capabilities: string[];
   image?: MediaAsset;
