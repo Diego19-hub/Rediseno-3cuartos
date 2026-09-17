@@ -27,7 +27,10 @@ final class MetaFields {
 	private static function schema( string $type, $default ): array {
 		$schema = array( 'type' => $type, 'default' => $default );
 		if ( 'array' === $type ) {
-			$schema['items'] = array( 'type' => 'string' );
+			$schema['items'] = array();
+		}
+		if ( 'object' === $type ) {
+			$schema['additionalProperties'] = true;
 		}
 		return $schema;
 	}
