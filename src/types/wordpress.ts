@@ -99,3 +99,4 @@ export type GlobalSettings = {
   globalCta: CallToAction;
   defaultSeo: SeoMetadata;
 };
+export type LegalPage = { slug: string; title: string; content: string; excerpt: string; modifiedAt: string; isProvisional: boolean };

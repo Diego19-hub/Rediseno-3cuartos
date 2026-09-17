@@ -7,6 +7,7 @@ namespace ThreeCuartos\ContentModel;
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	final class Cli {
 		public static function seed_demo(): void {
+			self::upsert( 'page', 'aviso-de-privacidad', 'Aviso de privacidad', 'Aviso de privacidad provisional, pendiente de revisión y aprobación del cliente. Este contenido no constituye un documento legal definitivo.' );
 			$capabilities = array( 'Estrategia de marca', 'Diseño de interfaces', 'Desarrollo WordPress', 'Marketing de contenidos' );
 			foreach ( $capabilities as $capability ) if ( ! term_exists( $capability, '3cuartos_service_capability' ) ) wp_insert_term( $capability, '3cuartos_service_capability' );
 			$services = array(

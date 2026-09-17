@@ -1,4 +1,4 @@
-import type { CaseStudy, GlobalSettings, Resource, Service, TeamMember, Testimonial, WordPressCategory } from "../../types/wordpress";
+import type { CaseStudy, GlobalSettings, LegalPage, Resource, Service, TeamMember, Testimonial, WordPressCategory } from "../../types/wordpress";
 import { wordpressFetch } from "./client";
 import { collectionEndpoint, globalSettingsEndpoint, type CollectionName, type CollectionParams } from "./endpoints";
 import { caseStudy, globalSettings, resource, service, teamMember, testimonial } from "./normalizers";
@@ -34,4 +34,15 @@ export async function getCategories(): Promise<WordPressCategory[]> {
 export async function getGlobalSettings(): Promise<GlobalSettings | null> {
   try { return globalSettings((await wordpressFetch<unknown>(globalSettingsEndpoint)).data); }
   catch (error) { if (error instanceof WordPressApiError && error.status === 404) return null; throw error; }
+}
+export async function getPageBySlug(slug: string): Promise<LegalPage | null> {
+  try {
+    const { data } = await wordpressFetch<Array<{ slug?: string; title?: { rendered?: string }; content?: { rendered?: string }; excerpt?: { rendered?: string }; modified?: string }>>(
+      `wp/v2/pages?slug=${encodeURIComponent(slug)}&per_page=1`,
+    );
+    const page = data[0];
+    if (!page?.slug) return null;
+    const plain = (value?: string) => (value ?? "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+    return { slug: page.slug, title: plain(page.title?.rendered) || "Página legal", content: plain(page.content?.rendered), excerpt: plain(page.excerpt?.rendered), modifiedAt: page.modified ?? "", isProvisional: true };
+  } catch { return null; }
 }
