@@ -69,7 +69,7 @@ function Pieces({ pointer, reducedMotion }: { pointer: PointerRef; reducedMotion
   });
 
   const positions = modePositions.assembled;
-  return <group ref={group} position={[1.35, 0.05, 0]} scale={1.1}>
+  return <group ref={group} position={[1.65, 0.05, 0]} scale={0.78}>
     <mesh ref={strategy} castShadow receiveShadow geometry={geometry.strategy} position={positions[0]} rotation={[0.08, -0.12, -0.18]}><meshStandardMaterial color="#24464b" metalness={0.58} roughness={0.4} /></mesh>
     <mesh ref={creativity} castShadow receiveShadow geometry={geometry.creativity} position={positions[1]} rotation={[-0.1, 0.14, 0.2]}><meshPhysicalMaterial color="#50777a" metalness={0.18} roughness={0.34} transmission={0.16} transparent opacity={0.8} /></mesh>
     <mesh ref={technology} castShadow receiveShadow geometry={geometry.technology} position={positions[2]} rotation={[0.12, 0.04, 0.08]}><meshStandardMaterial color="#315b61" metalness={0.5} roughness={0.3} /></mesh>
