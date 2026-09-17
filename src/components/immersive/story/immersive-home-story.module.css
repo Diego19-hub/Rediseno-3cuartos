@@ -1,0 +1,23 @@
+.storyPage {
+  position: relative;
+}
+
+.storyCanvas {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 100svh;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* The story scene replaces only the decorative orbital layer; all fallback HTML remains. */
+.storyPage :global([class*="orbital"]) {
+  visibility: hidden;
+}
+
+@media (max-width: 767px) {
+  .storyCanvas {
+    display: none;
+  }
+}

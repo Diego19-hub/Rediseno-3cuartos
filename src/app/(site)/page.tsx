@@ -9,13 +9,15 @@ import { homeProvisional as home } from "@/content/home.provisional";
 import { getHomeContent } from "@/lib/wordpress/home";
 import styles from "./page.module.css";
 import { ImmersiveHome } from "@/components/immersive/immersive-home";
+import { ImmersiveHomeStory } from "@/components/immersive/story/immersive-home-story";
 
 export default async function Home() {
   const content = await getHomeContent();
   const metrics = content.caseStudy.metrics.length >= 3 ? content.caseStudy.metrics.slice(0, 3) : home.metrics;
   const cta = content.settings.globalCta.label ? content.settings.globalCta : home.globalCta;
   const immersive = process.env.NEXT_PUBLIC_IMMERSIVE_HOME !== "false";
-  return <><>{immersive ? <ImmersiveHome services={content.services} ctaLabel={cta.label} ctaUrl={cta.url}/> : <Header currentPath="/"/>}</><main><Container>
+  const immersiveStory = process.env.NEXT_PUBLIC_IMMERSIVE_HOME_STORY === "true";
+  return <><>{immersiveStory ? <ImmersiveHomeStory services={content.services} ctaLabel={cta.label} ctaUrl={cta.url}/> : immersive ? <ImmersiveHome services={content.services} ctaLabel={cta.label} ctaUrl={cta.url}/> : <Header currentPath="/"/>}</><main><Container>
     {!immersive && <section className={styles.hero}><div><p className={styles.eyebrow}>{home.hero.eyebrow}</p><h1>{home.hero.title}</h1><p>{home.hero.copy}</p><Button href={cta.url}>{cta.label}</Button><Button href="/servicios" variant="secondary">Explorar servicios</Button></div><div className={styles.modules}>{content.services.map((item,index)=><Link key={item.id} href={`/servicios/${item.slug}`}><article><span>{item.visualIdentifier || `0${index+1}`}</span><strong>{item.name}</strong><ProvisionalBadge/></article></Link>)}</div></section>}
     <section className={styles.trust}><ProvisionalBadge/><p>Logotipos provisionales — cliente</p><div className={styles.grid}>{metrics.map((metric,index)=><Metric key={`${metric.label}-${index}`} metric={metric}/>)}</div></section>
     <section id="servicios"><EditorialBlock/><div className={styles.grid}>{content.services.map((service)=><ServiceCard key={service.id} service={service}/>)}</div><Button href="#contacto">Encontrar mi solución</Button></section>
