@@ -1,5 +1,10 @@
 # WordPress headless local
 
+El contenedor declara `WP_ENVIRONMENT_TYPE` como `local`, lo que permite habilitar
+Application Passwords para el desarrollo local aunque se acceda mediante HTTP.
+Esta excepción es exclusiva del entorno local. Producción utilizará HTTPS y nunca
+debe justificarse HTTP en producción con esta configuración.
+
 Next.js permanece en `http://localhost:3000`; WordPress local estará en `http://localhost:8080`. MariaDB no publica puerto al host y solo se comunica por la red interna `wordpress_internal`.
 
 ```bash

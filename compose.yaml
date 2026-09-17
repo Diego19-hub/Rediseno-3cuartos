@@ -19,6 +19,9 @@ services:
       mariadb:
         condition: service_healthy
     env_file: .env.wordpress
+    environment:
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
     ports:
       - "8080:80"
     volumes:

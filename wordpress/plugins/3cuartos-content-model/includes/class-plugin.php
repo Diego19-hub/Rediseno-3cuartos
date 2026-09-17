@@ -9,6 +9,7 @@ final class Plugin {
 		add_action( 'init', array( PostTypes::class, 'register' ) );
 		add_action( 'init', array( Taxonomies::class, 'register' ) );
 		add_action( 'init', array( MetaFields::class, 'register' ) );
+		add_action( 'init', array( ContactRequests::class, 'register' ) );
 		add_action( 'admin_init', array( GlobalSettings::class, 'register' ) );
 		add_action( 'admin_init', array( AdminFields::class, 'register' ) );
 		add_action( 'rest_api_init', array( RestApi::class, 'register_routes' ) );

@@ -27,5 +27,6 @@ require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-admin-fields.php'
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-rest-api.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-plugin.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-cli.php';
+require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-contact-requests.php';
 
 Plugin::boot();
