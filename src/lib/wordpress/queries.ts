@@ -1,4 +1,4 @@
-import type { CaseStudy, GlobalSettings, Resource, Service, TeamMember, Testimonial } from "../../types/wordpress";
+import type { CaseStudy, GlobalSettings, Resource, Service, TeamMember, Testimonial, WordPressCategory } from "../../types/wordpress";
 import { wordpressFetch } from "./client";
 import { collectionEndpoint, globalSettingsEndpoint, type CollectionName, type CollectionParams } from "./endpoints";
 import { caseStudy, globalSettings, resource, service, teamMember, testimonial } from "./normalizers";
@@ -23,6 +23,13 @@ export const getCaseStudies = (params?: CollectionParams) => getCollection<CaseS
 export const getTestimonials = (params?: CollectionParams) => getCollection<Testimonial>("testimonials", params);
 export const getTeamMembers = (params?: CollectionParams) => getCollection<TeamMember>("teamMembers", params);
 export const getResources = (params?: CollectionParams) => getCollection<Resource>("resources", params);
+
+export async function getCategories(): Promise<WordPressCategory[]> {
+  try {
+    const { data } = await wordpressFetch<Array<{ id?: number; name?: string; slug?: string }>>("wp/v2/categories?per_page=100");
+    return data.filter((item): item is { id: number; name: string; slug: string } => Number.isInteger(item.id) && typeof item.name === "string" && typeof item.slug === "string").map((item) => ({ id: item.id, name: item.name, slug: item.slug }));
+  } catch (error) { if (error instanceof WordPressApiError && error.status === 404) return []; throw error; }
+}
 
 export async function getGlobalSettings(): Promise<GlobalSettings | null> {
   try { return globalSettings((await wordpressFetch<unknown>(globalSettingsEndpoint)).data); }

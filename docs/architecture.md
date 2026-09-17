@@ -8,6 +8,8 @@ Next.js 16 con App Router, TypeScript y React. Las rutas viven en `src/app`; los
 
 WordPress será una instalación nueva y headless. La API elegida es REST: es nativa, reduce plugins y permite exponer CPTs, taxonomías, media y metadatos registrados. Las credenciales de preview y revalidación se usan exclusivamente en rutas del servidor.
 
+El contenido HTML de entradas nativas se normaliza en el servidor a texto plano antes de llegar a componentes React. Recursos no usa `dangerouslySetInnerHTML`, por lo que scripts, iframes, atributos de eventos y URLs potencialmente peligrosas no se interpretan ni ejecutan. Si una etapa futura exige formato enriquecido, deberá incorporar una sanitización por lista permitida antes de habilitar su renderizado.
+
 ## Movimiento
 
 Framer Motion `13.4.0` es la única biblioteca de animación instalada. Su carga se limitará a islas cliente que realmente animen. CSS cubre estados simples. La utilidad `lib/animations/reduced-motion.ts` y el media query global son la base para una alternativa sin desplazamientos ni ensamblajes.

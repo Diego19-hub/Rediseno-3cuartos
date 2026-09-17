@@ -20,7 +20,7 @@ export default async function Home() {
     <section id="casos" className={styles.grid}><Link href={`/casos-de-exito/${content.caseStudy.slug}`}><CaseStudyCard caseStudy={content.caseStudy}/></Link><article className={styles.caseDetails}><p className={styles.eyebrow}>Caso destacado</p><h2>{content.caseStudy.clientName}</h2><p><strong>Problema:</strong> {content.caseStudy.challenge}</p><p><strong>Solución:</strong> {content.caseStudy.solution}</p>{content.caseStudy.metrics.map((metric,index)=><Metric key={`${metric.label}-${index}`} metric={metric}/>)}</article><Testimonial testimonial={content.testimonials[0]}/></section>
     <section id="proceso"><p className={styles.eyebrow}>Proceso</p><ol className={styles.process}>{home.process.map((item,index)=><li key={item}>0{index+1} {item}</li>)}</ol></section>
     <section><p className={styles.eyebrow}>Testimonios</p><div className={styles.grid}>{content.testimonials.map((testimonial)=><Testimonial key={testimonial.id} testimonial={testimonial}/>)}</div></section>
-    <section id="recursos"><p className={styles.eyebrow}>Recursos</p><div className={styles.grid}>{content.resources.map((resource)=><ResourceCard key={resource.id} resource={resource}/>)}</div><Button href="#recursos" variant="secondary">Explorar recursos</Button></section>
+    <section id="recursos"><p className={styles.eyebrow}>Recursos</p><div className={styles.grid}>{content.resources.map((resource)=><Link key={resource.id} href={`/recursos/${resource.slug}`}><ResourceCard resource={resource}/></Link>)}</div><Button href="/recursos" variant="secondary">Explorar recursos</Button></section>
     <CtaSection label={cta.label} url={cta.url} contact={content.settings.contact.publicEmail}/>
   </Container></main><Footer/></>;
 }

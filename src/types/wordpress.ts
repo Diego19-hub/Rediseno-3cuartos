@@ -15,6 +15,7 @@ export type SeoMetadata = {
 export type CallToAction = { label: string; url: string };
 export type Metric = { label: string; value: string; context: string };
 export type ProfileLink = { label: string; url: string };
+export type WordPressCategory = { id: number; name: string; slug: string };
 
 export type Service = {
   id: number;
@@ -85,6 +86,7 @@ export type Resource = {
   cta: CallToAction;
   readingTime: number;
   publishedAt: string;
+  categoryIds: number[];
 };
 
 export type GlobalSettings = {
