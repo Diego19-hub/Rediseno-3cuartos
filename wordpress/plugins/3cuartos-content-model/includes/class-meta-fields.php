@@ -55,6 +55,7 @@ final class MetaFields {
 		$type = '3cuartos_case_study';
 		self::add( $type, '3cuartos_client_name', 'string', '', 'sanitize_text_field' );
 		self::add( $type, '3cuartos_challenge', 'string', '', 'wp_kses_post' );
+		self::add( $type, '3cuartos_objectives', 'array', array(), __NAMESPACE__ . '\\sanitize_string_list' );
 		self::add( $type, '3cuartos_solution', 'string', '', 'wp_kses_post' );
 		self::add( $type, '3cuartos_service_ids', 'array', array(), __NAMESPACE__ . '\\sanitize_id_list' );
 		self::add( $type, '3cuartos_results', 'array', array(), __NAMESPACE__ . '\\sanitize_string_list' );

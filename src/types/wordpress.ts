@@ -35,8 +35,10 @@ export type CaseStudy = {
   id: number;
   slug: string;
   title: string;
+  content: string;
   clientName: string;
   challenge: string;
+  objectives: string[];
   solution: string;
   serviceIds: number[];
   results: string[];

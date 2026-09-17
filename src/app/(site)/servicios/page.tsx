@@ -21,7 +21,7 @@ export default async function ServicesPage() {
     <section className={`${styles.section} ${styles.connection}`}><p className={styles.eyebrow}>Conexión</p><h2>{servicesProvisional.connection.title}</h2><p>{servicesProvisional.connection.copy}</p></section>
     <section className={styles.section}><p className={styles.eyebrow}>Capacidades</p><div className={styles.grid}>{capabilities.map((capability) => <article className={styles.detailCard} key={capability}><h3>{capability}</h3><ProvisionalBadge/></article>)}</div></section>
     <section className={styles.section}><p className={styles.eyebrow}>Proceso</p><ol className={styles.process}>{servicesProvisional.process.map((step, index) => <li key={step}>0{index + 1} {step}</li>)}</ol></section>
-    <section className={styles.section}><p className={styles.eyebrow}>Caso destacado</p><div className={styles.grid}><CaseStudyCard caseStudy={content.caseStudy}/></div></section>
+    <section className={styles.section}><p className={styles.eyebrow}>Caso destacado</p><div className={styles.grid}><Link href={`/casos-de-exito/${content.caseStudy.slug}`}><CaseStudyCard caseStudy={content.caseStudy}/></Link></div></section>
     <CtaSection label={cta.label} url={cta.url} contact={content.settings.contact.publicEmail}/>
   </Container></main><Footer/></>;
 }

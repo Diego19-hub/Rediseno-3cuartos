@@ -33,7 +33,7 @@ final class AdminFields {
 		}
 		if ( '3cuartos_case_study' === $type ) {
 			self::input( '3cuartos_client_name', 'Cliente (provisional si aplica)', $post->ID );
-			self::textarea( '3cuartos_challenge', 'Problema', $post->ID ); self::textarea( '3cuartos_solution', 'Solución', $post->ID );
+			self::textarea( '3cuartos_challenge', 'Problema', $post->ID ); self::textarea( '3cuartos_objectives', 'Objetivos (uno por línea)', $post->ID, true ); self::textarea( '3cuartos_solution', 'Solución', $post->ID );
 			self::textarea( '3cuartos_service_ids', 'IDs de servicios relacionados (uno por línea)', $post->ID, true );
 			self::textarea( '3cuartos_metrics', 'Métricas: etiqueta | valor | contexto (una por línea)', $post->ID, true ); self::cta( $post->ID );
 		}
@@ -54,6 +54,7 @@ final class AdminFields {
 		foreach ( $fields as $key ) if ( isset( $_POST[ $key ] ) ) update_post_meta( $post_id, $key, wp_unslash( $_POST[ $key ] ) );
 		foreach ( array( '3cuartos_sort_order' ) as $key ) if ( isset( $_POST[ $key ] ) ) update_post_meta( $post_id, $key, absint( $_POST[ $key ] ) );
 		if ( isset( $_POST['3cuartos_capabilities'] ) ) update_post_meta( $post_id, '3cuartos_capabilities', self::lines( $_POST['3cuartos_capabilities'] ) );
+		if ( isset( $_POST['3cuartos_objectives'] ) ) update_post_meta( $post_id, '3cuartos_objectives', self::lines( $_POST['3cuartos_objectives'] ) );
 		if ( isset( $_POST['3cuartos_service_ids'] ) ) update_post_meta( $post_id, '3cuartos_service_ids', array_map( 'absint', self::lines( $_POST['3cuartos_service_ids'] ) ) );
 		if ( isset( $_POST['3cuartos_metrics'] ) ) update_post_meta( $post_id, '3cuartos_metrics', self::metrics( $_POST['3cuartos_metrics'] ) );
 		if ( isset( $_POST['3cuartos_profile_links'] ) ) update_post_meta( $post_id, '3cuartos_profile_links', self::links( $_POST['3cuartos_profile_links'] ) );
