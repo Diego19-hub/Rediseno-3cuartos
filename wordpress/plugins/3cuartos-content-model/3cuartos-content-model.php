@@ -23,7 +23,9 @@ require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-post-types.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-taxonomies.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-meta-fields.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-global-settings.php';
+require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-admin-fields.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-rest-api.php';
 require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-plugin.php';
+require_once THREECUARTOS_CONTENT_MODEL_PATH . 'includes/class-cli.php';
 
 Plugin::boot();

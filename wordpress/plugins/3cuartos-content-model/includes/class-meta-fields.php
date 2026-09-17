@@ -39,6 +39,8 @@ final class MetaFields {
 	private static function service_fields(): void {
 		$type = '3cuartos_service';
 		self::add( $type, '3cuartos_summary', 'string', '', 'sanitize_textarea_field' );
+		// A short editor-selected identifier is the approved non-media fallback for service cards.
+		self::add( $type, '3cuartos_visual_identifier', 'string', '', 'sanitize_text_field' );
 		self::add( $type, '3cuartos_capabilities', 'array', array(), __NAMESPACE__ . '\\sanitize_string_list' );
 		self::add( $type, '3cuartos_cta', 'object', array(), __NAMESPACE__ . '\\sanitize_cta' );
 		self::add( $type, '3cuartos_sort_order', 'integer', 0, 'absint' );

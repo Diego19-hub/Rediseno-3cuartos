@@ -31,6 +31,18 @@ services:
       retries: 10
     networks: [wordpress_internal]
 
+  wpcli:
+    image: wordpress:cli-php8.2
+    profiles: [tools]
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    env_file: .env.wordpress
+    volumes_from:
+      - wordpress
+    working_dir: /var/www/html
+    networks: [wordpress_internal]
+
 volumes:
   wordpress_db:
   wordpress_content:
