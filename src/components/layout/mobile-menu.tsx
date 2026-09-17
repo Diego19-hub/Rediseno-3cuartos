@@ -1,0 +1,5 @@
+"use client";
+import { useEffect, useId, useRef, useState } from "react";
+import Link from "next/link";
+import styles from "./layout.module.css";
+export function MobileMenu() { const [isOpen, setIsOpen] = useState(false); const menuId=useId(); const triggerRef=useRef<HTMLButtonElement>(null); const firstLink=useRef<HTMLAnchorElement>(null); const close=(restore=false)=>{setIsOpen(false);if(restore)requestAnimationFrame(()=>triggerRef.current?.focus())}; useEffect(()=>{if(isOpen)firstLink.current?.focus();const key=(event:KeyboardEvent)=>{if(event.key==="Escape")close(true)};window.addEventListener("keydown",key);return()=>window.removeEventListener("keydown",key)},[isOpen]); return <div className={styles.mobile}><button ref={triggerRef} type="button" aria-expanded={isOpen} aria-controls={menuId} aria-label={isOpen?"Cerrar menú":"Abrir menú"} className={styles.menuButton} onClick={()=>setIsOpen(current=>!current)}>{isOpen?"Cerrar":"Menú"}</button>{isOpen&&<nav id={menuId} aria-label="Navegación móvil"><Link href="/servicios" onClick={()=>close()} ref={firstLink}>Servicios</Link><Link href="/contacto" onClick={()=>close()}>Contacto</Link></nav>}</div>; }
