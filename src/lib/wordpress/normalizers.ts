@@ -2,7 +2,7 @@ import type { CallToAction, CaseStudy, GlobalSettings, MediaAsset, Resource, Ser
 
 type WordPressPost = { id: number; slug: string; title?: { rendered?: string }; content?: { rendered?: string }; excerpt?: { rendered?: string }; date?: string; featured_media?: number; meta?: Record<string, unknown>; _embedded?: { "wp:featuredmedia"?: Array<{ id: number; source_url?: string; alt_text?: string; media_details?: { width?: number; height?: number } }> } };
 const text = (value: unknown): string => typeof value === "string" ? value.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim() : "";
-const integer = (value: unknown): number => Number.isInteger(value) ? value as number : 0;
+const integer = (value: unknown): number => Number.isInteger(value) ? value as number : typeof value === "string" && /^\d+$/.test(value) ? Number(value) : 0;
 const boolean = (value: unknown): boolean => value === true || value === 1 || value === "1" || value === "true";
 const list = (value: unknown): string[] => Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
 const ids = (value: unknown): number[] => Array.isArray(value) ? value.filter((item): item is number => Number.isInteger(item)) : [];
