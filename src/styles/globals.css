@@ -4,6 +4,8 @@
 
 html { min-width: 320px; background: var(--color-surface-canvas); }
 
+main [id] { scroll-margin-top: calc(var(--header-offset, 4.5rem) + 1rem); }
+
 body {
   min-height: 100vh;
   margin: 0;

@@ -1,6 +1,6 @@
 # 3cuartos — rediseño web
 
-Base técnica para el rediseño de 3cuartos con Next.js, App Router y WordPress headless (REST) previsto para una etapa posterior.
+Base técnica para el rediseño de 3cuartos con Next.js, App Router y WordPress headless (REST). La Home incorpora una prueba técnica de storytelling 3D detrás de una bandera local, manteniendo el hero inmersivo HTML como fallback.
 
 ## Requisitos
 
@@ -27,12 +27,17 @@ npm test
 npm run build
 ```
 
+También están disponibles `npm run start`, `npm run tokens:check` y `npm run test:e2e` (este último requiere Google Chrome local).
+
 ## Estructura
 
 - `src/app`: rutas, layout y metadata.
 - `src/components`: primitives UI, layout y secciones reutilizables.
 - `src/styles`: tokens y estilos globales.
 - `src/lib`: adaptadores futuros de WordPress, animación, SEO y validación.
+- `src/components/immersive/immersive-home.tsx`: hero inmersivo HTML/2.5D existente y fallback estable.
+- `src/components/immersive/story`: isla cliente diferida para la prueba Three.js/React Three Fiber de escritorio.
+- `src/app/(site)/page.tsx`: frontera Server Component y selección de la Home mediante banderas de entorno.
 - `wordpress/plugins/3cuartos-content-model`: plugin versionado que se implementará en la etapa CMS.
 - `docs/architecture.md`: decisiones de arquitectura y límites actuales.
 
@@ -42,9 +47,13 @@ La página inicial es deliberadamente provisional. No representa contenido final
 
 Penpot es la fuente de verdad. La copia exacta del export se encuentra en `docs/design-tokens.json`; la guía de correspondencia y actualización está en `docs/design-tokens.md`. No edites valores aprobados directamente en CSS: reemplaza el export, valida el inventario y conserva aliases mediante `var()`.
 
-## Estado
+## Estado actual
 
-La Etapa 1 — base técnica — está completada. La Etapa 2 (WordPress y modelo de contenido) requiere una nueva aprobación.
+La base técnica y el modelo de contenido provisional existen. La escena story contiene tres piezas procedurales (`THREE.Shape` + `ExtrudeGeometry`), iluminación, sombras, movimiento ambiental, respuesta sutil al puntero y estados locales `separated`, `assembled` y `expanded` controlados temporalmente. Todavía no está conectada al scroll ni a la transición de Servicios/proyecto.
+
+La bandera `NEXT_PUBLIC_IMMERSIVE_HOME_STORY` solo activa la isla cuando vale exactamente `"true"`; por defecto permanece desactivada. Con la bandera desactivada se conserva `ImmersiveHome`. En móvil no se monta el Canvas ni se carga Three.js.
+
+La dirección de contenido WordPress y sus secciones inferiores quedan fuera de este frente.
 
 ## Pruebas UI
 

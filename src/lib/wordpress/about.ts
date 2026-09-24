@@ -10,9 +10,18 @@ const fallback = (): AboutContent => ({
 });
 
 export async function getAboutContent(): Promise<AboutContent> {
-  try {
-    const [team, services, testimonials, settings] = await Promise.all([getTeamMembers({ perPage: 20 }), getServices({ perPage: 20 }), getTestimonials({ perPage: 1 }), getGlobalSettings()]);
-    if (!team.items.length || !settings) return fallback();
-    return { team: [...team.items].sort((a, b) => a.order - b.order), services: services.items, testimonial: testimonials.items[0], settings, source: "wordpress" };
-  } catch { return fallback(); }
+  const [teamResult, servicesResult, testimonialsResult, settingsResult] = await Promise.allSettled([
+    getTeamMembers({ perPage: 20 }),
+    getServices({ perPage: 20 }),
+    getTestimonials({ perPage: 20 }),
+    getGlobalSettings(),
+  ]);
+  const fallbackContent = fallback();
+  const team = teamResult.status === "fulfilled" && teamResult.value.items.length
+    ? [...teamResult.value.items].sort((a, b) => a.order - b.order)
+    : fallbackContent.team;
+  const services = servicesResult.status === "fulfilled" ? servicesResult.value.items : fallbackContent.services;
+  const testimonials = testimonialsResult.status === "fulfilled" ? [...testimonialsResult.value.items].sort((a, b) => a.order - b.order) : [];
+  const settings = settingsResult.status === "fulfilled" && settingsResult.value ? settingsResult.value : fallbackContent.settings;
+  return { team, services, testimonial: testimonials[0], settings, source: teamResult.status === "fulfilled" && settingsResult.status === "fulfilled" && Boolean(settingsResult.value) ? "wordpress" : "fallback" };
 }

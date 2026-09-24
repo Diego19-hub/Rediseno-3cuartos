@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Container } from "@/components/ui/container";
@@ -22,7 +21,7 @@ export default async function ResourcePage({ params }: Props) {
   if (!content) notFound();
   const { resource, related } = content;
   const cta = content.settings.globalCta.label ? content.settings.globalCta : { label: "Cuéntanos tu proyecto", url: "/#contacto" };
-  return <><Header currentPath="/recursos"/><main><Container>
+  return <><main><Container>
     <section className={`${styles.section} ${styles.breadcrumb}`}><Breadcrumb current={resource.title} sectionLabel="Recursos" sectionHref="/recursos"/></section>
     <article className={styles.article}><ul className={styles.categories}>{resource.categories.map((category) => <li className={styles.category} key={category.id}>{category.name}</li>)}</ul><p>{formatDate(resource.publishedAt)}</p><h1>{resource.title}</h1><p className={styles.copy}>{resource.featuredExcerpt || resource.excerpt}</p><ProvisionalBadge/><MediaPlaceholder/><p>{resource.content}</p></article>
     {related.length > 0 && <section className={styles.section}><p className={styles.eyebrow}>Recursos relacionados</p><div className={styles.grid}>{related.map((item) => <Link href={`/recursos/${item.slug}`} key={item.id}><ResourceCard resource={item}/></Link>)}</div></section>}

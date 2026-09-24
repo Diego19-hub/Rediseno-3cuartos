@@ -25,6 +25,8 @@ export type Service = {
   visualIdentifier: string;
   description: string;
   capabilities: string[];
+  /** IDs from the service-capabilities taxonomy, when WordPress exposes them. */
+  capabilityIds?: number[];
   image?: MediaAsset;
   cta: CallToAction;
   order: number;

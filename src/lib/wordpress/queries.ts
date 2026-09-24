@@ -1,7 +1,7 @@
 import type { CaseStudy, GlobalSettings, LegalPage, Resource, Service, TeamMember, Testimonial, WordPressCategory } from "../../types/wordpress";
 import { wordpressFetch } from "./client";
 import { collectionEndpoint, globalSettingsEndpoint, type CollectionName, type CollectionParams } from "./endpoints";
-import { caseStudy, globalSettings, resource, service, teamMember, testimonial } from "./normalizers";
+import { caseStudy, globalSettings, resource, service, teamMember, testimonial, type WordPressPost } from "./normalizers";
 import { WordPressApiError } from "./errors";
 
 export type PageResult<T> = { items: T[]; page: number; totalPages: number; total: number };
@@ -18,9 +18,42 @@ export async function getCollection<T>(name: CollectionName, params: CollectionP
   }
 }
 
-export const getServices = (params?: CollectionParams) => getCollection<Service>("services", params);
+type ServiceCapabilityTerm = { id: number; name: string };
+
+async function getServiceCapabilityTerms(): Promise<ServiceCapabilityTerm[]> {
+  try {
+    const { data } = await wordpressFetch<Array<{ id?: number; name?: string }>>("wp/v2/service-capabilities?per_page=100");
+    return data.filter((term): term is { id: number; name: string } => Number.isInteger(term.id) && typeof term.name === "string" && term.name.trim().length > 0);
+  } catch (error) {
+    if (error instanceof WordPressApiError && error.status === 404) return [];
+    return [];
+  }
+}
+
+export async function getServices(params?: CollectionParams): Promise<PageResult<Service>> {
+  const result = await getCollection<Service>("services", params);
+  if (!result.items.length) return result;
+  const terms = await getServiceCapabilityTerms();
+  if (!terms.length) return result;
+  const namesById = new Map(terms.map((term) => [term.id, term.name]));
+  return { ...result, items: result.items.map((service) => {
+    const taxonomyCapabilities = (service.capabilityIds ?? []).map((id) => namesById.get(id)).filter((name): name is string => Boolean(name));
+    const capabilities = [...service.capabilities, ...taxonomyCapabilities].filter((name, index, all) => all.findIndex((candidate) => candidate.toLocaleLowerCase() === name.toLocaleLowerCase()) === index);
+    return { ...service, capabilities };
+  }) };
+}
 export const getCaseStudies = (params?: CollectionParams) => getCollection<CaseStudy>("caseStudies", params);
 export const getTestimonials = (params?: CollectionParams) => getCollection<Testimonial>("testimonials", params);
+export async function getTestimonialById(id: number): Promise<Testimonial | null> {
+  if (!Number.isInteger(id) || id <= 0) return null;
+  try {
+    const { data } = await wordpressFetch<WordPressPost>(`wp/v2/testimonials/${id}?_embed=1`);
+    return testimonial(data);
+  } catch (error) {
+    if (error instanceof WordPressApiError && (error.status === 404 || error.status === 400)) return null;
+    throw error;
+  }
+}
 export const getTeamMembers = (params?: CollectionParams) => getCollection<TeamMember>("teamMembers", params);
 export const getResources = (params?: CollectionParams) => getCollection<Resource>("resources", params);
 

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const queries = vi.hoisted(() => ({ getCaseStudies: vi.fn(), getServices: vi.fn(), getTestimonials: vi.fn(), getGlobalSettings: vi.fn() }));
+const queries = vi.hoisted(() => ({ getCaseStudies: vi.fn(), getServices: vi.fn(), getTestimonials: vi.fn(), getGlobalSettings: vi.fn(), getTestimonialById: vi.fn() }));
 const home = vi.hoisted(() => ({ getHomeContent: vi.fn() }));
 vi.mock("../src/lib/wordpress/queries", () => queries);
 vi.mock("../src/lib/wordpress/home", () => home);
@@ -13,7 +13,7 @@ const caseStudy = { id: 1, slug: "caso-provisional-identidad", title: "Caso prov
 const settings = { brandName: "", contact: { publicEmail: "", phone: "" }, whatsappUrl: "", bookingUrl: "", socialLinks: [], legalLinks: [], globalCta: { label: "", url: "" }, defaultSeo: seo };
 
 describe("case studies content", () => {
-  beforeEach(() => { vi.resetAllMocks(); queries.getCaseStudies.mockResolvedValue({ items: [caseStudy] }); queries.getServices.mockResolvedValue({ items: [{ id: 2, slug: "diseno-branding", name: "Diseño y Branding", summary: "", visualIdentifier: "", description: "", capabilities: ["Estrategia"], cta: { label: "", url: "" }, order: 1, seo, isProvisional: true }] }); queries.getTestimonials.mockResolvedValue({ items: [{ id: 3, quote: "Cita", personName: "Persona", jobTitle: "Rol", company: "", order: 1, isProvisional: true }] }); queries.getGlobalSettings.mockResolvedValue(settings); home.getHomeContent.mockResolvedValue({ services: [], testimonials: [], settings, source: "fallback" }); });
+  beforeEach(() => { vi.resetAllMocks(); queries.getCaseStudies.mockResolvedValue({ items: [caseStudy] }); queries.getServices.mockResolvedValue({ items: [{ id: 2, slug: "diseno-branding", name: "Diseño y Branding", summary: "", visualIdentifier: "", description: "", capabilities: ["Estrategia"], cta: { label: "", url: "" }, order: 1, seo, isProvisional: true }] }); queries.getTestimonials.mockResolvedValue({ items: [{ id: 3, quote: "Cita", personName: "Persona", jobTitle: "Rol", company: "", order: 1, isProvisional: true }] }); queries.getGlobalSettings.mockResolvedValue(settings); queries.getTestimonialById.mockResolvedValue({ id: 3, quote: "Cita", personName: "Persona", jobTitle: "Rol", company: "", order: 1, isProvisional: true }); home.getHomeContent.mockResolvedValue({ services: [], testimonials: [], settings, source: "fallback" }); });
   it("returns the CMS listing and preserves provisional state", async () => { const content = await getCaseStudiesContent(); expect(content.cases).toHaveLength(1); expect(content.cases[0].isProvisional).toBe(true); });
   it("resolves a valid case with its relation", async () => expect((await getCaseStudyPageContent(caseStudy.slug))?.testimonial?.id).toBe(3));
   it("returns null for an unknown slug", async () => expect(await getCaseStudyPageContent("inexistente")).toBeNull());

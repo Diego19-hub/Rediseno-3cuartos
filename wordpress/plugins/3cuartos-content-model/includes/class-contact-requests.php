@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace ThreeCuartos\ContentModel;
+use WP_Post;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_Error;
@@ -11,7 +12,20 @@ final class ContactRequests {
   add_action('rest_api_init', array(self::class,'route'));
  }
  public static function meta_box(): void { add_meta_box('3cuartos-contact-details','Datos de la solicitud',array(self::class,'render_meta'),'3c_contact_request','normal','high'); }
- public static function render_meta(WP_Post $post): void { $keys=array('name'=>'Nombre','company'=>'Empresa','email'=>'Correo','phone'=>'Teléfono','service'=>'Servicio','budget'=>'Presupuesto','timeline'=>'Plazo','message'=>'Mensaje','received_at'=>'Recibida','status'=>'Estado'); echo '<dl>'; foreach($keys as $key=>$label){$value=get_post_meta($post->ID,'3cuartos_contact_'.$key,true); echo '<dt><strong>'.esc_html($label).'</strong></dt><dd>'.nl2br(esc_html((string)$value)).'</dd>'; } echo '</dl>'; }
+ public static function render_meta(WP_Post $post): void {
+  $keys=array('name'=>'Nombre','company'=>'Empresa','email'=>'Email','phone'=>'Teléfono','service'=>'Servicio(s)','message'=>'Mensaje','received_at'=>'Fecha','status'=>'Estado');
+  echo '<dl>';
+  foreach($keys as $key=>$label){
+   $value=get_post_meta($post->ID,'3cuartos_contact_'.$key,true);
+   if(is_array($value)){
+    $value=implode(', ',array_map(static fn($item): string => is_scalar($item)?(string)$item:'',$value));
+   } elseif(!is_scalar($value)){
+    $value='';
+   }
+   echo '<dt><strong>'.esc_html($label).'</strong></dt><dd>'.nl2br(esc_html((string)$value)).'</dd>';
+  }
+  echo '</dl>';
+ }
  public static function route(): void { register_rest_route('3cuartos/v1','/contact',array('methods'=>'POST','callback'=>array(self::class,'submit'),'permission_callback'=>array(self::class,'can_submit'))); }
  public static function can_submit(): bool { return current_user_can('edit_others_posts'); }
  public static function submit(WP_REST_Request $request): WP_REST_Response|WP_Error {

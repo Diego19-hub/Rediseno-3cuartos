@@ -10,7 +10,17 @@ export async function submitContactRequest(payload: ContactPayload): Promise<{ i
   const timeout = setTimeout(() => controller.abort(), 8000);
   try {
     const auth = Buffer.from(`${username}:${password}`).toString("base64");
-    const response = await fetch(`${base.replace(/\/$/, "")}/3cuartos/v1/contact`, { method: "POST", headers: { Accept: "application/json", "Content-Type": "application/json", Authorization: `Basic ${auth}` }, body: JSON.stringify(payload), cache: "no-store", signal: controller.signal });
+    const response = await fetch(`${base.replace(/\/$/, "")}/3cuartos/v1/contact`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Basic ${auth}`,
+      },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+      signal: controller.signal,
+    });
     if (!response.ok) throw new WordPressContactError(response.status);
     const body = await response.json().catch(() => ({}));
     return { id: Number(body?.id ?? 0) };

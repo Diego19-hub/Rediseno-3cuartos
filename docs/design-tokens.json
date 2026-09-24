@@ -184,14 +184,14 @@
       "family": {
         "display": {
           "$value": [
-            "DM Sans"
+            "Outfit"
           ],
           "$type": "fontFamilies",
           "$description": ""
         },
         "body": {
           "$value": [
-            "DM Sans"
+            "Outfit"
           ],
           "$type": "fontFamilies",
           "$description": ""
@@ -318,7 +318,7 @@
       "heading-3": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "40px",
           "fontWeights": "600",
@@ -333,7 +333,7 @@
       "display-l": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "80px",
           "fontWeights": "700",
@@ -348,7 +348,7 @@
       "heading-2": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "48px",
           "fontWeights": "600",
@@ -363,7 +363,7 @@
       "label": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "14px",
           "fontWeights": "600",
@@ -378,7 +378,7 @@
       "heading-1": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "64px",
           "fontWeights": "700",
@@ -393,7 +393,7 @@
       "body-s": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "14px",
           "fontWeights": "400",
@@ -408,7 +408,7 @@
       "heading-4": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "32px",
           "fontWeights": "600",
@@ -423,7 +423,7 @@
       "body-l": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "20px",
           "fontWeights": "400",
@@ -438,7 +438,7 @@
       "caption": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "12px",
           "fontWeights": "400",
@@ -453,7 +453,7 @@
       "body-m": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "16px",
           "fontWeights": "400",
@@ -468,7 +468,7 @@
       "display-xl": {
         "$value": {
           "fontFamilies": [
-            "DM Sans"
+            "Outfit"
           ],
           "fontSizes": "96px",
           "fontWeights": "700",
@@ -625,19 +625,19 @@
           "$description": ""
         },
         "primary-active": {
-          "$value": "#163A43",
+          "$value": "#385BA9",
           "$type": "color",
           "$description": ""
         }
       },
       "accent": {
         "500": {
-          "$value": "#245B68",
+          "$value": "#4A70CC",
           "$type": "color",
           "$description": ""
         },
         "600": {
-          "$value": "#1C4853",
+          "$value": "#3D62B7",
           "$type": "color",
           "$description": ""
         }

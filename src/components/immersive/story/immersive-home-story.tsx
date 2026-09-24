@@ -10,7 +10,7 @@ const StoryCanvas = dynamic(() => import("./story-canvas"), { ssr: false, loadin
 
 type StoryPointer = { x: number; y: number };
 
-export function ImmersiveHomeStory(props: { services: Service[]; ctaLabel: string; ctaUrl: string; showProjects?: boolean }) {
+export function ImmersiveHomeStory(props: { services: Service[]; ctaLabel: string; ctaUrl: string; showProjects?: boolean; heroOnly?: boolean }) {
   const [isClient, setIsClient] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const pointer = useRef<StoryPointer>({ x: 0, y: 0 });

@@ -27,7 +27,9 @@ final class MetaFields {
 	private static function schema( string $type, $default ): array {
 		$schema = array( 'type' => $type, 'default' => $default );
 		if ( 'array' === $type ) {
-			$schema['items'] = array();
+			// These collections contain strings, IDs and structured objects depending on the field.
+			// Declaring the supported item types prevents WordPress REST schema warnings for empty items.
+			$schema['items'] = array( 'type' => array( 'string', 'integer', 'object' ) );
 		}
 		if ( 'object' === $type ) {
 			$schema['additionalProperties'] = true;

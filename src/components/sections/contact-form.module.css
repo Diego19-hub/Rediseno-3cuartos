@@ -1,1 +1,32 @@
-.form{display:grid;gap:var(--space-5);padding:var(--space-6);border:1px solid var(--color-border-subtle);border-radius:var(--radius-lg);background:var(--color-surface-default)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}.field{display:grid;gap:var(--space-2);font-weight:var(--font-weight-medium)}.field input,.field select{min-height:44px;padding:var(--space-2) var(--space-3);border:1px solid var(--color-border-strong);border-radius:var(--radius-sm);background:var(--color-surface-default);color:var(--color-text-primary)}.field:nth-child(7){grid-column:1/-1}.checkbox{display:flex;align-items:center;gap:var(--space-2)}.checkbox input{width:20px;height:20px}.error{color:var(--color-status-error);font-size:var(--font-size-14)}.honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.form button{justify-self:start}@media(max-width:767px){.grid{grid-template-columns:1fr}.field:nth-child(7){grid-column:auto}.form{padding:var(--space-4)}}
+.form{display:grid;gap:clamp(1.6rem,2.8vw,2.5rem);width:100%;max-width:43rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.25rem clamp(1.5rem,3vw,3rem)}
+.field{display:grid;gap:.65rem;padding-block:.9rem;border-bottom:1px solid var(--color-neutral-500);color:var(--color-text-primary);font-size:var(--font-size-14);font-weight:var(--font-weight-semibold);transition:border-color var(--duration-fast) ease}
+.field:focus-within{border-color:var(--color-brand-blue)}
+.field input,.field textarea{width:100%;min-height:2.75rem;padding:0;border:0;border-radius:0;background:transparent;color:var(--color-text-primary);font:inherit;font-size:clamp(1rem,1.4vw,1.15rem);font-weight:var(--font-weight-regular);outline:none;resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible{outline:2px solid color-mix(in srgb,var(--color-brand-blue) 45%,transparent);outline-offset:4px}
+.field textarea{min-height:8rem;padding-top:.25rem;line-height:1.55}
+.field input::placeholder,.field textarea::placeholder{color:var(--color-text-muted);opacity:1}
+.needs{padding:0 0 1rem;border:0;border-bottom:1px solid var(--color-neutral-500);transition:border-color var(--duration-fast) ease}
+.needs:focus-within{border-color:var(--color-brand-blue)}
+.needs legend{padding:0 0 .9rem;color:var(--color-text-primary);font-size:var(--font-size-14);font-weight:var(--font-weight-semibold)}
+.needsGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem 1.5rem}
+.choice{display:flex;align-items:center;gap:.7rem;min-height:2.75rem;color:var(--color-text-secondary);font-size:var(--font-size-16);cursor:pointer}
+.choice input{width:1.15rem;height:1.15rem;accent-color:var(--color-brand-blue)}
+.choice input:focus-visible{outline:2px solid var(--color-brand-blue);outline-offset:3px}
+.choice:focus-within,.choice:hover{color:var(--color-text-primary)}
+.message{margin-top:.15rem}
+.formActions{display:flex;align-items:center;padding-top:.25rem}
+.formActions button{min-height:3.5rem;padding-inline:1.5rem;letter-spacing:.04em}
+.formActions button span{display:inline-block;margin-left:.45rem}
+.error,.submitError{display:block;color:var(--color-status-error);font-size:var(--font-size-12);font-weight:var(--font-weight-medium);line-height:1.4}
+.submitStatus{margin:0;color:var(--color-brand-blue);font-size:var(--font-size-12);font-weight:var(--font-weight-medium);line-height:1.4}
+.submitError{margin:0}
+.success{display:grid;align-content:center;min-height:34rem;max-width:38rem;color:var(--color-text-primary)}
+.check{display:grid;place-items:center;width:3rem;aspect-ratio:1;margin-bottom:2rem;border:1px solid var(--color-brand-blue);color:var(--color-brand-blue);font-size:1.5rem}
+.success h2{margin:0 0 2rem;font-size:clamp(3.5rem,7vw,6.5rem);letter-spacing:-.06em;line-height:.9}
+.success p{margin:0 0 1rem;color:var(--color-text-secondary);font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.55}
+.success a{display:inline-flex;gap:.7rem;width:max-content;margin-top:2rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-brand-blue);color:inherit;font-weight:var(--font-weight-semibold)}
+.success a span{color:var(--color-brand-blue)}
+@media(max-width:600px){.form{gap:var(--space-7)}.grid{grid-template-columns:1fr;gap:0}.needsGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.25rem 1rem}.formActions button{width:100%}.success{min-height:28rem}.success h2{font-size:clamp(3.2rem,16vw,5rem)}}
+@media(max-width:390px){.needsGrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.field,.needs,.choice{transition:none}}

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 import type { ReactNode } from "react";
 import "../styles/globals.css";
+import { Header } from "@/components/layout/header";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
 });
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="es" className={dmSans.variable}>
-      <body>{children}</body>
+    <html lang="es" className={outfit.variable}>
+      <body><Header />{children}</body>
     </html>
   );
 }
