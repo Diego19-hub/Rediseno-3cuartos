@@ -1,6 +1,34 @@
 # 3cuartos — rediseño web
 
 Base técnica para el rediseño de 3cuartos con Next.js, App Router y WordPress headless (REST). La Home incorpora una prueba técnica de storytelling 3D detrás de una bandera local, manteniendo el hero inmersivo HTML como fallback.
+Rediseño de 3cuartos con Next.js App Router, TypeScript y WordPress headless previsto para una etapa posterior.
+
+## Objetivo visual actual
+
+La prioridad es construir una Home con narrativa controlada por scroll. Tres piezas 3D —Estrategia, Creatividad y Tecnología— rodean un vacío central, se ensamblan para formar “El sistema 3cuartos” y después se expanden para presentar los servicios.
+
+Secuencia objetivo:
+
+`Hero → separated → assembled → expanded → Servicios → primer proyecto`.
+
+El trabajo se desarrolla por aprobaciones visuales. Primero se valida el objeto estático; después materiales y encuadre; luego movimiento, scroll, transiciones y finalmente optimización.
+
+Consulta [TASKS.md](./TASKS.md) para el plan y [AGENTS.md](./AGENTS.md) para los límites de trabajo.
+
+## Alcance de este frente
+
+Se permite trabajar en composición visual, Three.js/R3F, Framer Motion, scroll, movimiento reducido, fallback móvil y rendimiento de la experiencia animada.
+
+Quedan fuera de este frente SEO, metadata, WordPress, consultas de contenido, formularios, analítica, backend y debugging general ajeno a la animación.
+
+## Estado actual
+
+- Escena procedural disponible mediante un feature flag.
+- Tres piezas con geometría extruida, materiales diferenciados y estados base.
+- Canvas dinámico únicamente en escritorio.
+- Movimiento ambiental y puntero en prototipo.
+- Los estados aún cambian con temporizador; falta conectarlos al scroll.
+- El objeto, materiales, iluminación y encuadre todavía requieren aprobación.
 
 ## Requisitos
 
@@ -15,7 +43,13 @@ npm ci
 cp .env.example .env.local
 ```
 
-No agregues secretos a `.env.example` ni a Git. Las variables no requeridas en esta etapa pueden permanecer vacías.
+No agregues secretos a `.env.example` ni a Git. Las variables no requeridas pueden permanecer vacías.
+
+Para activar el prototipo narrativo:
+
+```bash
+NEXT_PUBLIC_IMMERSIVE_HOME_STORY=true
+```
 
 ## Comandos
 
@@ -25,14 +59,18 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npm run test:e2e
 ```
 
 También están disponibles `npm run start`, `npm run tokens:check` y `npm run test:e2e` (este último requiere Google Chrome local).
 
 ## Estructura
+## Estructura relevante
 
-- `src/app`: rutas, layout y metadata.
-- `src/components`: primitives UI, layout y secciones reutilizables.
+- `src/app`: rutas y layout.
+- `src/components/immersive`: experiencia inmersiva actual.
+- `src/components/immersive/story`: prototipo del objeto 3D y su narrativa.
+- `src/components`: UI, layout y secciones reutilizables.
 - `src/styles`: tokens y estilos globales.
 - `src/lib`: adaptadores futuros de WordPress, animación, SEO y validación.
 - `src/components/immersive/immersive-home.tsx`: hero inmersivo HTML/2.5D existente y fallback estable.
@@ -40,11 +78,24 @@ También están disponibles `npm run start`, `npm run tokens:check` y `npm run t
 - `src/app/(site)/page.tsx`: frontera Server Component y selección de la Home mediante banderas de entorno.
 - `wordpress/plugins/3cuartos-content-model`: plugin versionado que se implementará en la etapa CMS.
 - `docs/architecture.md`: decisiones de arquitectura y límites actuales.
+- `src/lib`: adaptadores y utilidades.
+- `docs`: arquitectura y tokens de diseño.
+- `wordpress/plugins/3cuartos-content-model`: etapa CMS, fuera del alcance visual actual.
 
-La página inicial es deliberadamente provisional. No representa contenido final de cliente.
+## Principios de implementación
+
+- Reutilizar antes de crear archivos.
+- Preferir el cambio completo más pequeño.
+- Mantener contenido y CTAs como HTML real.
+- Tratar el Canvas como una capa decorativa.
+- No cargar Three.js en móvil.
+- Respetar `prefers-reduced-motion`.
+- No agregar dependencias ni eliminar archivos sin una necesidad comprobada.
+- No optimizar una dirección visual antes de aprobarla.
 
 ## Tokens de diseño
 
+<<<<<<< HEAD
 Penpot es la fuente de verdad. La copia exacta del export se encuentra en `docs/design-tokens.json`; la guía de correspondencia y actualización está en `docs/design-tokens.md`. No edites valores aprobados directamente en CSS: reemplaza el export, valida el inventario y conserva aliases mediante `var()`.
 
 ## Estado actual
@@ -54,7 +105,10 @@ La base técnica y el modelo de contenido provisional existen. La escena story c
 La bandera `NEXT_PUBLIC_IMMERSIVE_HOME_STORY` solo activa la isla cuando vale exactamente `"true"`; por defecto permanece desactivada. Con la bandera desactivada se conserva `ImmersiveHome`. En móvil no se monta el Canvas ni se carga Three.js.
 
 La dirección de contenido WordPress y sus secciones inferiores quedan fuera de este frente.
+=======
+Penpot es la fuente de verdad. La copia del export está en `docs/design-tokens.json` y su guía en `docs/design-tokens.md`. Los valores aprobados no se cambian directamente en CSS sin actualizar la fuente correspondiente.
+>>>>>>> 2b0d3c9c7b58bb5eccedbff0ce1fa75739b8fe25
 
 ## Pruebas UI
 
-`npm run test:e2e` requiere Google Chrome local y usa los viewports 375×812, 768×1024, 1024×768 y 1440×1000. Las capturas se guardan en `artifacts/ui-review/`, ignorado por Git. El menú móvil es un desplegable no modal: mueve foco al primer enlace al abrir y restaura el disparador al cerrar con Escape.
+`npm run test:e2e` requiere Google Chrome local y usa los viewports 375×812, 768×1024, 1024×768 y 1440×1000. Las capturas se guardan en `artifacts/ui-review/`, ignorado por Git.
