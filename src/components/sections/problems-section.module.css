@@ -32,3 +32,5 @@
 /* Keep the introduction and Problem 01 in one continuous charcoal scene. */
 .storyGrid{background:var(--color-brand-charcoal)}
 .videoStage::after{background:linear-gradient(180deg,var(--color-brand-charcoal) 0%,rgba(9,11,13,.9) 14%,rgba(9,11,13,.28) 30%,transparent 42%,transparent 78%,rgba(9,11,13,.2) 100%),linear-gradient(90deg,rgba(9,11,13,.96) 0%,rgba(9,11,13,.8) 30%,rgba(9,11,13,.36) 57%,rgba(9,11,13,0) 82%)}
+@media(min-width:768px){.section:before{top:0;right:0;left:38%;width:auto;height:1px;background:linear-gradient(90deg,transparent,rgb(var(--color-brand-blue-rgb) / .72) 12%,var(--color-brand-blue) 54%,rgb(var(--color-brand-blue-rgb) / .24));opacity:.9}}
+@media(min-width:768px) and (max-width:1100px){.section:before{left:42%}}

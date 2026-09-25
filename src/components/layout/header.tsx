@@ -19,7 +19,7 @@ function isActive(currentPath: string | undefined, href: string) {
 }
 
 function routeStartsDark(currentPath?: string) {
-  return currentPath === "/" || currentPath === "/servicios" || currentPath === "/nosotros" || currentPath?.startsWith("/servicios/");
+  return currentPath === "/" || currentPath === "/servicios" || currentPath === "/nosotros";
 }
 
 export function Header() {
@@ -51,7 +51,7 @@ export function Header() {
     return () => { window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); observer.disconnect(); if (frame) window.cancelAnimationFrame(frame); };
   }, [pathname]);
 
-  return <header data-global-header className={`${styles.header} ${dark ? styles.headerDark : styles.headerLight}`}>
+  return <header data-global-header className={`${styles.header} ${dark ? styles.headerDark : styles.headerLight} ${pathname === "/" ? styles.headerHome : ""}`}>
     <Link aria-current={isActive(pathname, "/") ? "page" : undefined} aria-label="3cuartos, inicio" className={styles.brand} href="/">3cuartos</Link>
     <nav aria-label="Navegación principal" className={styles.desktop}>
       {links.map((link) => <Link aria-current={isActive(pathname, link.href) ? "page" : undefined} href={link.href} key={link.href}>{link.label}</Link>)}

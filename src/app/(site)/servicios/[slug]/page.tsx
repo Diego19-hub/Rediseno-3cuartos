@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Container } from "@/components/ui/container";
 import { ProvisionalBadge } from "@/components/ui/provisional-badge";
 import { CaseStudyCard, CtaSection, ServiceCard, Testimonial } from "@/components/sections/cards";
@@ -11,11 +10,17 @@ import { servicesProvisional } from "@/content/services.provisional";
 import { getServicePageContent, getServicesPageContent } from "@/lib/wordpress/services";
 import { serviceMetadata } from "@/lib/wordpress/service-metadata";
 import { ServiceFeaturedImage } from "./service-featured-image";
-import styles from "../page.module.css";
+import styles from "./service-detail.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
 const isExternalUrl = (url: string) => /^https?:\/\//i.test(url);
+
+const problemTitles: Record<string, string> = {
+  "marketing-digital-demo": "Conecta tu marca con las personas correctas.",
+  "diseno-branding-demo": "Una marca clara para avanzar.",
+  "desarrollo-web-demo": "Una experiencia digital que funciona.",
+};
 
 export async function generateStaticParams() {
   const content = await getServicesPageContent();
@@ -34,14 +39,36 @@ export default async function ServicePage({ params }: Props) {
   const cta = service.cta.label && service.cta.url ? service.cta : { label: "Cuéntanos tu proyecto", url: "/#contacto" };
   const image = service.image;
   const externalCta = isExternalUrl(cta.url);
-  return <><main><Container>
-    <section className={`${styles.section} ${styles.breadcrumb}`}><Breadcrumb current={service.name}/></section>
-    <section className={`${styles.hero} ${styles.serviceHero}`}><div><p className={styles.eyebrow}>Servicio</p><h1>{service.name}</h1><p>{service.summary}</p><ProvisionalBadge/><Button href={cta.url} target={externalCta ? "_blank" : undefined} rel={externalCta ? "noreferrer" : undefined}>{cta.label} <span aria-hidden="true">→</span></Button></div><div className={styles.connection}>{image ? <ServiceFeaturedImage className={styles.connectionMedia} src={image.url} alt={image.alt || service.name} sizes="(max-width: 767px) 100vw, 36vw" /> : null}<p>{service.visualIdentifier || "Módulo de servicio"}</p><p>{service.description || service.summary}</p></div></section>
-    <section className={styles.detailGrid}><article className={styles.detailCard}><p className={styles.eyebrow}>{servicesProvisional.service.problemLabel}</p><h2>{service.summary}</h2></article><article className={styles.detailCard}><p className={styles.eyebrow}>{servicesProvisional.service.valueLabel}</p><p className={styles.copy}>{service.description || service.summary}</p></article></section>
-    <section className={styles.section}><p className={styles.eyebrow}>{servicesProvisional.service.capabilitiesLabel}</p><div className={styles.grid}>{service.capabilities.length ? service.capabilities.map((capability) => <article className={styles.detailCard} key={capability}><h3>{capability}</h3><ProvisionalBadge/></article>) : <article className={styles.detailCard}><p>Capacidades provisionales por confirmar.</p><ProvisionalBadge/></article>}</div></section>
-    <section className={styles.section}><p className={styles.eyebrow}>{servicesProvisional.service.processLabel}</p><ol className={styles.process}>{servicesProvisional.process.map((step, index) => <li key={step}>0{index + 1} {step}</li>)}</ol></section>
-    {caseStudy && <section className={styles.section}><p className={styles.eyebrow}>Caso relacionado</p><div className={styles.grid}><CaseStudyCard caseStudy={caseStudy}/>{testimonial && <Testimonial testimonial={testimonial}/>}</div></section>}
-    <section className={styles.section}><p className={styles.eyebrow}>{servicesProvisional.service.relatedLabel}</p><div className={styles.grid}>{relatedServices.map((related) => <Link key={related.id} href={`/servicios/${related.slug}`}><ServiceCard service={related}/></Link>)}</div></section>
+  const problemTitle = problemTitles[service.slug] ?? service.summary;
+  return <><main className={styles.page}><Container>
+    <section className={styles.hero} aria-labelledby="service-title">
+      <div className={styles.heroCopy}>
+        <p className={styles.eyebrow}><span aria-hidden="true">{String(service.order).padStart(2, "0")}</span> Servicio</p>
+        <h1 id="service-title">{service.name}</h1>
+        <p className={styles.summary}>{service.summary}</p>
+        <div className={styles.heroActions}>
+          {service.isProvisional && <ProvisionalBadge/>}
+          <Button href={cta.url} target={externalCta ? "_blank" : undefined} rel={externalCta ? "noreferrer" : undefined}>{cta.label} <span aria-hidden="true">→</span></Button>
+        </div>
+      </div>
+      <div className={styles.heroVisual}>
+        {image ? <ServiceFeaturedImage className={styles.featuredImage} src={image.url} alt={image.alt || service.name} sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 42vw, 38vw" /> : <div className={styles.imageFallback} aria-hidden="true"><span>{String(service.order).padStart(2, "0")}</span></div>}
+        {service.visualIdentifier ? <p className={styles.visualIdentifier}>{service.visualIdentifier}</p> : null}
+      </div>
+    </section>
+    <section className={styles.overview} aria-label="Resumen del servicio">
+      <article><p className={styles.eyebrow}>{servicesProvisional.service.problemLabel}</p><h2>{problemTitle}</h2></article>
+      <article><p className={styles.eyebrow}>{servicesProvisional.service.valueLabel}</p><p>{service.description || service.summary}</p></article>
+    </section>
+    <section className={styles.capabilities} aria-labelledby="capabilities-title">
+      <div className={styles.sectionHeading}><p className={styles.eyebrow}>{servicesProvisional.service.capabilitiesLabel}</p><h2 id="capabilities-title">Capacidades y<br />entregables.</h2></div>
+      {service.capabilities.length ? <ol className={styles.capabilityList}>{service.capabilities.map((capability, index) => <li key={capability}><span>{String(index + 1).padStart(2, "0")}</span><h3>{capability}</h3></li>)}</ol> : <p className={styles.emptyCapabilities}>Sin capacidades publicadas para este servicio.</p>}
+    </section>
+    </Container>
+    <section className={styles.process} aria-labelledby="process-title"><div className={styles.processInner}><p className={styles.eyebrow}>{servicesProvisional.service.processLabel}</p><h2 id="process-title">Una dirección<br />clara<br />en cada etapa.</h2><ol>{servicesProvisional.process.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}</ol></div></section>
+    <Container>
+    {caseStudy && <section className={styles.related} aria-labelledby="related-case-title"><p className={styles.eyebrow}>Caso relacionado</p><h2 id="related-case-title">Una aplicación del sistema.</h2><div className={styles.relatedGrid}><CaseStudyCard caseStudy={caseStudy}/>{testimonial && <Testimonial testimonial={testimonial}/>}</div></section>}
+    {relatedServices.length ? <section className={styles.related} aria-labelledby="related-services-title"><p className={styles.eyebrow}>{servicesProvisional.service.relatedLabel}</p><h2 id="related-services-title">Otras capacidades<br />que se conectan.</h2><div className={styles.relatedGrid}>{relatedServices.map((related) => <Link key={related.id} href={`/servicios/${related.slug}`}><ServiceCard service={related}/></Link>)}</div></section> : null}
     <CtaSection label={cta.label} url={cta.url}/>
   </Container></main><Footer/></>;
 }

@@ -1,0 +1,243 @@
+.page {
+  overflow: clip;
+  background: var(--color-brand-mineral);
+  color: var(--color-brand-charcoal);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, .94fr) minmax(20rem, .86fr);
+  gap: clamp(3rem, 8vw, 10rem);
+  align-items: center;
+  min-height: min(72svh, 52rem);
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+.heroCopy,
+.heroVisual,
+.overview article,
+.capabilities,
+.process,
+.related {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-brand-blue);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.eyebrow span { margin-right: .7rem; }
+
+.hero h1,
+.overview h2,
+.sectionHeading h2,
+.process h2,
+.related h2 {
+  margin: 0;
+  font-weight: 580;
+  letter-spacing: -.065em;
+  line-height: .91;
+}
+
+.hero h1 {
+  max-width: 9ch;
+  margin-top: 1.3rem;
+  font-size: clamp(4.25rem, 7.3vw, 9rem);
+}
+
+.summary {
+  max-width: 34rem;
+  margin: 2rem 0 0;
+  color: #4e5355;
+  font-size: clamp(1.05rem, 1.35vw, 1.32rem);
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.heroVisual {
+  position: relative;
+  border-top: 1px solid var(--color-brand-blue);
+  padding-top: .9rem;
+}
+
+.featuredImage,
+.imageFallback {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #dfe0dc;
+}
+
+.imageFallback {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, rgb(var(--color-brand-blue-rgb) / .16), transparent 60%), #dfe0dc;
+  color: rgb(var(--color-brand-blue-rgb) / .35);
+  font-size: clamp(7rem, 16vw, 16rem);
+  font-weight: 650;
+  letter-spacing: -.08em;
+}
+
+.visualIdentifier {
+  margin: .9rem 0 0;
+  color: #5a5e60;
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, .68fr);
+  gap: clamp(3rem, 9vw, 11rem);
+  padding-block: clamp(5rem, 10vw, 10rem);
+  border-top: 1px solid rgb(9 11 13 / .2);
+}
+
+.overview h2,
+.sectionHeading h2,
+.process h2,
+.related h2 { font-size: clamp(2.8rem, 4vw, 5rem); }
+
+.overview h2 { max-width: 13ch; margin-top: 1.1rem; }
+
+.overview article:last-child { align-self: end; }
+
+.overview article:last-child p:last-child {
+  max-width: 33rem;
+  margin: 1.1rem 0 0;
+  color: #4e5355;
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.capabilities {
+  display: grid;
+  grid-template-columns: minmax(16rem, .62fr) minmax(0, 1.38fr);
+  gap: clamp(3rem, 8vw, 10rem);
+  padding-block: clamp(5rem, 10vw, 10rem);
+  border-top: 1px solid rgb(9 11 13 / .2);
+}
+
+.sectionHeading h2 { max-width: 10ch; margin-top: 1.1rem; }
+
+.capabilityList {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgb(9 11 13 / .25);
+  list-style: none;
+}
+
+.capabilityList li {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  min-height: clamp(4.8rem, 6vw, 6.5rem);
+  border-bottom: 1px solid rgb(9 11 13 / .18);
+}
+
+.capabilityList span {
+  color: var(--color-brand-blue);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.capabilityList h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-weight: 540;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+
+.emptyCapabilities { margin: 0; color: #565b5d; line-height: 1.6; }
+
+.process {
+  width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+  color: var(--color-brand-mineral);
+  background: var(--color-brand-charcoal);
+}
+
+.processInner {
+  width: min(calc(100% - (2 * var(--container-gutter))), 1600px);
+  min-height: 100svh;
+  margin-inline: auto;
+  padding-block: clamp(5rem, 10vw, 10rem);
+  box-sizing: border-box;
+}
+
+.process h2 { max-width: 11ch; margin-top: 1.3rem; }
+
+.process ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: clamp(4rem, 7vw, 7rem) 0 0;
+  padding: 0;
+  border-top: 1px solid rgb(242 242 238 / .28);
+  list-style: none;
+}
+
+.process li {
+  display: grid;
+  gap: .8rem;
+  min-height: 8rem;
+  padding: 1.2rem 1rem 1rem 0;
+  border-right: 1px solid rgb(242 242 238 / .16);
+  color: #c7cbc9;
+  line-height: 1.35;
+}
+
+.process li + li { padding-left: 1rem; }
+.process li:last-child { border-right: 0; }
+.process li span { color: var(--color-brand-blue); font-size: .75rem; font-weight: 700; letter-spacing: .1em; }
+
+.related { padding-block: clamp(5rem, 10vw, 10rem); border-top: 1px solid rgb(9 11 13 / .2); }
+.related h2 { max-width: 12ch; margin-top: 1.1rem; }
+.relatedGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 2.5rem); margin-top: clamp(3rem, 6vw, 6rem); }
+.relatedGrid > a { color: inherit; text-decoration: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroCopy { animation: enter .5s cubic-bezier(.22, 1, .36, 1) both; }
+  .heroVisual { animation: enter .5s .1s cubic-bezier(.22, 1, .36, 1) both; }
+}
+
+@keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 767px) {
+  .hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; padding-bottom: 4.5rem; }
+  .hero h1 { max-width: 10ch; font-size: clamp(3.3rem, 15vw, 5.2rem); }
+  .summary { margin-top: 1.4rem; font-size: 1rem; }
+  .heroActions { margin-top: 1.5rem; }
+  .heroVisual { order: 2; }
+  .featuredImage, .imageFallback { aspect-ratio: 4 / 3; }
+  .overview, .capabilities { grid-template-columns: 1fr; gap: 2.5rem; padding-block: 4.5rem; }
+  .overview h2, .sectionHeading h2, .process h2, .related h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .overview h2, .sectionHeading h2 { margin-top: .9rem; }
+  .capabilityList li { grid-template-columns: 3rem minmax(0, 1fr); min-height: 4.5rem; }
+  .process { min-height: 0; }
+  .processInner { width: 100%; min-height: 0; padding-block: 4.5rem; }
+  .process ol { grid-template-columns: 1fr; margin-top: 3rem; }
+  .process li, .process li + li { grid-template-columns: 3rem 1fr; min-height: 0; padding: 1rem 0; border-right: 0; border-bottom: 1px solid rgb(242 242 238 / .16); }
+  .process li:last-child { border-bottom: 0; }
+  .related { padding-block: 4.5rem; }
+  .relatedGrid { grid-template-columns: 1fr; margin-top: 2.5rem; }
+}
