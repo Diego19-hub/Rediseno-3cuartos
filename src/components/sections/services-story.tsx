@@ -175,7 +175,6 @@ export function ServicesStory({ intro, videoSrc }: ServicesStoryProps) {
         <div className={styles.chapters}>
           <motion.article className={styles.chapter} {...reveal}>
             <div className={styles.chapterContent}>
-              <p className={styles.step}>02 / LAS TRES DISCIPLINAS</p>
               <h2 className={styles.systemTitle}>Sistema</h2>
               <p className={styles.copy}>Las necesidades de un proyecto no siempre pertenecen a una sola disciplina.</p>
               <span className={styles.architecturalLine} aria-hidden="true" />
@@ -196,13 +195,6 @@ export function ServicesStory({ intro, videoSrc }: ServicesStoryProps) {
             </motion.article>
           ))}
 
-          <motion.article className={`${styles.chapter} ${styles.finalChapter}`} {...reveal}>
-            <div className={styles.chapterContent}>
-              <p className={styles.step}>Conexión</p>
-              <h2>Todo vuelve a conectarse.</h2>
-              <span className={styles.architecturalLine} aria-hidden="true" />
-            </div>
-          </motion.article>
         </div>
       </section>
     </>

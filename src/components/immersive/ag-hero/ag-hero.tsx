@@ -14,7 +14,6 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
   const visualOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 0.92, 0.58]);
   const copyY = useTransform(scrollYProgress, [0, 1], [0, -72]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0]);
-  const transitionLineOpacity = useTransform(scrollYProgress, [0, 0.65, 1], [1, 0.82, 0.2]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -65,8 +64,8 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
         <video
           ref={videoRef}
           className={styles.video}
-          src="/video/home-hero.mp4"
-          poster="/video/home-hero-poster.jpg"
+          src="/video/3cuartos-logo-motion.mp4"
+          poster="/video/3cuartos-logo-motion-poster.jpg"
           autoPlay={!reducedMotion}
           muted
           loop
@@ -93,16 +92,9 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
         </div>
       </motion.div>
 
-      <motion.span
-        className={styles.transitionLine}
-        aria-hidden="true"
-        style={reducedMotion ? undefined : { opacity: transitionLineOpacity }}
-      />
       <div className={styles.disciplines} aria-label="Disciplinas del sistema">
         <span>Estrategia</span><span>Creatividad</span><span>Tecnología</span>
       </div>
-      <p className={styles.cycleNote} aria-hidden="true">Ciclo autónomo · 8 segundos</p>
-      <p className={styles.scrollHint} aria-hidden="true">Scroll para explorar ↓</p>
     </motion.section>
   );
 }

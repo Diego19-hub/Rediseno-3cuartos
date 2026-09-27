@@ -65,10 +65,10 @@ export default async function ServicePage({ params }: Props) {
       {service.capabilities.length ? <ol className={styles.capabilityList}>{service.capabilities.map((capability, index) => <li key={capability}><span>{String(index + 1).padStart(2, "0")}</span><h3>{capability}</h3></li>)}</ol> : <p className={styles.emptyCapabilities}>Sin capacidades publicadas para este servicio.</p>}
     </section>
     </Container>
-    <section className={styles.process} aria-labelledby="process-title"><div className={styles.processInner}><p className={styles.eyebrow}>{servicesProvisional.service.processLabel}</p><h2 id="process-title">Una dirección<br />clara<br />en cada etapa.</h2><ol>{servicesProvisional.process.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}</ol></div></section>
+    <section className={styles.process} aria-labelledby="process-title"><div className={styles.processInner}><p className={styles.eyebrow}>{servicesProvisional.service.processLabel}</p><h2 id="process-title">Una dirección<br />clara<br />en cada etapa.</h2><ol>{servicesProvisional.process.map((step, index) => <li key={step} tabIndex={0}><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}</ol></div></section>
     <Container>
     {caseStudy && <section className={styles.related} aria-labelledby="related-case-title"><p className={styles.eyebrow}>Caso relacionado</p><h2 id="related-case-title">Una aplicación del sistema.</h2><div className={styles.relatedGrid}><CaseStudyCard caseStudy={caseStudy}/>{testimonial && <Testimonial testimonial={testimonial}/>}</div></section>}
     {relatedServices.length ? <section className={styles.related} aria-labelledby="related-services-title"><p className={styles.eyebrow}>{servicesProvisional.service.relatedLabel}</p><h2 id="related-services-title">Otras capacidades<br />que se conectan.</h2><div className={styles.relatedGrid}>{relatedServices.map((related) => <Link key={related.id} href={`/servicios/${related.slug}`}><ServiceCard service={related}/></Link>)}</div></section> : null}
-    <CtaSection label={cta.label} url={cta.url}/>
+    <CtaSection headingAs="h3" label={cta.label} url={cta.url}/>
   </Container></main><Footer/></>;
 }

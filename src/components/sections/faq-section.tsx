@@ -26,7 +26,6 @@ export function FaqSection() {
     <section data-header-theme="light" id="preguntas-frecuentes" className={styles.section} aria-labelledby="faq-title">
       <div className={styles.inner}>
         <div className={styles.heading}>
-          <p className={styles.eyebrow}>08 / PREGUNTAS FRECUENTES</p>
           <h2 id="faq-title">Lo esencial antes de empezar.</h2>
         </div>
         <div className={styles.list}>

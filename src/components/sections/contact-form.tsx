@@ -86,7 +86,7 @@ export function ContactForm() {
       {field("name", "Nombre", { required: true, autoComplete: "name" })}
       {field("company", "Empresa", { autoComplete: "organization" })}
       {field("email", "Email", { required: true, autoComplete: "email", type: "email" })}
-      {field("phone", "Teléfono", { autoComplete: "tel", placeholder: "Tu número de teléfono", type: "tel", inputMode: "tel" })}
+      {field("phone", "Teléfono", { autoComplete: "tel", type: "tel", inputMode: "tel" })}
     </div>
     <fieldset className={styles.needs} aria-describedby={errors.needs ? "contact-needs-error" : undefined}>
       <legend>Qué necesitas *</legend>

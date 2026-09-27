@@ -1,8 +1,128 @@
-.section{position:relative;overflow:hidden;background:var(--color-brand-mineral);color:#171716;padding:clamp(7rem,12vw,11rem) var(--container-gutter) clamp(6rem,10vw,9rem)}.transitionLine{position:absolute;top:0;left:14%;width:1px;height:clamp(5rem,10vw,8rem);background:linear-gradient(var(--color-brand-blue),rgb(var(--color-brand-blue-rgb) / .1));opacity:.7}.transitionLine::after{position:absolute;top:100%;left:0;width:clamp(4rem,10vw,9rem);height:1px;background:linear-gradient(90deg,var(--color-brand-blue),transparent);content:""}.inner{max-width:1280px;margin:0 auto}.intro{max-width:880px}.eyebrow{margin:0 0 1.25rem;color:var(--color-brand-blue);font-size:.72rem;font-weight:650;letter-spacing:.16em}.intro h2{max-width:800px;margin:0;font-size:clamp(3.4rem,7vw,7.5rem);line-height:.92;letter-spacing:-.06em}.brandRail{position:relative;overflow:hidden;margin:clamp(6rem,11vw,10rem) 0 0;padding:1.4rem 0;border-top:1px solid rgba(23,23,22,.28);border-bottom:1px solid rgba(23,23,22,.28)}.brandRail::before{position:absolute;top:0;bottom:0;left:31%;width:1px;background:rgb(var(--color-brand-blue-rgb) / .36);content:""}.brandTrack{display:flex;align-items:center;justify-content:space-between;gap:clamp(3rem,9vw,9rem);min-width:max-content}.brand{display:grid;min-width:clamp(9rem,13vw,13rem);min-height:4rem;place-items:center;color:rgba(23,23,22,.7);font-size:clamp(1rem,1.7vw,1.4rem);font-weight:600;letter-spacing:-.02em;transition:color .25s ease,opacity .25s ease;white-space:nowrap}.brand img{max-width:10rem;height:auto;object-fit:contain;filter:grayscale(1);opacity:.65}.brandRail:hover .brand{opacity:.36}.brandRail:hover .brand:hover{color:#171716;opacity:1}.brandRail:hover .brand:hover img{opacity:1}.testimonialArea{display:grid;grid-template-columns:minmax(180px,.35fr) minmax(0,1fr);gap:clamp(2rem,9vw,10rem);align-items:start;max-width:1050px;margin:clamp(6rem,12vw,11rem) 0 0}.testimonialEyebrow{max-width:15ch;margin:0;color:var(--color-brand-blue);font-size:.72rem;font-weight:650;letter-spacing:.15em;line-height:1.4;text-transform:uppercase}.testimonialArea blockquote{margin:0;padding-left:clamp(1.5rem,4vw,4rem);border-left:1px solid rgb(var(--color-brand-blue-rgb) / .58)}.testimonialArea blockquote p{max-width:780px;margin:0;font-size:clamp(2rem,4.2vw,4.8rem);line-height:1;letter-spacing:-.05em}.testimonialArea footer{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin-top:2rem;color:#777770;font-size:.82rem}.testimonialArea cite{font-style:normal;color:#171716;font-weight:600}.testimonialArea footer span+span::before{margin-right:1.2rem;color:#a5aaa8;content:"/"}
-@media(max-width:767px){.section{padding:6rem var(--container-gutter) 6rem}.transitionLine{left:18%;height:4rem}.transitionLine::after{width:4rem}.intro h2{max-width:12ch;font-size:clamp(3rem,13vw,4.8rem)}.brandRail{margin-top:5rem;padding:1rem 0}.brandRail::before{left:42%}.brandTrack{justify-content:flex-start;gap:2.5rem}.brand{min-width:8rem;min-height:3.2rem;font-size:1rem}.brand img{max-width:7rem}.testimonialArea{display:block;margin-top:5rem}.testimonialEyebrow{margin-bottom:1.5rem}.testimonialArea blockquote{padding-left:1.25rem}.testimonialArea blockquote p{font-size:clamp(2rem,10vw,3.2rem)}.testimonialArea footer{margin-top:1.5rem}}
-@media(prefers-reduced-motion:reduce){.brand{transition:none}.brandTrack{transform:none!important}}
-.demoTag{display:inline-block;margin:0 0 1.25rem;padding:.35rem .55rem;border:1px dashed rgb(var(--color-brand-blue-rgb) / .7);color:var(--color-brand-blue);font-size:.65rem;font-weight:700;letter-spacing:.12em}
+.section {
+  overflow: hidden;
+  padding: clamp(6rem, 9vw, 8.5rem) var(--container-gutter) clamp(4rem, 6vw, 6rem);
+  background: var(--color-brand-mineral);
+  color: var(--color-text-primary);
+}
 
-/* A compact chapter keeps the demonstration content readable without an empty second screen. */
-@media(min-width:768px){.section{padding-top:clamp(6rem,9vw,8.5rem);padding-bottom:clamp(5rem,7vw,6.75rem)}.brandRail{margin-top:clamp(4.5rem,8vw,7.25rem)}.testimonialArea{margin-top:clamp(4.5rem,8.5vw,8.25rem)}}
-@media(max-width:767px){.brandRail{margin-top:4rem}.testimonialArea{margin-top:4rem}}
+.inner {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+}
+
+.intro {
+  max-width: 55rem;
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--color-brand-blue);
+  font-size: var(--type-h4);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .16em;
+}
+
+.intro h2 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: var(--type-h2);
+  line-height: var(--type-h2-line-height);
+  letter-spacing: var(--type-h2-letter-spacing);
+}
+
+.brandRail {
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(4rem, 7vw, 6rem);
+  padding: 1.4rem 0;
+  border-block: 1px solid rgb(23 23 22 / .24);
+}
+
+.brandTrack {
+  display: flex;
+  width: max-content;
+  animation: confidence-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.brandGroup {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: clamp(3rem, 9vw, 9rem);
+  padding-right: clamp(3rem, 9vw, 9rem);
+}
+
+.brand {
+  display: grid;
+  min-width: clamp(9rem, 13vw, 13rem);
+  min-height: 4rem;
+  place-items: center;
+  color: var(--color-brand-blue);
+  font-size: var(--type-h4);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -.02em;
+  white-space: nowrap;
+}
+
+.brand img {
+  display: block;
+  max-width: 10rem;
+  height: auto;
+  object-fit: contain;
+  filter: saturate(1.15) contrast(1.08);
+  opacity: 1;
+}
+
+.brandRail:hover .brandTrack {
+  animation-play-state: paused;
+}
+
+.brandRail:hover .brand {
+  opacity: .45;
+}
+
+.brandRail:hover .brand:hover {
+  opacity: 1;
+}
+
+@keyframes confidence-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: 5rem 4rem;
+  }
+
+  .intro h2 {
+    max-width: 11ch;
+  }
+
+  .brandRail {
+    margin-top: 3.5rem;
+    padding-block: 1rem;
+  }
+
+  .brandGroup {
+    gap: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .brand {
+    min-width: 8rem;
+    min-height: 3.2rem;
+  }
+
+  .brand img {
+    max-width: 7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brandTrack {
+    animation: none;
+    transform: none;
+  }
+}

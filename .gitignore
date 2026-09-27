@@ -42,4 +42,23 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+
+
+# caches
+.eslintcache
+.stylelintcache
+.turbo
+.cache
+.pnpm-store
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# temporary files
+tmp/
+temp/

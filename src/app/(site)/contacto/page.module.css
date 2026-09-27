@@ -1,23 +1,23 @@
 .main{--contact-header-offset:clamp(4rem,5vw,4.75rem);background:var(--color-brand-mineral);color:var(--color-text-primary);scroll-padding-top:var(--contact-header-offset)}
 .contactLayout{position:relative;display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);gap:clamp(2.5rem,6vw,7rem);max-width:var(--container-wide);min-height:calc(100svh - var(--contact-header-offset));margin:0 auto;padding:max(clamp(3.5rem,8vw,7.5rem),var(--contact-header-offset)) var(--container-gutter) clamp(4rem,8vw,8rem);overflow:hidden}
+.archLine{position:absolute;top:14%;bottom:14%;left:45%;width:clamp(5rem,9vw,9rem);pointer-events:none;border-left:1px solid color-mix(in srgb,var(--color-brand-blue) 35%,transparent)}
 .intro{align-self:center;max-width:38rem;padding-bottom:clamp(1rem,5vw,4rem)}
-.eyebrow{margin:0 0 var(--space-6);color:var(--color-brand-blue);font-size:var(--font-size-14);font-weight:var(--font-weight-semibold);letter-spacing:var(--letter-spacing-wide);text-transform:uppercase}
-.intro h1{max-width:10ch;margin:0;font-size:clamp(3.25rem,6.2vw,6.5rem);font-weight:var(--font-weight-semibold);letter-spacing:var(--letter-spacing-tight);line-height:.98}
-.introText{max-width:34rem;margin:clamp(2rem,4vw,3.5rem) 0 0;color:var(--color-text-secondary);font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5}
-.closing{display:flex;flex-wrap:wrap;gap:.45rem;margin:clamp(3rem,7vw,6rem) 0 0;color:var(--color-text-primary);font-size:var(--font-size-12);font-weight:var(--font-weight-semibold);letter-spacing:.14em;line-height:1.5}
+.eyebrow{margin:0 0 var(--space-6);color:var(--color-brand-blue);font-size: var(--type-h4);font-weight:var(--font-weight-semibold);letter-spacing:var(--letter-spacing-wide);text-transform:uppercase}
+.intro h1{max-width:10ch;margin:0;font-size: var(--type-h1);font-weight:var(--font-weight-semibold);letter-spacing:var(--letter-spacing-tight);line-height:.98}
+.introText{max-width:34rem;margin:clamp(2rem,4vw,3.5rem) 0 0;color:var(--color-text-secondary);font-size: var(--type-h3);line-height:1.5}
+.closing{display:flex;flex-wrap:wrap;gap:.45rem;margin:clamp(3rem,7vw,6rem) 0 0;color:var(--color-text-primary);font-size: var(--type-h4);font-weight:var(--font-weight-semibold);letter-spacing:.14em;line-height:1.5}
 .closing span{color:var(--color-brand-blue)}
 .formPanel{align-self:center;min-width:0;padding-block:var(--space-4)}
-.archLine{position:absolute;top:14%;bottom:14%;left:45%;width:clamp(5rem,9vw,9rem);pointer-events:none;border-left:1px solid color-mix(in srgb,var(--color-brand-blue) 35%,transparent)}
 .archLine::after{position:absolute;top:18%;left:-1px;width:100%;height:1px;background:linear-gradient(90deg,var(--color-brand-blue),transparent);content:""}
 .direct{display:grid;gap:1.25rem;margin-top:clamp(3rem,6vw,5rem);padding-top:1.5rem;border-top:1px solid var(--color-border-default)}
-.direct h2{margin:0;color:var(--color-text-secondary);font-size:var(--font-size-12);font-weight:var(--font-weight-semibold);letter-spacing:.14em}
+.direct h2{margin:0;color:var(--color-text-secondary);font-size: var(--type-h2);font-weight:var(--font-weight-semibold);letter-spacing:.14em}
 .directLinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
 .directLinks a{display:grid;gap:.65rem;padding-bottom:1rem;border-bottom:1px solid var(--color-border-default);color:inherit}
 .directLinks a:hover,.directLinks a:focus-visible{border-color:var(--color-brand-blue)}
-.directLinks span{color:var(--color-brand-blue);font-size:var(--font-size-12);font-weight:var(--font-weight-semibold);letter-spacing:.12em}
-.directLinks strong{font-size:var(--font-size-16);font-weight:var(--font-weight-medium)}
+.directLinks span{color:var(--color-brand-blue);font-size: var(--type-h4);font-weight:var(--font-weight-semibold);letter-spacing:.12em}
+.directLinks strong{font-size: var(--type-h4);font-weight:var(--font-weight-medium)}
 .directLinks i{color:var(--color-brand-blue);font-style:normal}
 .srOnly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:900px){.contactLayout{grid-template-columns:1fr;gap:var(--space-12);min-height:auto;padding-top:max(clamp(3rem,10vw,6rem),var(--contact-header-offset))}.intro{align-self:start;max-width:44rem;padding:0}.intro h1{max-width:12ch;font-size:clamp(3rem,10vw,5.5rem)}.introText{max-width:42rem}.formPanel{align-self:start;width:100%;padding:0}.archLine{top:auto;right:var(--container-gutter);bottom:auto;left:var(--container-gutter);width:auto;height:1px;border-top:1px solid color-mix(in srgb,var(--color-brand-blue) 35%,transparent);border-left:0}.archLine::after{top:-1px;left:0;width:28%;height:1px;background:var(--color-brand-blue)}}
-@media(max-width:600px){.main{--contact-header-offset:3.75rem}.contactLayout{gap:var(--space-10);padding-block:max(var(--space-10),var(--contact-header-offset)) var(--space-12)}.eyebrow{margin-bottom:var(--space-5);font-size:var(--font-size-12)}.intro h1{font-size:clamp(2.8rem,12vw,4rem)}.introText{margin-top:var(--space-6);font-size:var(--font-size-18)}.closing{margin-top:var(--space-10);font-size:11px;letter-spacing:.1em}.archLine{position:relative;top:auto;right:auto;bottom:auto;left:auto;order:1;margin-top:var(--space-2)}.formPanel{order:2}.directLinks{grid-template-columns:1fr}}
+@media(max-width:900px){.contactLayout{grid-template-columns:1fr;gap:var(--space-12);min-height:auto;padding-top:max(clamp(3rem,10vw,6rem),var(--contact-header-offset))}.intro{align-self:start;max-width:44rem;padding:0}.intro h1{max-width:12ch;font-size: var(--type-h1)}.introText{max-width:42rem}.formPanel{align-self:start;width:100%;padding:0}.archLine{top:auto;right:var(--container-gutter);bottom:auto;left:var(--container-gutter);width:auto;height:1px;border-top:1px solid color-mix(in srgb,var(--color-brand-blue) 35%,transparent);border-left:0}.archLine::after{top:-1px;left:0;width:28%;height:1px;background:var(--color-brand-blue)}}
+@media(max-width:600px){.main{--contact-header-offset:3.75rem}.contactLayout{gap:var(--space-10);padding-block:max(var(--space-10),var(--contact-header-offset)) var(--space-12)}.eyebrow{margin-bottom:var(--space-5);font-size: var(--type-h4)}.intro h1{font-size: var(--type-h1)}.introText{margin-top:var(--space-6);font-size: var(--type-h3)}.closing{margin-top:var(--space-10);font-size: var(--type-h4);letter-spacing:.1em}.archLine{position:relative;top:auto;right:auto;bottom:auto;left:auto;order:1;margin-top:var(--space-2)}.formPanel{order:2}.directLinks{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.archLine::after,.directLinks a{transition:none}}

@@ -16,8 +16,7 @@ export function TeamSection({ team }: TeamSectionProps) {
   return (
     <section className={styles.teamSection} aria-labelledby="team-title">
       <div className={styles.teamHeader}>
-        <p className={styles.eyebrow}>06 / EQUIPO</p>
-        <h2 id="team-title"><span>Un equipo para</span><span>cada dirección.</span></h2>
+        <h1 id="team-title"><span>Un equipo para</span><span>cada dirección.</span></h1>
       </div>
       <div className={styles.teamGrid}>
         {visibleTeam.map((member, index) => (
