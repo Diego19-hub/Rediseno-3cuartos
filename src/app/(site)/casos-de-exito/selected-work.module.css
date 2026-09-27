@@ -14,16 +14,16 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  min-height: calc(100svh - clamp(4rem, 5vw, 5rem));
-  height: calc(100svh - clamp(4rem, 5vw, 5rem));
-  padding-block: clamp(2.75rem, 5svh, 4rem) clamp(2rem, 3.5svh, 3rem);
+  min-height: 0;
+  height: auto;
+  padding-block: 2rem 0;
 }
 
 .heroCopy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: clamp(20rem, 35svh, 29rem);
+  min-height: 0;
   max-width: 43rem;
 }
 
@@ -33,7 +33,7 @@
 .projectIndex {
   margin: 0;
   color: var(--color-brand-blue);
-  font-size: var(--font-size-14);
+  font-size: var(--type-h3);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -42,7 +42,7 @@
 .hero h1 {
   max-width: 10ch;
   margin: clamp(1rem, 1.8vw, 1.5rem) 0 0;
-  font-size: clamp(3.5rem, 5.8vw, 6.25rem);
+  font-size: var(--type-h1);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.065em;
   line-height: 0.9;
@@ -55,15 +55,15 @@
 .heroIntro {
   max-width: 34rem;
   margin: clamp(1.25rem, 2vw, 1.75rem) 0 0;
-  color: var(--color-text-secondary);
-  font-size: clamp(1.1rem, 1.55vw, 1.4rem);
+  font-size: var(--type-h3);
   line-height: 1.45;
+  min-height: 3lh;
 }
 
 .heroIndex {
   width: 100%;
   margin-top: clamp(.5rem, 1.2svh, 1rem);
-  padding-top: clamp(1.5rem, 3svh, 2.5rem);
+  padding-top: 1rem;
   border-top: 1px solid var(--color-brand-blue);
 }
 
@@ -71,7 +71,7 @@
   display: grid;
   margin: 0;
   color: var(--color-text-primary);
-  font-size: clamp(4rem, 8vw, 8rem);
+  font-size: var(--type-h3);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.075em;
   line-height: 0.78;
@@ -90,7 +90,7 @@
   padding-top: 0;
   border-top: 0;
   color: var(--color-text-primary);
-  font-size: clamp(.8rem, 1vw, 1rem);
+  font-size: var(--type-h4);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.14em;
 }
@@ -113,13 +113,13 @@
 
 .projectIndex {
   color: var(--color-text-secondary);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   letter-spacing: 0.16em;
 }
 
 .project h2 {
   margin: 1rem 0 1.5rem;
-  font-size: clamp(2.75rem, 5.4vw, 5.75rem);
+  font-size: var(--type-h2);
   letter-spacing: -0.055em;
   line-height: 0.95;
 }
@@ -141,7 +141,7 @@
   padding-top: 1rem;
   border-top: 1px solid var(--color-brand-blue);
   color: var(--color-text-secondary);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   letter-spacing: 0.16em;
 }
 
@@ -177,8 +177,8 @@
 .manifest {
   position: relative;
   display: grid;
-  min-height: clamp(42rem, 94svh, 68rem);
-  margin-top: clamp(1rem, 3vw, 3rem);
+  min-height: clamp(28rem, 60svh, 42rem);
+  margin-top: 0;
   overflow: hidden;
   background: #090B0D;
   color: #F2F2EE;
@@ -192,58 +192,100 @@
   width: min(100% - 2 * var(--container-gutter), var(--container-wide));
   min-height: inherit;
   margin-inline: auto;
-  padding-block: clamp(5rem, 10svh, 8rem);
+  padding-block: clamp(3rem, 7svh, 5rem);
 }
 
-.manifestIndex {
+.manifestEyebrow {
   position: relative;
   z-index: 1;
-  margin: 0 0 clamp(2rem, 4vw, 4rem);
+  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
   color: var(--color-brand-blue);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.16em;
 }
 
-.manifest h2 {
+.manifestTitle {
   position: relative;
   z-index: 1;
-  max-width: 11ch;
+  max-width: 13ch;
   margin: 0;
-  font-size: clamp(3rem, 8vw, 9rem);
+  font-size: var(--type-h2);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.07em;
   line-height: 0.9;
 }
 
-.manifest h2 span {
+.manifestTitle span {
   display: block;
-  width: max-content;
-  max-width: calc(100vw - 2 * var(--container-gutter));
-  white-space: nowrap;
 }
 
-.manifest h2 span:nth-child(3) {
-  margin-top: clamp(1.25rem, 2.5vw, 2.5rem);
+.manifestSecondary {
+  position: relative;
+  z-index: 1;
+  max-width: 26ch;
+  margin: clamp(1rem, 2vw, 1.5rem) 0 0;
+  color: rgb(242 242 238 / .66);
+  font-size: var(--type-h3);
+  line-height: 1.12;
 }
 
-.manifestLine {
+.manifestDescription {
+  position: relative;
+  z-index: 1;
+  max-width: 38ch;
+  margin: clamp(1rem, 2vw, 1.5rem) 0 0;
+  color: rgb(242 242 238 / .58);
+  font-size: var(--type-h4);
+  line-height: 1.35;
+}
+
+.manifest::before {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  z-index: 0;
+  height: 16%;
+  background: var(--color-brand-mineral);
+  clip-path: polygon(0 82%, 100% 24%, 100% 100%, 0 100%);
+  content: "";
+}
+
+.manifest::after {
   position: absolute;
   z-index: 0;
-  top: 53%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  transform: scaleX(0.12);
-  transform-origin: left center;
-  background: #4A70CC;
-  opacity: 0.78;
-  animation: manifest-line-reveal var(--duration-reveal) var(--easing-emphasized) 120ms both;
+  right: 2%;
+  bottom: 23%;
+  left: 58%;
+  height: 42%;
+  transform: translateY(18%) scaleY(.72);
+  transform-origin: bottom center;
+  background: var(--color-brand-blue);
+  clip-path: polygon(0 88%, 13% 88%, 13% 76%, 29% 76%, 29% 68%, 43% 68%, 43% 54%, 58% 54%, 58% 43%, 72% 43%, 72% 27%, 86% 27%, 86% 12%, 100% 12%, 100% 16%, 88% 16%, 88% 31%, 74% 31%, 74% 47%, 60% 47%, 60% 58%, 45% 58%, 45% 72%, 31% 72%, 31% 80%, 16% 80%, 16% 92%, 0 92%);
+  opacity: .85;
+  content: "";
+  animation: manifest-line-reveal 2.4s cubic-bezier(.45, 0, .2, 1) 550ms both, graph-line-loop 6s ease-in-out 3s infinite alternate;
 }
 
 @keyframes manifest-line-reveal {
-  from { transform: scaleX(0.12); }
-  to { transform: scaleX(1); }
+  from { opacity: 0; transform: translateY(18%) scaleY(.72); }
+  to { opacity: .85; transform: translateY(0) scaleY(1); }
+}
+
+@keyframes graph-line-loop {
+  from { transform: translateY(0) scaleY(1); }
+  to { transform: translateY(-12%) scaleY(1.08); }
+}
+
+.manifestEyebrow { animation: manifest-rise 450ms var(--easing-emphasized) both; }
+.manifestTitle { animation: manifest-rise 600ms var(--easing-emphasized) 120ms both; }
+.manifestSecondary { animation: manifest-rise 500ms var(--easing-emphasized) 240ms both; }
+.manifestDescription { animation: manifest-rise 500ms var(--easing-emphasized) 340ms both; }
+
+@keyframes manifest-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .testimonials,
@@ -281,7 +323,7 @@
 .sectionEyebrow {
   margin: 0;
   color: var(--color-brand-blue);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -289,7 +331,7 @@
 
 .testimonialQuote h2 {
   margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
-  font-size: clamp(3.25rem, 5vw, 5.75rem);
+  font-size: var(--type-h2);
   letter-spacing: -0.065em;
   line-height: 0.9;
 }
@@ -297,7 +339,7 @@
 .testimonialQuote blockquote {
   max-width: 22ch;
   margin: clamp(3rem, 7vw, 6rem) 0 0;
-  font-size: clamp(2rem, 3.2vw, 3.75rem);
+  font-size: var(--type-h3);
   font-weight: var(--font-weight-medium);
   letter-spacing: -0.045em;
   line-height: 1.02;
@@ -306,7 +348,7 @@
 .testimonialSignature {
   margin: 2rem 0 0;
   color: var(--color-text-secondary);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.12em;
 }
@@ -319,7 +361,7 @@
   padding-block: 0.35rem;
   border-left: 1px solid color-mix(in srgb, var(--color-brand-blue) 55%, transparent);
   color: var(--color-brand-blue);
-  font-size: var(--font-size-14);
+  font-size: var(--type-h4);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.12em;
   text-align: right;
@@ -327,7 +369,7 @@
 
 .validationNote {
   color: var(--color-text-secondary);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   line-height: 1.5;
 }
 
@@ -343,7 +385,7 @@
 .collaborators h2 {
   max-width: 14ch;
   margin: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(3rem, 6vw, 5rem);
-  font-size: clamp(2.75rem, 5vw, 5.75rem);
+  font-size: var(--type-h2);
   letter-spacing: -0.06em;
   line-height: 0.92;
 }
@@ -363,7 +405,7 @@
   padding: 1rem clamp(0.75rem, 2vw, 2rem);
   border-right: 1px solid color-mix(in srgb, var(--color-text-primary) 28%, transparent);
   color: var(--color-text-primary);
-  font-size: clamp(0.75rem, 1vw, 1rem);
+  font-size: var(--type-h4);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.14em;
 }
@@ -379,14 +421,14 @@
 }
 
 .brandWordmark {
-  font-size: clamp(1rem, 1.65vw, 1.65rem);
+  font-size: var(--type-h4);
   letter-spacing: 0.12em;
 }
 
 .collaborationNote {
   margin: 1.5rem 0 0;
   color: var(--color-text-secondary);
-  font-size: var(--font-size-12);
+  font-size: var(--type-h4);
   letter-spacing: 0.04em;
 }
 
@@ -405,7 +447,7 @@
 .finalCta h2 {
   max-width: 13ch;
   margin: clamp(2rem, 4vw, 3.5rem) 0 0;
-  font-size: clamp(3.5rem, 7vw, 8rem);
+  font-size: var(--type-h2);
   letter-spacing: -0.075em;
   line-height: 0.86;
 }
@@ -419,24 +461,41 @@
 .finalCtaCopy {
   margin: clamp(2rem, 4vw, 3.5rem) 0 0;
   color: color-mix(in srgb, #F2F2EE 72%, transparent);
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: var(--type-h3);
 }
 
 .finalCtaLink {
+  display: inline-flex;
+  min-height: 3.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
   width: max-content;
-  margin-top: 2rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid #F2F2EE;
-  color: #F2F2EE;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  font-weight: var(--font-weight-semibold);
+  max-width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem 1.6rem;
+  border: 1px solid var(--color-brand-blue);
+  border-radius: var(--button-radius);
+  background: var(--color-brand-blue);
+  box-shadow: 0 8px 22px rgb(0 0 0 / .2);
+  color: var(--color-base-white);
+  font-size: var(--type-h4);
+  font-weight: 650;
   text-decoration: none;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
 }
 
 .finalCtaLink:hover,
 .finalCtaLink:focus-visible {
-  border-color: #090B0D;
-  color: #090B0D;
+  border-color: var(--color-accent-600);
+  background: var(--color-accent-600);
+  color: var(--color-base-white);
+  transform: translateY(-2px);
+}
+
+.finalCtaLink:focus-visible {
+  outline: 2px solid var(--color-brand-blue);
+  outline-offset: 6px;
 }
 
 .reveal {
@@ -449,6 +508,22 @@
 }
 
 @media (max-width: 767px) {
+  .manifest {
+    min-height: clamp(22rem, 50svh, 32rem);
+  }
+
+  .manifestInner {
+    padding-block: 2.5rem;
+  }
+
+  .manifest::after {
+    right: -8%;
+    bottom: 18%;
+    left: 52%;
+    height: 34%;
+    transform: translateY(18%) scaleY(.72);
+  }
+
   .hero,
   .project {
     width: min(100% - 2 * var(--container-gutter), 40rem);
@@ -468,7 +543,7 @@
 
   .hero h1 {
     max-width: 8ch;
-    font-size: clamp(3.25rem, 14.5vw, 4.75rem);
+    font-size: var(--type-h1);
   }
 
   .heroIntro {
@@ -482,7 +557,7 @@
   }
 
   .heroIndex p {
-    font-size: clamp(3.4rem, 14.2vw, 5.25rem);
+    font-size: var(--type-h3);
     line-height: 0.8;
   }
 
@@ -505,7 +580,7 @@
 
   .project h2 {
     margin-block: 0.75rem 1.1rem;
-    font-size: clamp(2.7rem, 14vw, 4.5rem);
+    font-size: var(--type-h2);
   }
 
   .projectMedia {
@@ -528,7 +603,7 @@
 
   .manifest h2 {
     max-width: 11ch;
-    font-size: clamp(2.9rem, 12.6vw, 4.5rem);
+    font-size: var(--type-h2);
     line-height: 0.9;
   }
 
@@ -565,12 +640,12 @@
 
   .testimonialQuote h2 {
     margin-top: 1.5rem;
-    font-size: clamp(2.7rem, 12vw, 4.25rem);
+    font-size: var(--type-h2);
   }
 
   .testimonialQuote blockquote {
     margin-top: 3rem;
-    font-size: clamp(1.9rem, 8vw, 3rem);
+    font-size: var(--type-h3);
   }
 
   .testimonialSignature {
@@ -599,7 +674,7 @@
 
   .collaborators h2 {
     margin-block: 1.5rem 3rem;
-    font-size: clamp(2.7rem, 12vw, 4.25rem);
+    font-size: var(--type-h2);
   }
 
   .brandList {
@@ -629,14 +704,18 @@
   }
 
   .finalCta h2 {
-    font-size: clamp(3rem, 13vw, 4.75rem);
+    font-size: var(--type-h2);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .finalCtaLink { transition: none; }
+  .finalCtaLink:hover,
+  .finalCtaLink:focus-visible { transform: none; }
   .reveal { animation: none; }
   .projectMedia img { transition: none; }
-  .manifestLine { animation: none; transform: scaleX(1); }
+  .manifestEyebrow, .manifestTitle, .manifestSecondary, .manifestDescription { animation: none; }
+  .manifest::after { animation: none; opacity: .85; transform: none; }
 }
 
 @media (max-width: 767px) {
@@ -653,7 +732,7 @@
     width: 100%;
     max-width: 100%;
     justify-items: center;
-    font-size: clamp(2.55rem, 11.5vw, 5.25rem);
+    font-size: var(--type-h3);
     line-height: 0.88;
     text-align: center;
     overflow-wrap: break-word;
@@ -724,4 +803,190 @@
   .projectMedia {
     max-width: 100%;
   }
+}
+
+/* Final responsive overrides for the compact project introduction. */
+.manifest {
+  min-height: 65svh;
+}
+
+.manifestInner {
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+  padding-block: 2rem;
+}
+
+.manifestCopy { position: relative; z-index: 2; }
+.manifestTitle {
+  max-width: 11ch;
+  font-size: var(--type-h2);
+  line-height: .9;
+}
+.manifestDescription {
+  max-width: 38ch;
+  margin-top: clamp(1.5rem, 2.5vw, 2rem);
+  color: rgb(242 242 238 / .7);
+  font-size: var(--type-h3);
+  line-height: 1.28;
+}
+
+.manifestStages {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: .3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.manifestStages li {
+  display: flex;
+  align-items: center;
+  gap: clamp(.75rem, 1.2vw, 1.25rem);
+  min-height: 3rem;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: stage-rise 500ms var(--easing-emphasized) calc(700ms + var(--stage-delay, 0ms)) both;
+}
+
+.manifestStages li:nth-child(2) { margin-left: 12%; --stage-delay: 100ms; }
+.manifestStages li:nth-child(3) { margin-left: 24%; --stage-delay: 200ms; }
+.manifestStages li:nth-child(4) { margin-left: 36%; --stage-delay: 300ms; }
+.manifestStages li:nth-child(5) { margin-left: 48%; --stage-delay: 400ms; }
+
+.stageNode {
+  flex: 0 0 .65rem;
+  width: .65rem;
+  height: .65rem;
+  border: 2px solid var(--color-brand-blue);
+  border-radius: 50%;
+  background: #090B0D;
+  box-shadow: 0 0 0 .3rem rgb(var(--color-brand-blue-rgb) / .14);
+  transform: scale(.7);
+  animation: node-pop 450ms var(--easing-emphasized) calc(900ms + var(--stage-delay, 0ms)) both;
+}
+
+.stageLabel {
+  color: #F2F2EE;
+  font-size: var(--type-h3);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -.05em;
+  line-height: .95;
+  transform-origin: left center;
+  transition: color 300ms ease, transform 350ms cubic-bezier(.2, 0, 0, 1);
+}
+
+.manifestStageFinal .stageLabel { color: #F2F2EE; }
+
+.manifestStages li:hover .stageLabel,
+.manifestStages li:focus-visible .stageLabel,
+.manifestStages li:active .stageLabel {
+  color: var(--color-brand-blue);
+  transform: scale(1.16);
+}
+
+.manifestStages li:hover .stageNode,
+.manifestStages li:focus-visible .stageNode,
+.manifestStages li:active .stageNode {
+  background: var(--color-brand-blue);
+  box-shadow: 0 0 0 .45rem rgb(var(--color-brand-blue-rgb) / .2), 0 0 1.25rem rgb(var(--color-brand-blue-rgb) / .45);
+  transform: scale(1.16);
+}
+
+.manifestStageFinal:hover .stageLabel,
+.manifestStageFinal:focus-visible .stageLabel,
+.manifestStageFinal:active .stageLabel {
+  color: #F2F2EE;
+}
+
+.manifestStages li:focus-visible {
+  outline: 2px solid var(--color-brand-blue);
+  outline-offset: .6rem;
+}
+
+.manifest::after {
+  display: none;
+  right: 4%;
+  bottom: 24%;
+  left: 48%;
+  width: auto;
+  height: 2px;
+  transform: rotate(-15deg) scaleX(.05);
+  transform-origin: left center;
+  background: var(--color-brand-blue);
+  clip-path: none;
+  opacity: .9;
+  animation: none;
+}
+
+.manifestEyebrow { animation: manifest-rise 450ms var(--easing-emphasized) both; }
+.manifestTitle span:first-child { animation: manifest-rise 500ms var(--easing-emphasized) 120ms both; }
+.manifestTitle span:last-child { animation: manifest-rise 500ms var(--easing-emphasized) 220ms both; }
+.manifestDescription { animation: manifest-rise 500ms var(--easing-emphasized) 340ms both; }
+
+@keyframes stage-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes node-pop {
+  from { transform: scale(.7); }
+  to { transform: scale(1); }
+}
+
+@media (max-width: 767px) {
+  .manifest {
+    min-height: 50svh;
+  }
+
+  .manifestInner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-block: 2.5rem;
+  }
+
+  .manifestTitle { max-width: 12ch; }
+  .manifestDescription { max-width: 34ch; }
+
+  .manifestStages {
+    gap: .45rem;
+    padding-block: .5rem 1.5rem;
+  }
+
+  .manifestStages li,
+  .manifestStages li:nth-child(2),
+  .manifestStages li:nth-child(3),
+  .manifestStages li:nth-child(4),
+  .manifestStages li:nth-child(5) {
+    min-height: 2rem;
+    margin-left: 0;
+  }
+
+  .manifestStages li:nth-child(even) { margin-left: 10%; }
+  .stageLabel { font-size: var(--type-h3); }
+
+  .manifest::after {
+    display: none;
+    top: 47%;
+    right: auto;
+    bottom: 10%;
+    left: 8%;
+    width: 2px;
+    height: auto;
+    transform: scaleY(.05);
+    transform-origin: bottom center;
+    animation: manifest-line-mobile 1.8s cubic-bezier(.45, 0, .2, 1) 550ms both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifestEyebrow, .manifestTitle span, .manifestDescription, .manifestStages li, .stageNode { animation: none; opacity: 1; transform: none; }
+  .manifest::after { display: none; animation: none; }
+}
+
+@keyframes manifest-line-mobile {
+  from { opacity: 0; transform: scaleY(.05); }
+  to { opacity: .9; transform: scaleY(1); }
 }

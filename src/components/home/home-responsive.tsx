@@ -1,17 +1,18 @@
 "use client";
 
 import { type ComponentType, useEffect, useState } from "react";
-import type { SelectedProject } from "@/lib/wordpress/selected-projects";
+import type { CaseStudy, Service } from "@/types/wordpress";
 import { MobileHomeExperience } from "./mobile-home-experience";
 
 type HomeResponsiveProps = {
   ctaLabel: string;
   ctaUrl: string;
-  selectedProjects: SelectedProject[];
+  projects: CaseStudy[];
+  services: Service[];
   previewConfidence: boolean;
 };
 
-export function HomeResponsive({ ctaLabel, ctaUrl, selectedProjects, previewConfidence }: HomeResponsiveProps) {
+export function HomeResponsive({ ctaLabel, ctaUrl, projects, services, previewConfidence }: HomeResponsiveProps) {
   const [isDesktop, setIsDesktop] = useState(false);
   const [DesktopHomeExperience, setDesktopHomeExperience] = useState<ComponentType<HomeResponsiveProps> | null>(null);
 
@@ -37,8 +38,8 @@ export function HomeResponsive({ ctaLabel, ctaUrl, selectedProjects, previewConf
   }, []);
 
   if (isDesktop && DesktopHomeExperience) {
-    return <DesktopHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} selectedProjects={selectedProjects} previewConfidence={previewConfidence} />;
+    return <DesktopHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} projects={projects} services={services} previewConfidence={previewConfidence} />;
   }
 
-  return <MobileHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} selectedProjects={selectedProjects} previewConfidence={previewConfidence} />;
+  return <MobileHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} projects={projects} services={services} previewConfidence={previewConfidence} />;
 }

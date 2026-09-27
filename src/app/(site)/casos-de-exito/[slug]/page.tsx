@@ -76,34 +76,29 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
 
         <div className={styles.editorialFlow}>
-          {caseStudy.challenge && <section className={styles.editorialSection} aria-labelledby="problem-title">
-            <p className={styles.sectionIndex}>01 / PROBLEMA</p>
+          {caseStudy.challenge && <section className={`${styles.editorialSection} ${styles.splitEditorialSection}`} aria-labelledby="problem-title">
             <h2 id="problem-title">Problema</h2>
             <p>{caseStudy.challenge}</p>
           </section>}
 
-          {caseStudy.objectives.length > 0 && <section className={styles.editorialSection} aria-labelledby="objectives-title">
-            <p className={styles.sectionIndex}>02 / OBJETIVOS</p>
+          {caseStudy.objectives.length > 0 && <section className={`${styles.editorialSection} ${styles.splitEditorialSection}`} aria-labelledby="objectives-title">
             <h2 id="objectives-title">Objetivos</h2>
             <ul className={styles.editorialList}>{caseStudy.objectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
           </section>}
 
-          {solutionParagraphs.length > 0 && <section className={styles.editorialSection} aria-labelledby="solution-title">
-            <p className={styles.sectionIndex}>03 / SOLUCIÓN</p>
+          {solutionParagraphs.length > 0 && <section className={`${styles.editorialSection} ${styles.splitEditorialSection}`} aria-labelledby="solution-title">
             <h2 id="solution-title">Solución</h2>
             <div className={styles.prose}>{solutionParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
           </section>}
 
-          {caseStudy.results.length > 0 && <section className={styles.editorialSection} aria-labelledby="results-title">
-            <p className={styles.sectionIndex}>04 / RESULTADOS</p>
+          {caseStudy.results.length > 0 && <section className={`${styles.editorialSection} ${styles.resultsSection}`} aria-labelledby="results-title">
             <h2 id="results-title">Resultados</h2>
             <ul className={styles.editorialList}>{caseStudy.results.map((result) => <li key={result}>{result}</li>)}</ul>
           </section>}
 
-          {caseStudy.metrics.length > 0 && <section className={styles.editorialSection} aria-labelledby="metrics-title">
-            <p className={styles.sectionIndex}>05 / MÉTRICAS</p>
+          {caseStudy.metrics.length > 0 && <section className={`${styles.editorialSection} ${styles.metricsSection}`} aria-labelledby="metrics-title">
             <h2 id="metrics-title">Métricas</h2>
-            <div className={styles.metrics}>{caseStudy.metrics.map((metric, index) => <article key={`${metric.label}-${index}`}>
+            <div className={`${styles.metrics} ${caseStudy.metrics.length === 4 ? styles.metricsFour : caseStudy.metrics.length === 3 ? styles.metricsThree : styles.metricsAdaptive}`}>{caseStudy.metrics.map((metric, index) => <article key={`${metric.label}-${index}`}>
               <strong>{metric.value}</strong>
               <h3>{metric.label}</h3>
               {metric.context && <p>{metric.context}</p>}

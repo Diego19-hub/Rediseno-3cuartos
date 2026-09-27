@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { ServicesStoryProps } from "@/components/sections/services-story";
 import type { Service } from "@/types/wordpress";
 import type { ContentSource } from "@/lib/wordpress/home";
+import { Footer } from "@/components/layout/footer";
 import styles from "./page.module.css";
 
 type Discipline = {
@@ -73,7 +74,6 @@ function MobileServicesPage({ intro, services, servicesSource }: ServicesPagePro
         <p>{intro.copy}</p>
       </section>
       <section data-header-theme="light" className={styles.mobileDisciplines} aria-labelledby="mobile-disciplines-title">
-        <p className={styles.sectionEyebrow}>02 / LAS TRES DISCIPLINAS</p>
         <h2 id="mobile-disciplines-title">SISTEMA</h2>
         <p className={styles.mobileLead}>Las necesidades de un proyecto no siempre pertenecen a una sola disciplina.</p>
         <ol className={styles.mobileDisciplineList}>
@@ -97,17 +97,11 @@ function MobileServicesPage({ intro, services, servicesSource }: ServicesPagePro
           ))}
         </ol>
       </section>
-      <section data-header-theme="dark" className={styles.mobileConnection} aria-labelledby="mobile-connection-title">
-        <p className={styles.sectionEyebrow}>CAPACIDADES CONECTADAS</p>
-        <h2 id="mobile-connection-title">Los proyectos reales no siempre caben en una categoría.</h2>
-        <div className={styles.mobileConnectionDiagram} aria-label="Marketing, Branding y Web conectados a un proyecto">
-          <div className={styles.mobileConnectionSources}>
-            <span>Marketing</span>
-            <span>Branding</span>
-            <span>Web</span>
-          </div>
-          <span className={styles.mobileConnectionTarget}>Proyecto <span aria-hidden="true">→</span></span>
-        </div>
+      <section data-header-theme="light" className={styles.mobileConnection} aria-labelledby="mobile-connection-title">
+        <p className={styles.sectionEyebrow}>DISCIPLINAS CONECTADAS</p>
+        <h2 id="mobile-connection-title">Una dirección. Múltiples capacidades.</h2>
+        <p className={styles.mobileConnectionCopy}>Un proyecto puede necesitar estrategia, identidad y tecnología al mismo tiempo. La dirección correcta conecta cada decisión.</p>
+        <div className={styles.mobileConnectionFlow}><div><span><i aria-hidden="true" />Estrategia</span><span><i aria-hidden="true" />Identidad</span><span><i aria-hidden="true" />Tecnología</span></div><strong>PROYECTO <span aria-hidden="true">→</span></strong></div>
       </section>
       <section data-header-theme="light" className={styles.mobileMatrix} aria-labelledby="mobile-matrix-title">
         <p className={styles.sectionEyebrow}>MATRIZ DE CAPACIDADES</p>
@@ -125,9 +119,12 @@ function MobileServicesPage({ intro, services, servicesSource }: ServicesPagePro
         <p className={styles.sectionEyebrow}>ENTRADA POR PROBLEMA</p>
         <h2 id="mobile-problem-title">NO TIENES QUE SABER QUÉ SERVICIO NECESITAS.</h2>
         <p>Cuéntanos qué quieres resolver. Primero entendemos el problema y después definimos qué capacidades necesita el proyecto.</p>
-        <Link href="/contacto">Cuéntanos tu proyecto <span aria-hidden="true">→</span></Link>
+        <ol className={styles.mobileProblemFlow} aria-label="Proceso de trabajo">
+          <li>PROBLEMA</li><li>DIRECCIÓN</li><li>CAPACIDADES</li><li className={styles.mobileProblemFlowSolution}>SOLUCIÓN</li>
+        </ol>
+        <Link href="/contacto">Cuéntanos tu proyecto</Link>
       </section>
     </main>
-    <footer className={styles.mobileFooter}><strong>3cuartos</strong><Link href="/contacto">Cuéntanos tu proyecto <span aria-hidden="true">→</span></Link></footer>
+    <Footer tone="dark" />
   </>;
 }

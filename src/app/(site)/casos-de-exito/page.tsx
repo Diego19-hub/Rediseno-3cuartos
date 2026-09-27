@@ -1,34 +1,29 @@
-/* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/layout/footer";
+import { SelectedProjectsCarousel } from "@/components/sections/selected-projects";
+import { ConfidenceBrandCarousel, type ConfidenceBrand } from "@/components/sections/confidence-section";
 import { getCaseStudiesContent } from "@/lib/wordpress/case-studies";
 import styles from "./selected-work.module.css";
 
 export const metadata = { title: "Casos de éxito | 3cuartos", description: "Proyectos seleccionados desarrollados por 3Cuartos." };
 
-const isValidMediaUrl = (value: string | undefined): value is string => {
-  if (!value) return false;
-  if (value.startsWith("/")) return true;
-  try {
-    const url = new URL(value);
-    return url.protocol === "http:" || url.protocol === "https:";
-  } catch {
-    return false;
-  }
-};
-
 export default async function CaseStudiesPage() {
   const content = await getCaseStudiesContent();
   const cases = content.cases.filter((item) => item.slug && item.title);
   const approvedTestimonial = content.testimonials.find((item) => item.quote.trim() && (process.env.NODE_ENV === "development" || !item.isProvisional));
+  const collaborators: readonly ConfidenceBrand[] = [
+    { name: "Answare IT", logo: "/images/brand/answareit-display.png", approved: true },
+    { name: "Calforce", approved: true },
+    { name: "ReciclaGil", logo: "/images/brand/reciclagil-display.png", approved: true },
+    { name: "Senderos del Roble", logo: "/images/brand/senderos-del-roble-display.png", approved: true },
+  ];
   return <>
     <main className={styles.page}>
       <section data-header-theme="light" className={`${styles.hero} ${styles.reveal}`} aria-labelledby="cases-title">
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>CASOS / TRABAJO</p>
           <h1 id="cases-title">Ideas que <span>toman forma.</span></h1>
-          <p className={styles.heroIntro}>Una selección de proyectos y colaboraciones desarrolladas por 3Cuartos.</p>
+          <div className={styles.heroIntro} aria-hidden="true" />
         </div>
         <div className={styles.heroIndex}>
           <p><span>PROYECTOS</span><span>SELECCIONADOS</span></p>
@@ -36,44 +31,27 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      {cases.map((caseStudy, index) => <section data-header-theme="light" className={`${styles.project} ${styles.reveal}`} aria-labelledby={`case-title-${caseStudy.id}`} key={caseStudy.id}>
-        <div className={styles.projectCopy}>
-          <p className={styles.projectIndex}>{String(index + 1).padStart(2, "0")} / 04</p>
-          <Link className={styles.projectTitleLink} href={`/casos-de-exito/${caseStudy.slug}`}><h2 id={`case-title-${caseStudy.id}`}>{caseStudy.title}</h2></Link>
-          <p className={styles.projectCategory}>{caseStudy.clientName || "PROYECTO SELECCIONADO"}</p>
-        </div>
-        <Link className={styles.projectMediaLink} href={`/casos-de-exito/${caseStudy.slug}`} aria-label={`Ver proyecto ${caseStudy.title}`}>
-          <div className={styles.projectMedia}>
-            {isValidMediaUrl(caseStudy.gallery[0]?.url) ? <img
-              src={caseStudy.gallery[0].url}
-              alt={caseStudy.gallery[0].alt || caseStudy.title}
-              width={caseStudy.gallery[0].width || 1907}
-              height={caseStudy.gallery[0].height || 1080}
-              sizes="(max-width: 767px) 100vw, 65vw"
-              loading={index === 0 ? "eager" : "lazy"}
-            /> : <span className={styles.missingVisual} aria-hidden="true" />}
-          </div>
-        </Link>
-      </section>)}
+      <SelectedProjectsCarousel projects={cases} services={content.services} title="Trabajo que toma forma." ctaLabel="" introReveal />
 
       <section data-header-theme="dark" className={styles.manifest} aria-labelledby="manifest-title">
         <div className={styles.manifestInner}>
-          <p className={styles.manifestIndex}>03 / MANIFIESTO</p>
-          <div className={styles.manifestLine} aria-hidden="true" />
-          <h2 id="manifest-title">
-            <span>Un proyecto no empieza</span>
-            <span>con una solución.</span>
-            <span>Empieza entendiendo qué</span>
-            <span>necesita cambiar.</span>
-          </h2>
+          <div className={styles.manifestCopy}>
+            <h2 id="manifest-title" className={styles.manifestTitle}>
+              <span>De una idea clara</span>
+              <span>a un negocio que avanza.</span>
+            </h2>
+            <p className={styles.manifestDescription}>Cada proyecto comienza entendiendo qué necesita cambiar y termina convirtiendo esa claridad en una solución real.</p>
+          </div>
+          <ol className={styles.manifestStages} aria-label="Progresión de un proyecto">
+            {(["CLARIDAD", "DIRECCIÓN", "IDENTIDAD", "EXPERIENCIA", "RESULTADOS"] as const).map((stage) => <li key={stage} tabIndex={0} className={stage === "RESULTADOS" ? styles.manifestStageFinal : undefined}><span className={styles.stageNode} aria-hidden="true" /><span className={styles.stageLabel}>{stage}</span></li>)}
+          </ol>
         </div>
       </section>
 
       <section data-header-theme="light" className={styles.testimonials} aria-labelledby="testimonials-title">
         <div className={styles.testimonialsInner}>
           <div className={styles.testimonialQuote}>
-            <p className={styles.sectionEyebrow}>04 / LO QUE DICEN</p>
-            <h2 id="testimonials-title">DE TRABAJAR JUNTOS</h2>
+            <h2 id="testimonials-title">TESTIMONIO</h2>
             {/* TODO: reemplazar por testimonio autorizado antes de publicar. */}
             <blockquote>{approvedTestimonial ? `“${approvedTestimonial.quote}”` : "“Una relación que continúa después de la entrega.”"}</blockquote>
             <p className={styles.testimonialSignature}>{approvedTestimonial ? `— ${approvedTestimonial.personName || approvedTestimonial.company || "TESTIMONIO"}` : "— TESTIMONIO PENDIENTE DE VALIDACIÓN"}</p>
@@ -87,48 +65,14 @@ export default async function CaseStudiesPage() {
 
       <section data-header-theme="light" className={styles.collaborators} aria-labelledby="collaborators-title">
         <div className={styles.collaboratorsInner}>
-          <p className={styles.sectionEyebrow}>05 / MARCAS Y COLABORACIONES</p>
-          <h2 id="collaborators-title">Relaciones que siguen tomando forma.</h2>
-          <div className={styles.brandList} aria-label="Nombres provisionales pendientes de validación">
-            <div className={styles.brandItem}>
-              <Image
-                className={styles.brandLogo}
-                src="/images/brand/answareit-display.png"
-                alt="Answare IT"
-                width={512}
-                height={512}
-                sizes="(max-width: 767px) 70vw, 20vw"
-              />
-            </div>
-            <div className={`${styles.brandItem} ${styles.brandWordmark}`}>CALFORCE</div>
-            <div className={styles.brandItem}>
-              <Image
-                className={styles.brandLogo}
-                src="/images/brand/reciclagil-display.png"
-                alt="ReciclaGil"
-                width={250}
-                height={105}
-                sizes="(max-width: 767px) 70vw, 20vw"
-              />
-            </div>
-            <div className={styles.brandItem}>
-              <Image
-                className={styles.brandLogo}
-                src="/images/brand/senderos-del-roble-display.png"
-                alt="Senderos del Roble"
-                width={512}
-                height={512}
-                sizes="(max-width: 767px) 70vw, 20vw"
-              />
-            </div>
-          </div>
+          <h2 id="collaborators-title">Marcas y colaboraciones</h2>
+          <ConfidenceBrandCarousel brands={collaborators} />
           <p className={styles.collaborationNote}>Relaciones y autorizaciones pendientes de validación.</p>
         </div>
       </section>
 
       <section data-header-theme="dark" className={styles.finalCta} aria-labelledby="final-cta-title">
         <div className={styles.finalCtaInner}>
-          <p className={styles.sectionEyebrow}>06 / HABLEMOS</p>
           <h2 id="final-cta-title"><span>TU PROYECTO</span><span>PUEDE SER EL SIGUIENTE.</span></h2>
           <p className={styles.finalCtaCopy}>Cuéntanos qué quieres construir.</p>
           <Link className={styles.finalCtaLink} href="/contacto">Cuéntanos tu proyecto →</Link>

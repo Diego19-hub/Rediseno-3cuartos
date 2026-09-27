@@ -5,21 +5,22 @@ import { AgHero } from "@/components/immersive/ag-hero/ag-hero";
 import immersiveStyles from "@/components/immersive/immersive-home.module.css";
 import { ProblemsSection } from "@/components/sections/problems-section";
 import { SystemCore } from "@/components/sections/system-core";
-import { SelectedProjects } from "@/components/sections/selected-projects";
+import { SelectedProjectsCarousel } from "@/components/sections/selected-projects";
 import { HowWeWork } from "@/components/sections/how-we-work";
 import { ConfidenceSection } from "@/components/sections/confidence-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FinalCta } from "@/components/sections/final-cta";
-import type { SelectedProject } from "@/lib/wordpress/selected-projects";
+import type { CaseStudy, Service } from "@/types/wordpress";
 
 type DesktopHomeExperienceProps = {
   ctaLabel: string;
   ctaUrl: string;
-  selectedProjects: SelectedProject[];
+  projects: CaseStudy[];
+  services: Service[];
   previewConfidence: boolean;
 };
 
-export function DesktopHomeExperience({ ctaLabel, ctaUrl, selectedProjects, previewConfidence }: DesktopHomeExperienceProps) {
+export function DesktopHomeExperience({ ctaLabel, ctaUrl, projects, services, previewConfidence }: DesktopHomeExperienceProps) {
   return <>
     <AgHero ctaLabel={ctaLabel} ctaUrl={ctaUrl} />
     <ProblemsSection />
@@ -32,7 +33,7 @@ export function DesktopHomeExperience({ ctaLabel, ctaUrl, selectedProjects, prev
       </div>
       <SystemCore />
     </section>
-    <SelectedProjects projects={selectedProjects} />
+    <SelectedProjectsCarousel projects={projects} services={services} />
     <HowWeWork />
     <ConfidenceSection preview={previewConfidence} />
     <main>

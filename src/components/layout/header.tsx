@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MobileMenu } from "./mobile-menu";
+import { BrandLogo } from "@/components/ui/brand-logo";
 import styles from "./layout.module.css";
 
 const links = [
@@ -52,7 +53,7 @@ export function Header() {
   }, [pathname]);
 
   return <header data-global-header className={`${styles.header} ${dark ? styles.headerDark : styles.headerLight} ${pathname === "/" ? styles.headerHome : ""}`}>
-    <Link aria-current={isActive(pathname, "/") ? "page" : undefined} aria-label="3cuartos, inicio" className={styles.brand} href="/">3cuartos</Link>
+    <Link aria-current={isActive(pathname, "/") ? "page" : undefined} aria-label="3cuartos, inicio" className={styles.brand} href="/"><BrandLogo tone={dark ? "light" : "blue"} /></Link>
     <nav aria-label="Navegación principal" className={styles.desktop}>
       {links.map((link) => <Link aria-current={isActive(pathname, link.href) ? "page" : undefined} href={link.href} key={link.href}>{link.label}</Link>)}
     </nav>

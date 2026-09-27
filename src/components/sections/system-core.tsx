@@ -1,34 +1,18 @@
 "use client";
 
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 import styles from "./system-core.module.css";
 
 export function SystemCore() {
   const reducedMotion = useReducedMotion();
   const coreRef = useRef<HTMLElement>(null);
-  const [motionState, setMotionState] = useState<"separated" | "assembled" | "expanded">("separated");
-  const { scrollYProgress } = useScroll({ target: coreRef, offset: ["start end", "end start"] });
-  const strategyX = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [-42, 0, -14, -76]);
-  const strategyY = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [34, 0, 0, -26]);
-  const strategyRotate = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [-18, -9, -12, -24]);
-  const creativityX = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [42, 0, 16, 58]);
-  const creativityY = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [24, 0, 0, -14]);
-  const creativityRotate = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [18, 10, 14, 25]);
-  const technologyX = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [18, 0, 12, 30]);
-  const technologyY = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [48, 0, 0, 32]);
-  const technologyRotate = useTransform(scrollYProgress, [0, 0.32, 0.66, 1], [12, 4, 8, 17]);
 
-  useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    const nextState = progress < 0.32 ? "separated" : progress < 0.66 ? "assembled" : "expanded";
-    setMotionState((current) => current === nextState ? current : nextState);
-  });
-
-  return <motion.figure ref={coreRef} data-motion-state={motionState} className={styles.core} initial={reducedMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: reducedMotion ? 0 : 0.6, ease: "easeOut" }}>
+  return <motion.figure ref={coreRef} className={styles.core} initial={reducedMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: reducedMotion ? 0 : 0.6, ease: "easeOut" }}>
     <div className={styles.sculpture} aria-hidden="true">
-      <motion.span className={`${styles.fragment} ${styles.strategy}`} style={reducedMotion ? undefined : { x: strategyX, y: strategyY, rotate: strategyRotate }} />
-      <motion.span className={`${styles.fragment} ${styles.creativity}`} style={reducedMotion ? undefined : { x: creativityX, y: creativityY, rotate: creativityRotate }} />
-      <motion.span className={`${styles.fragment} ${styles.technology}`} style={reducedMotion ? undefined : { x: technologyX, y: technologyY, rotate: technologyRotate }}><i /><i /><i /></motion.span>
+      <motion.span className={`${styles.fragment} ${styles.strategy}`} animate={reducedMotion ? undefined : { x: [-18, 0, -22, 0, -18], y: [26, 0, -14, 0, 26], rotate: [-15, -8, -17, -8, -15], scale: [.96, 1, .97, 1, .96] }} transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.span className={`${styles.fragment} ${styles.creativity}`} animate={reducedMotion ? undefined : { x: [22, 0, 20, 0, 22], y: [18, 0, -10, 0, 18], rotate: [15, 9, 18, 9, 15], scale: [.96, 1, .98, 1, .96] }} transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut", delay: -1.6 }} />
+      <motion.span className={`${styles.fragment} ${styles.technology}`} animate={reducedMotion ? undefined : { x: [14, 0, 16, 0, 14], y: [28, 0, 12, 0, 28], rotate: [10, 4, 13, 4, 10], scale: [.97, 1, .98, 1, .97] }} transition={{ duration: 6.6, repeat: Infinity, ease: "easeInOut", delay: -3 }}><i /><i /><i /></motion.span>
     </div>
     <figcaption className={styles.legend}>
       <span>Estrategia</span>
