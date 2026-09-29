@@ -33,7 +33,7 @@ export function MobileHomeExperience({ ctaLabel, ctaUrl, projects, services, pre
     <MobileHero ctaLabel={ctaLabel} ctaUrl={ctaUrl} />
     <MobileProblems />
     <MobileDisciplines />
-    <SelectedProjectsCarousel projects={projects} services={services} />
+    <SelectedProjectsCarousel projects={projects} services={services} stackOnScroll />
     <MobileProcess />
     {previewConfidence ? <MobileConfidence /> : null}
     <MobileFaq />

@@ -32,7 +32,7 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      <SelectedProjectsCarousel projects={cases} services={content.services} title="Trabajo que toma forma." ctaLabel="" introReveal stackOnScroll />
+      <SelectedProjectsCarousel projects={cases} services={content.services} title="Trabajo que toma forma." ctaLabel="" introReveal />
 
       <section data-header-theme="dark" className={styles.manifest} aria-labelledby="manifest-title">
         <div className={styles.manifestInner}>

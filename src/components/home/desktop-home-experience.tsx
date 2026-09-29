@@ -33,7 +33,7 @@ export function DesktopHomeExperience({ ctaLabel, ctaUrl, projects, services, pr
       </div>
       <SystemCore />
     </section>
-    <SelectedProjectsCarousel projects={projects} services={services} />
+    <SelectedProjectsCarousel projects={projects} services={services} stackOnScroll />
     <HowWeWork />
     <ConfidenceSection preview={previewConfidence} />
     <main>

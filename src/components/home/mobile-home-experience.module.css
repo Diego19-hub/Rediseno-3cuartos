@@ -20,7 +20,7 @@
 .problem { position: relative; padding: 1.4rem 0 2.6rem; border-top: 1px solid rgb(74 112 204 / .5); }
 .index { display: block; color: var(--color-brand-blue); font-size: var(--type-h4); letter-spacing: -.08em; line-height: .8; }
 .discipline { margin: 1.4rem 0 .75rem; color: #8f9697; font-size: var(--type-h4); font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
-.problem h2 { max-width: 12ch; margin: 0; font-size: var(--type-h2); line-height: .98; letter-spacing: -.045em; }
+.problem h2 { max-width: 12ch; margin: 0; font-size: var(--type-h1); line-height: .9; letter-spacing: var(--type-h1-letter-spacing); }
 .problem p:last-child { max-width: 34ch; margin: 1rem 0 0; color: #b9bdc0; line-height: 1.55; }
 .closing { margin: 1rem 0 0; padding-top: 1.5rem; border-top: 1px solid rgb(242 242 238 / .26); font-size: var(--type-h4); line-height: 1; letter-spacing: -.04em; }
 .disciplines { padding-block: 5.5rem; }
