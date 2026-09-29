@@ -39,6 +39,9 @@
 .progressTrack { width: min(100%, 1440px); height: 2px; margin: 1rem auto 0; background: rgb(23 23 22 / .16); }
 .progressTrack span { display: block; height: 100%; background: var(--color-brand-blue); transition: width .3s ease; }
 .state { width: min(100%, 1440px); margin: 0 auto; color: var(--color-text-secondary); font-size: var(--type-h3); }
+.carousel { display: contents; }
+.stackOnScroll { overflow: clip; }
+.stackOnScroll .carousel { display: none; }
 @media (max-width: 767px) {
   .section { padding: 5rem var(--container-gutter) 6rem; }
   .header { display: block; margin-bottom: 2.5rem; }
@@ -50,8 +53,10 @@
   .cardBody { padding-top: 1.15rem; }
   .cardBody h3 { max-width: 15ch; margin: .8rem 0 1.25rem; }
   .progressTrack { margin-top: .75rem; }
+  .stackOnScroll .carousel { display: contents; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .stackOnScroll .carousel { display: contents; }
   .introReveal .card:first-child { animation: none; }
   .control, .media img, .media::after, .progressTrack span, .card { transition: none; }
   .track { scroll-behavior: auto; }

@@ -1,0 +1,19 @@
+.timeline { position: relative; z-index: 3; }
+.stage { position: sticky; top: 0; display: grid; place-items: center; min-height: 100svh; overflow: clip; padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 6rem); }
+.kicker { position: absolute; top: clamp(2rem, 5vw, 4rem); left: clamp(1.5rem, 5vw, 6rem); margin: 0; color: var(--color-brand-blue); font-size: var(--type-h4); font-weight: var(--font-weight-semibold); letter-spacing: .14em; text-transform: uppercase; }
+.moment { position: absolute; top: 50%; left: 50%; width: min(43vw, 650px); translate: -50% -50%; transform-origin: 50% 100%; will-change: transform, opacity; }
+.heading { display: flex; align-items: flex-end; gap: clamp(1rem, 2.5vw, 2rem); }
+.index { color: transparent; font-size: var(--type-h2); font-weight: var(--font-weight-semibold); letter-spacing: -.08em; line-height: .68; -webkit-text-stroke: 1px rgb(var(--color-brand-blue-rgb) / .8); }
+.heading p { margin: 0; color: var(--color-brand-blue); font-size: var(--type-h4); font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
+.moment h2 { max-width: 12ch; margin: 1.5rem 0 1.25rem; font-size: var(--type-h2); font-weight: var(--font-weight-semibold); letter-spacing: -.055em; line-height: .92; }
+.copy { max-width: 52ch; margin: 0; color: #b8bcba; font-size: var(--type-h3); line-height: 1.65; }
+.rule { display: block; width: min(28rem, 78%); height: 1px; margin-top: 2rem; background: linear-gradient(90deg, var(--color-brand-blue), rgb(var(--color-brand-blue-rgb) / 0)); }
+.progressLine { position: absolute; right: clamp(1.5rem, 5vw, 6rem); bottom: clamp(2rem, 5vw, 4rem); left: clamp(1.5rem, 5vw, 6rem); height: 1px; background: linear-gradient(90deg, rgb(var(--color-brand-blue-rgb) / .8), rgb(var(--color-brand-blue-rgb) / .08)); }
+.staticStack { display: grid; gap: 4rem; padding: 4.5rem 1.25rem 6rem; }
+.staticStack > * { padding-top: 1.25rem; border-top: 1px solid rgb(var(--color-brand-blue-rgb) / .25); }
+.staticStack .moment h2 { margin-top: 1rem; }
+
+@media (max-width: 767px) {
+  .timeline { display: none; }
+  .staticStack { display: grid; }
+}

@@ -29,7 +29,135 @@
 @media(max-width:767px){.transition:after{left:0;background:linear-gradient(135deg,transparent 0 37%,rgb(var(--color-brand-blue-rgb) / .12) 48%,rgb(var(--color-brand-blue-rgb) / .17) 56%,transparent 70%);clip-path:polygon(48% 0,100% 0,100% 100%,0 100%,0 68%)}}
 .sceneNote{display:none!important}
 
+.transitionTitle span,
+.projectsTitle span {
+  display: inline-block !important;
+}
+
 /* Mobile flow: services follow the hero copy instead of competing for the same fixed-height area. */
 @media(max-width:767px){.header{gap:var(--space-2);padding-block:.5rem}.brand{display:flex;align-items:center;min-height:44px}.hero{min-height:0!important;padding-top:5.75rem!important;padding-bottom:5rem!important}.heroCopy{max-width:100%}.heroCopy>div{display:flex;flex-wrap:wrap;gap:.75rem}.heroCopy a{margin-right:0}.modules{position:relative;right:auto;bottom:auto;left:auto;margin-top:3.5rem;padding:0!important}.modules .moduleWrap{min-height:0;height:auto;padding:1.25rem 0;border:0;border-top:1px solid rgb(var(--color-brand-blue-rgb) / .34);border-radius:0;background:transparent!important;box-shadow:none}.modules .moduleWrap:last-child{border-bottom:1px solid rgb(var(--color-brand-blue-rgb) / .24)}.modules .moduleWrap.active,.modules .moduleWrap:focus-within{border-color:var(--color-brand-blue);background:transparent!important}.modules .capabilityList{min-height:3.15rem;height:auto;margin-bottom:1rem}.modules .moduleLink{margin-top:.25rem}.scene:after{height:5rem!important}}
 .scene:after{background:linear-gradient(180deg,rgb(var(--color-brand-blue-rgb) / .1) 0%,rgb(var(--color-brand-blue-rgb) / .035) 18%,var(--color-brand-charcoal) 52%)!important;box-shadow:0 -14px 32px rgb(var(--color-brand-blue-rgb) / .1);filter:drop-shadow(0 -8px 18px rgb(var(--color-brand-blue-rgb) / .08));}
 .menuButton { border-radius: var(--button-radius); }
+
+/* The first Nosotros scene keeps the editorial motion, but gives the copy a
+   bounded, readable stage instead of inheriting the more expansive Home rules. */
+.aboutScene {
+  min-height: 100dvh;
+  min-height: 100svh;
+  background: var(--color-neutral-950);
+}
+
+.aboutScene .hero {
+  min-height: 100dvh;
+  min-height: 100svh;
+  max-width: 1440px;
+  padding-block: clamp(6.5rem, 10vh, 8rem) clamp(5rem, 8vh, 7rem);
+}
+
+.aboutScene .heroCopy {
+  max-width: min(100%, 42rem);
+}
+
+.aboutScene .heroCopy h1 {
+  max-width: 100%;
+  margin-block: clamp(1rem, 2.5vh, 1.75rem);
+  font-size: clamp(3.75rem, 6.2vw, 6.5rem);
+  line-height: .92;
+}
+
+.aboutScene .heroCopy h1 span {
+  white-space: normal;
+}
+
+.aboutScene .copy {
+  max-width: 34ch;
+  margin-bottom: 1.5rem;
+}
+
+.aboutScene .orbital {
+  top: 17%;
+  right: 5%;
+  width: min(38vw, 500px);
+}
+
+.aboutScene .modules {
+  bottom: clamp(7rem, 12vh, 9rem);
+}
+
+.aboutScene .modules .moduleWrap {
+  min-height: 148px;
+  height: 148px;
+  padding: 1rem;
+}
+
+.aboutScene .modules .capabilityList {
+  min-height: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+.aboutScene::after {
+  height: 8vh !important;
+  background: linear-gradient(180deg, transparent, var(--color-neutral-950)) !important;
+  box-shadow: none;
+  filter: none;
+  clip-path: none !important;
+}
+
+.aboutScene .sceneNote,
+.aboutScene .scrollHint {
+  bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
+@media (max-width: 767px) {
+  .aboutScene .hero {
+    min-height: 100dvh;
+    min-height: 100svh;
+    padding-top: 5.75rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .aboutScene .heroCopy h1 {
+    max-width: 11ch;
+    font-size: clamp(3rem, 13vw, 4.6rem);
+    line-height: .94;
+  }
+
+  .aboutScene .copy {
+    max-width: 30ch;
+    margin-bottom: 1.25rem;
+  }
+
+  .aboutScene .orbital {
+    top: 34%;
+    right: 8%;
+    width: min(52vw, 220px);
+  }
+
+  .aboutScene .modules {
+    bottom: auto;
+    margin-top: 3rem;
+  }
+
+  .aboutScene .modules .moduleWrap {
+    min-height: 0;
+    height: auto;
+    padding: 1.25rem 0;
+  }
+
+  .aboutScene .modules .capabilityList {
+    min-height: 3.15rem;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .aboutScene::after {
+    height: 5vh !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aboutScene .heroCopy h1 span {
+    transform: none !important;
+  }
+}

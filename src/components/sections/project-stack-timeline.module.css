@@ -1,0 +1,19 @@
+.timeline { display: block; overflow: clip; }
+.stage { position: sticky; top: 0; display: grid; place-items: center; min-height: 100svh; overflow: clip; padding: 2rem var(--container-gutter); }
+.moment { position: absolute; top: 50%; left: 50%; width: min(calc(100% - 2 * var(--container-gutter)), 68rem); translate: -50% -50%; transform-origin: 50% 100%; will-change: transform, opacity; }
+.card { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(15rem, .55fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid rgb(8 12 24 / .1); background: rgb(255 255 255 / .64); box-shadow: 0 22px 55px rgb(8 12 24 / .14); }
+.mediaLink { display: block; color: inherit; text-decoration: none; }
+.media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 14px; background: rgb(var(--color-brand-blue-rgb) / .1); }
+.media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media > span:not(.fallback) { position: absolute; right: 1rem; bottom: 1rem; padding: .4rem .55rem; background: rgb(8 12 24 / .76); color: var(--color-brand-mineral); font-size: var(--type-h4); letter-spacing: .1em; }
+.fallback { position: absolute; inset: 15%; background: linear-gradient(135deg, rgb(var(--color-brand-blue-rgb) / .35), transparent); clip-path: polygon(8% 18%, 72% 0, 100% 28%, 82% 100%, 15% 88%); }
+.copy { padding-bottom: .35rem; }
+.copy p { margin: 0; color: var(--color-text-secondary); font-size: var(--type-h4); letter-spacing: .1em; text-transform: uppercase; }
+.copy h3 { max-width: 12ch; margin: 1rem 0 2rem; font-size: var(--type-h2); letter-spacing: -.055em; line-height: .95; }
+.copy h3 a, .copy > a { color: inherit; text-decoration: none; }
+.copy > a { display: inline-flex; gap: .45rem; border-bottom: 1px solid var(--color-brand-blue); font-size: var(--type-h4); font-weight: var(--font-weight-semibold); padding-bottom: .25rem; }
+.reducedList { display: none; }
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .timeline { display: none; }
+}

@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./services-story.module.css";
+import { ServicesDisciplineTimeline } from "./services-discipline-timeline";
 
 export type ServicesStoryProps = {
   intro: { copy: string; eyebrow: string; title: string };
@@ -181,19 +182,7 @@ export function ServicesStory({ intro, videoSrc }: ServicesStoryProps) {
             </div>
           </motion.article>
 
-          {narrative.map((item) => (
-            <motion.article className={styles.chapter} key={item.index} {...reveal}>
-              <div className={styles.chapterContent}>
-                <div className={styles.disciplineHeading}>
-                  <span className={styles.largeIndex} aria-hidden="true">{item.index}</span>
-                  <p className={styles.step}>{item.label}</p>
-                </div>
-                <h2>{item.title}</h2>
-                <p className={styles.copy}>{item.copy}</p>
-                <span className={styles.architecturalLine} aria-hidden="true" />
-              </div>
-            </motion.article>
-          ))}
+          <ServicesDisciplineTimeline disciplines={narrative} staticMode={Boolean(prefersReducedMotion || isCompact)} />
 
         </div>
       </section>

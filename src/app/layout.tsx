@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import type { ReactNode } from "react";
 import "../styles/globals.css";
 import { Header } from "@/components/layout/header";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="es" className={outfit.variable}>
-      <body><Header />{children}</body>
+      <body><Header /><CustomCursor />{children}</body>
     </html>
   );
 }

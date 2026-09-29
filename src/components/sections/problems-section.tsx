@@ -93,14 +93,18 @@ export function ProblemsSection() {
 function ProblemMoment({ problem, index, reduced }: { problem: (typeof problems)[number]; index: number; reduced: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const x = useTransform(scrollYProgress, [0, 0.28, 0.62, 1], [index === 1 ? 72 : -72, 0, index === 1 ? -24 : 24, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.78, 1], [40, 0, -12, -48]);
+  const x = useTransform(scrollYProgress, [0, 0.28, 0.62, 1], [index === 1 ? "18vw" : "-18vw", "0vw", index === 1 ? "-8vw" : "8vw", "0vw"]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.78, 1], ["16vh", "0vh", "-4vh", "-12vh"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.78, 1], [0.15, 1, 1, 0.3]);
   const lineScale = useTransform(scrollYProgress, [0.06, 0.34], [0.05, 1]);
+  const headlineX = useTransform(scrollYProgress, [0, 0.2, 0.78, 1], [index === 1 ? "-12vw" : "12vw", "0vw", index === 1 ? "8vw" : "-8vw", "0vw"]);
+  const headlineY = useTransform(scrollYProgress, [0, 0.2, 0.78, 1], ["8vh", "0vh", "-3vh", "-8vh"]);
+  const headlineScale = useTransform(scrollYProgress, [0, 0.22, 0.78, 1], [0.84, 1, 1, 0.9]);
+  const headlineRotate = useTransform(scrollYProgress, [0, 0.2, 0.78, 1], [index === 1 ? 3 : -3, 0, 0, index === 1 ? -2 : 2]);
 
   return <motion.article ref={ref} className={`${styles.problem} ${styles[`problem${index + 1}`]}`} style={reduced ? undefined : { x, y, opacity }}>
     <div className={styles.number} aria-hidden="true">{problem.number}</div>
-    <div className={styles.problemBody}><p className={styles.discipline}>{problem.discipline}</p><h2>{problem.headline}</h2><p className={styles.description}>{problem.description}</p></div>
+    <div className={styles.problemBody}><p className={styles.discipline}>{problem.discipline}</p><motion.h2 style={reduced ? undefined : { x: headlineX, y: headlineY, scale: headlineScale, rotate: headlineRotate }}>{problem.headline}</motion.h2><p className={styles.description}>{problem.description}</p></div>
     <motion.span className={styles.momentLine} aria-hidden="true" style={reduced ? undefined : { scaleX: lineScale }} />
   </motion.article>;
 }

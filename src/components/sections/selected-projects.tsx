@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
 import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import type { CaseStudy, Service } from "@/types/wordpress";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { ProjectStackTimeline } from "./project-stack-timeline";
 import styles from "./selected-projects.module.css";
 
 type CarouselStatus = "ready" | "loading" | "empty" | "error";
@@ -17,6 +19,7 @@ type SelectedProjectsCarouselProps = {
   ctaHref?: string;
   status?: CarouselStatus;
   introReveal?: boolean;
+  stackOnScroll?: boolean;
 };
 
 export function SelectedProjectsCarousel({
@@ -27,6 +30,7 @@ export function SelectedProjectsCarousel({
   ctaHref = "/casos-de-exito",
   status = "ready",
   introReveal = false,
+  stackOnScroll = false,
 }: SelectedProjectsCarouselProps) {
   const reduced = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
@@ -73,19 +77,21 @@ export function SelectedProjectsCarousel({
     }
   };
 
-  return <section id="proyectos-seleccionados" className={`${styles.section} ${introReveal ? styles.introReveal : ""}`} aria-labelledby="selected-projects-title">
-    <div className={styles.header}>
+  return <section id="proyectos-seleccionados" className={`${styles.section} ${introReveal ? styles.introReveal : ""} ${stackOnScroll ? styles.stackOnScroll : ""}`} aria-labelledby="selected-projects-title">
+    <ScrollReveal className={styles.header}>
       <div className={styles.intro}>
         <h2 id="selected-projects-title">{title}</h2>
       </div>
       {ctaLabel && <Link className={styles.sectionCta} href={ctaHref}>{ctaLabel}</Link>}
-    </div>
+    </ScrollReveal>
 
     {status === "loading" && <p className={styles.state}>Cargando proyectos…</p>}
     {status === "error" && <p className={styles.state}>No fue posible cargar los proyectos.</p>}
     {(status === "empty" || (status === "ready" && total === 0)) && <p className={styles.state}>No hay proyectos disponibles.</p>}
 
     {status === "ready" && total > 0 && <>
+      {stackOnScroll && <ProjectStackTimeline projects={projects} services={serviceNames} />}
+      <div className={styles.carousel}>
       <div className={styles.controls}>
         <span className={styles.counter} aria-live="polite">{String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
         <div className={styles.controlGroup}>
@@ -105,6 +111,7 @@ export function SelectedProjectsCarousel({
         />)}
       </div>
       <div className={styles.progressTrack} aria-hidden="true"><span style={{ width: `${((activeIndex + 1) / total) * 100}%` }} /></div>
+      </div>
     </>}
   </section>;
 }
@@ -116,6 +123,7 @@ function ProjectCard({ project, index, total, active, services, cardRef }: { pro
   const href = project.slug ? `/casos-de-exito/${project.slug}` : "/casos-de-exito";
 
   return <article className={`${styles.card} ${active ? styles.cardActive : ""}`} ref={cardRef}>
+    <ScrollReveal distance={24} direction="x">
     <Link className={styles.mediaLink} href={href} aria-label={`Ver proyecto ${project.title}`}>
       <div className={styles.media}>
         {image?.url ? <img src={image.url} alt={image.alt || project.title} width={image.width || 1600} height={image.height || 900} loading={index === 0 ? "eager" : "lazy"} /> : <span className={styles.missingVisual} aria-hidden="true" />}
@@ -127,5 +135,6 @@ function ProjectCard({ project, index, total, active, services, cardRef }: { pro
       <h3><Link href={href}>{project.title}</Link></h3>
       <Link className={styles.cardCta} href={href}>Ver proyecto <span aria-hidden="true">→</span></Link>
     </div>
+    </ScrollReveal>
   </article>;
 }

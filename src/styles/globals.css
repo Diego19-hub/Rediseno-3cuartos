@@ -20,6 +20,8 @@ body {
 a { color: inherit; text-decoration: none; }
 button { border-radius: var(--button-radius); }
 button, input, textarea, select { font: inherit; }
+:where(body[data-custom-cursor="true"]) { cursor: none; }
+:where(body[data-custom-cursor="true"] input, body[data-custom-cursor="true"] textarea, body[data-custom-cursor="true"] select, body[data-custom-cursor="true"] [contenteditable="true"]) { cursor: text; }
 :focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
 
 /* Contrato tipográfico único para todas las rutas y superficies. */

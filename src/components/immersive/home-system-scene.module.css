@@ -1,0 +1,25 @@
+.scene { position: relative; height: 175svh; overflow: clip; background: var(--color-surface-canvas); color: var(--color-text-primary); }
+.sticky { position: sticky; top: 0; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(20rem, .92fr); align-items: center; gap: clamp(2rem, 5vw, 6rem); min-height: 100svh; padding: clamp(5rem, 10vw, 9rem) var(--container-gutter); }
+.sticky::before { position: absolute; inset: 0; background: linear-gradient(130deg, transparent 0 17%, rgb(var(--color-brand-blue-rgb) / .08) 35%, rgb(var(--color-brand-blue-rgb) / .18) 49%, transparent 73%); clip-path: polygon(42% 0, 100% 0, 100% 100%, 12% 100%, 30% 54%, 12% 33%); content: ""; pointer-events: none; }
+.copy, .core { position: relative; z-index: 1; }
+.copy { max-width: 42rem; }
+.eyebrow { margin: 0; color: var(--color-brand-blue); font-size: var(--type-h4); font-weight: var(--font-weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
+.copy h2 { margin: .8rem 0 1.4rem; font-size: var(--type-h2); letter-spacing: var(--type-h2-letter-spacing); line-height: 1; }
+.copy h2 span { display: block; }
+.copy p:not(.eyebrow) { max-width: 36rem; margin: 0; color: var(--color-text-secondary); font-size: var(--type-h3); line-height: 1.5; }
+.copy a { display: inline-flex; gap: .45rem; margin-top: 2rem; color: inherit; font-size: var(--type-h4); font-weight: var(--font-weight-semibold); text-decoration: underline; text-underline-offset: .3em; }
+.copy a span { transition: transform var(--duration-normal) var(--easing-standard); }
+.copy a:hover span, .copy a:focus-visible span { transform: translateX(.3rem); }
+.core { justify-self: end; width: min(100%, 34rem); }
+
+@media (max-width: 767px) {
+  .scene { height: auto; min-height: auto; }
+  .sticky { position: relative; display: block; min-height: auto; padding-block: 5rem; }
+  .copy h2 { max-width: 11ch; }
+  .core { width: min(100%, 22rem); margin: 3.5rem auto 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { height: auto; min-height: auto; }
+  .sticky { position: relative; min-height: auto; }
+}

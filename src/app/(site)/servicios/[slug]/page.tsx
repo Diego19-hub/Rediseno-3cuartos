@@ -10,6 +10,7 @@ import { servicesProvisional } from "@/content/services.provisional";
 import { getServicePageContent, getServicesPageContent } from "@/lib/wordpress/services";
 import { serviceMetadata } from "@/lib/wordpress/service-metadata";
 import { ServiceFeaturedImage } from "./service-featured-image";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import styles from "./service-detail.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -42,7 +43,7 @@ export default async function ServicePage({ params }: Props) {
   const problemTitle = problemTitles[service.slug] ?? service.summary;
   return <><main className={styles.page}><Container>
     <section className={styles.hero} aria-labelledby="service-title">
-      <div className={styles.heroCopy}>
+      <div className={styles.heroCopy}><ScrollReveal>
         <p className={styles.eyebrow}><span aria-hidden="true">{String(service.order).padStart(2, "0")}</span> Servicio</p>
         <h1 id="service-title">{service.name}</h1>
         <p className={styles.summary}>{service.summary}</p>
@@ -50,7 +51,7 @@ export default async function ServicePage({ params }: Props) {
           {service.isProvisional && <ProvisionalBadge/>}
           <Button href={cta.url} target={externalCta ? "_blank" : undefined} rel={externalCta ? "noreferrer" : undefined}>{cta.label} <span aria-hidden="true">→</span></Button>
         </div>
-      </div>
+      </ScrollReveal></div>
       <div className={styles.heroVisual}>
         {image ? <ServiceFeaturedImage className={styles.featuredImage} src={image.url} alt={image.alt || service.name} sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 42vw, 38vw" /> : <div className={styles.imageFallback} aria-hidden="true"><span>{String(service.order).padStart(2, "0")}</span></div>}
         {service.visualIdentifier ? <p className={styles.visualIdentifier}>{service.visualIdentifier}</p> : null}
@@ -61,7 +62,7 @@ export default async function ServicePage({ params }: Props) {
       <article><p className={styles.eyebrow}>{servicesProvisional.service.valueLabel}</p><p>{service.description || service.summary}</p></article>
     </section>
     <section className={styles.capabilities} aria-labelledby="capabilities-title">
-      <div className={styles.sectionHeading}><p className={styles.eyebrow}>{servicesProvisional.service.capabilitiesLabel}</p><h2 id="capabilities-title">Capacidades y<br />entregables.</h2></div>
+      <ScrollReveal className={styles.sectionHeading}><p className={styles.eyebrow}>{servicesProvisional.service.capabilitiesLabel}</p><h2 id="capabilities-title">Capacidades y<br />entregables.</h2></ScrollReveal>
       {service.capabilities.length ? <ol className={styles.capabilityList}>{service.capabilities.map((capability, index) => <li key={capability}><span>{String(index + 1).padStart(2, "0")}</span><h3>{capability}</h3></li>)}</ol> : <p className={styles.emptyCapabilities}>Sin capacidades publicadas para este servicio.</p>}
     </section>
     </Container>

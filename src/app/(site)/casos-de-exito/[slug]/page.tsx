@@ -12,6 +12,7 @@ import { caseStudyMetadata } from "@/lib/wordpress/case-study-metadata";
 import { getCaseStudiesContent, getCaseStudyPageContent } from "@/lib/wordpress/case-studies";
 import type { MediaAsset } from "@/types/wordpress";
 import styles from "./case-study-detail.module.css";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -61,7 +62,7 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
 
         <section className={styles.hero} aria-labelledby="case-title">
-          <div className={styles.heroCopy}>
+          <div className={styles.heroCopy}><ScrollReveal>
             <p className={styles.eyebrow}>CASO DE ÉXITO</p>
             <h1 id="case-title">{caseStudy.title}</h1>
             {caseStudy.clientName && <p className={styles.client}>{caseStudy.clientName}</p>}
@@ -71,7 +72,7 @@ export default async function CaseStudyPage({ params }: Props) {
             {caseStudy.challenge && <p className={styles.heroSummary}>{caseStudy.challenge}</p>}
             {caseStudy.isProvisional && <ProvisionalBadge />}
             {cta && <Button className={styles.heroCta} href={cta.url} target={isExternalUrl(cta.url) ? "_blank" : undefined} rel={isExternalUrl(cta.url) ? "noreferrer" : undefined}>{cta.label} <span aria-hidden="true">→</span></Button>}
-          </div>
+          </ScrollReveal></div>
           <CaseStudyMedia media={caseStudy.gallery[0]} alt={caseStudy.title} className={styles.heroMedia} />
         </section>
 
@@ -108,7 +109,7 @@ export default async function CaseStudyPage({ params }: Props) {
           {testimonial?.quote.trim() && <section className={styles.testimonial} aria-labelledby="testimonial-title">
             <p className={styles.sectionIndex}>TESTIMONIO</p>
             <h2 id="testimonial-title" className={styles.visuallyHidden}>Testimonio relacionado</h2>
-            <div className={styles.testimonialContent}>
+            <ScrollReveal className={styles.testimonialContent}>
               {testimonial.image && <div className={styles.testimonialMedia}><CaseStudyMedia media={testimonial.image} alt={testimonial.personName || "Imagen del testimonio"} /></div>}
               <blockquote>“{testimonial.quote}”</blockquote>
               <div className={styles.testimonialDetails}>
@@ -117,7 +118,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 {testimonial.company && <p>{testimonial.company}</p>}
                 {testimonial.isProvisional && <span className={styles.provisionalBadge}>Provisional — cliente</span>}
               </div>
-            </div>
+            </ScrollReveal>
           </section>}
 
           {additionalMedia.length > 0 && <section className={styles.editorialSection} aria-labelledby="gallery-title">

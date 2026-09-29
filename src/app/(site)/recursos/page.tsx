@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/footer";
 import { getResourcesContent, type ResourceWithCategories } from "@/lib/wordpress/resources";
 import { getServicesPageContent } from "@/lib/wordpress/services";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { EditorialScrollScene } from "@/components/motion/editorial-scroll-scene";
 import styles from "./resources-hub.module.css";
 
 export const metadata = {
@@ -81,7 +83,7 @@ function ResourceImage({ resource, featured = false }: { resource: EditorialReso
 
 function FeaturedResource({ resource }: { resource: EditorialResource }) {
   return (
-    <section className={`${styles.featured} ${resource.image ? "" : styles.featuredNoMedia}`} aria-labelledby="featured-resource-title">
+    <EditorialScrollScene direction="right" intensity="medium" className={`${styles.featured} ${resource.image ? "" : styles.featuredNoMedia}`} aria-labelledby="featured-resource-title">
       <p className={styles.sectionLabel}>02 / RECURSO DESTACADO</p>
       <ResourceImage resource={resource} featured />
       <div className={styles.featuredCopy}>
@@ -93,7 +95,7 @@ function FeaturedResource({ resource }: { resource: EditorialResource }) {
         {resource.excerpt ? <p>{resource.excerpt}</p> : null}
         <Link className={styles.textLink} href={resource.href}>Leer recurso <span aria-hidden="true">→</span></Link>
       </div>
-    </section>
+    </EditorialScrollScene>
   );
 }
 
@@ -101,7 +103,7 @@ function EditorialGrid({ resources }: { resources: EditorialResource[] }) {
   if (resources.length === 0) return null;
 
   return (
-    <section className={styles.editorialGrid} aria-labelledby="articles-title">
+    <EditorialScrollScene direction="left" className={styles.editorialGrid} aria-labelledby="articles-title">
       <div className={styles.gridHeading}>
         <p className={styles.sectionLabel}>04 / LECTURAS</p>
         <h2 id="articles-title">Ideas para volver a mirar.</h2>
@@ -122,7 +124,7 @@ function EditorialGrid({ resources }: { resources: EditorialResource[] }) {
           </article>
         ))}
       </div>
-    </section>
+    </EditorialScrollScene>
   );
 }
 
@@ -146,12 +148,14 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
   return <>
     <main className={styles.page}>
       <section data-header-theme="light" className={styles.hero} aria-labelledby="resources-title">
-        <p className={styles.eyebrow}>RECURSOS / 3CUARTOS</p>
-        <h1 id="resources-title"><span>Ideas para tomar</span><span>mejores decisiones</span><span>digitales.</span></h1>
-        <p className={styles.heroText}>Estrategia, marca, marketing y desarrollo web<br />explicados desde la experiencia.</p>
-        <div className={styles.editorialBand} aria-label="Temas de los recursos">
+        <ScrollReveal>
+          <p className={styles.eyebrow}>RECURSOS / 3CUARTOS</p>
+          <h1 id="resources-title"><span>Ideas para tomar</span><span>mejores decisiones</span><span>digitales.</span></h1>
+          <p className={styles.heroText}>Estrategia, marca, marketing y desarrollo web<br />explicados desde la experiencia.</p>
+          <div className={styles.editorialBand} aria-label="Temas de los recursos">
           <span>ESTRATEGIA</span><i>/</i><span>BRANDING</span><i>/</i><span>MARKETING</span><i>/</i><span>DESARROLLO WEB</span>
-        </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       {featured ? <FeaturedResource resource={featured} /> : null}
@@ -163,7 +167,7 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
         </section>
       ) : null}
 
-      <section data-header-theme="light" className={styles.topics} aria-labelledby="topics-title">
+      <EditorialScrollScene direction="right" intensity="medium" data-header-theme="light" className={styles.topics} aria-labelledby="topics-title">
         <h2 id="topics-title">03 / EXPLORAR POR TEMA</h2>
         <ol className={styles.topicList}>
           {topics.map((topic, index) => (
@@ -174,11 +178,11 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
             </li>
           ))}
         </ol>
-      </section>
+      </EditorialScrollScene>
 
       <EditorialGrid resources={articles.slice(0, 4)} />
 
-      <section data-header-theme="light" className={styles.needs} aria-labelledby="needs-title">
+      <EditorialScrollScene direction="left" intensity="medium" data-header-theme="light" className={styles.needs} aria-labelledby="needs-title">
         <p className={styles.sectionLabel}>05 / ENTRADA POR PROBLEMA</p>
         <h2 id="needs-title">¿QUÉ ESTÁS INTENTANDO RESOLVER?</h2>
         <nav className={styles.needsList} aria-label="Explorar servicios por necesidad">
@@ -190,16 +194,16 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
             </Link>
           ))}
         </nav>
-      </section>
+      </EditorialScrollScene>
 
-      <section data-header-theme="dark" className={styles.cta} aria-labelledby="resources-cta-title">
+      <EditorialScrollScene direction="right" data-header-theme="dark" className={styles.cta} aria-labelledby="resources-cta-title">
         <p className={styles.sectionLabel}>06 / HABLEMOS</p>
         <h2 id="resources-cta-title"><span>Una idea es más útil</span><span>cuando se convierte en acción.</span></h2>
         <div className={styles.ctaAside}>
           <p>Si encontraste algo que conecta con lo que estás intentando resolver, hablemos.</p>
           <Link className={styles.ctaLink} href="/contacto">Cuéntanos tu proyecto <span aria-hidden="true">→</span></Link>
         </div>
-      </section>
+      </EditorialScrollScene>
     </main>
     <Footer tone="dark" />
   </>;

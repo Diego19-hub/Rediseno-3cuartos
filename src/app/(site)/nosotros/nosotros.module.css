@@ -134,6 +134,10 @@
     line-height: 0.92;
   }
 
+  .mobileAboutHero h1 {
+    font-size: var(--type-h2);
+  }
+
   .mobileAboutHero > p:not(.eyebrow),
   .mobileAboutSection > p:not(.eyebrow),
   .mobileAboutCta > p:not(.eyebrow) {

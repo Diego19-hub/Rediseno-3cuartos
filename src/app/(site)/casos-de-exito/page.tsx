@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/footer";
 import { SelectedProjectsCarousel } from "@/components/sections/selected-projects";
 import { ConfidenceBrandCarousel, type ConfidenceBrand } from "@/components/sections/confidence-section";
 import { getCaseStudiesContent } from "@/lib/wordpress/case-studies";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import styles from "./selected-work.module.css";
 
 export const metadata = { title: "Casos de éxito | 3cuartos", description: "Proyectos seleccionados desarrollados por 3Cuartos." };
@@ -20,28 +21,28 @@ export default async function CaseStudiesPage() {
   return <>
     <main className={styles.page}>
       <section data-header-theme="light" className={`${styles.hero} ${styles.reveal}`} aria-labelledby="cases-title">
-        <div className={styles.heroCopy}>
+        <ScrollReveal className={styles.heroCopy}>
           <p className={styles.eyebrow}>CASOS / TRABAJO</p>
           <h1 id="cases-title">Ideas que <span>toman forma.</span></h1>
           <div className={styles.heroIntro} aria-hidden="true" />
-        </div>
+        </ScrollReveal>
         <div className={styles.heroIndex}>
           <p><span>PROYECTOS</span><span>SELECCIONADOS</span></p>
           <div className={styles.indexRule}><span>01 — 04</span></div>
         </div>
       </section>
 
-      <SelectedProjectsCarousel projects={cases} services={content.services} title="Trabajo que toma forma." ctaLabel="" introReveal />
+      <SelectedProjectsCarousel projects={cases} services={content.services} title="Trabajo que toma forma." ctaLabel="" introReveal stackOnScroll />
 
       <section data-header-theme="dark" className={styles.manifest} aria-labelledby="manifest-title">
         <div className={styles.manifestInner}>
-          <div className={styles.manifestCopy}>
+          <ScrollReveal className={styles.manifestCopy}>
             <h2 id="manifest-title" className={styles.manifestTitle}>
               <span>De una idea clara</span>
               <span>a un negocio que avanza.</span>
             </h2>
             <p className={styles.manifestDescription}>Cada proyecto comienza entendiendo qué necesita cambiar y termina convirtiendo esa claridad en una solución real.</p>
-          </div>
+          </ScrollReveal>
           <ol className={styles.manifestStages} aria-label="Progresión de un proyecto">
             {(["CLARIDAD", "DIRECCIÓN", "IDENTIDAD", "EXPERIENCIA", "RESULTADOS"] as const).map((stage) => <li key={stage} tabIndex={0} className={stage === "RESULTADOS" ? styles.manifestStageFinal : undefined}><span className={styles.stageNode} aria-hidden="true" /><span className={styles.stageLabel}>{stage}</span></li>)}
           </ol>
@@ -50,12 +51,12 @@ export default async function CaseStudiesPage() {
 
       <section data-header-theme="light" className={styles.testimonials} aria-labelledby="testimonials-title">
         <div className={styles.testimonialsInner}>
-          <div className={styles.testimonialQuote}>
+          <ScrollReveal className={styles.testimonialQuote}>
             <h2 id="testimonials-title">TESTIMONIO</h2>
             {/* TODO: reemplazar por testimonio autorizado antes de publicar. */}
             <blockquote>{approvedTestimonial ? `“${approvedTestimonial.quote}”` : "“Una relación que continúa después de la entrega.”"}</blockquote>
             <p className={styles.testimonialSignature}>{approvedTestimonial ? `— ${approvedTestimonial.personName || approvedTestimonial.company || "TESTIMONIO"}` : "— TESTIMONIO PENDIENTE DE VALIDACIÓN"}</p>
-          </div>
+          </ScrollReveal>
           <div className={styles.testimonialMeta}>
             <span>01 / 03</span>
             <span className={styles.validationNote}>CONTENIDO DEMO<br />PENDIENTE DE VALIDACIÓN</span>

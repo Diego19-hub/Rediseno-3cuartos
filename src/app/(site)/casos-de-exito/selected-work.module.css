@@ -1,5 +1,6 @@
 .page {
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   background: var(--color-brand-mineral);
   color: var(--color-text-primary);
 }

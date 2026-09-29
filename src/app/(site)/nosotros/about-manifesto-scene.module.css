@@ -1,0 +1,41 @@
+.timeline { position: relative; z-index: 2; }
+.pinned { height: 278svh; }
+.stage { position: sticky; top: 0; display: grid; place-items: center; min-height: 100svh; overflow: clip; padding: clamp(5rem, 9vw, 8rem) max(var(--container-gutter), calc((100vw - var(--container-wide)) / 2)); background: var(--color-brand-mineral); }
+.kicker { position: absolute; top: clamp(2rem, 5vw, 4rem); left: max(var(--container-gutter), calc((100vw - var(--container-wide)) / 2)); margin: 0; color: var(--color-brand-blue); font-size: var(--type-h4); font-weight: var(--font-weight-semibold); letter-spacing: .14em; text-transform: uppercase; }
+.moment { position: absolute; top: 50%; left: 50%; width: min(76vw, 74rem); translate: -50% -50%; transform-origin: 50% 100%; will-change: transform, opacity, clip-path; }
+.moment.dark { padding: clamp(2rem, 4vw, 4rem); background: var(--color-brand-charcoal); color: var(--color-brand-mineral); }
+.marker { display: flex; flex-wrap: wrap; gap: clamp(1rem, 3vw, 3rem); align-items: baseline; color: var(--color-brand-blue); font-size: var(--type-h4); font-weight: var(--font-weight-semibold); letter-spacing: .14em; line-height: 1.2; text-transform: uppercase; }
+.marker span:first-child { opacity: .72; }
+.moment h2 { max-width: 13ch; margin: clamp(1.4rem, 3vw, 2.5rem) 0 1.5rem; font-size: clamp(4rem, 8.8vw, 9rem); letter-spacing: -.075em; line-height: .86; transform-origin: 0 50%; }
+.copy { max-width: 42rem; margin: 0; color: var(--color-text-secondary); font-size: var(--type-h3); line-height: 1.45; }
+.dark .copy { color: rgb(242 242 238 / .72); }
+.rule { display: block; width: min(30rem, 68%); height: 1px; margin-top: 2.4rem; background: linear-gradient(90deg, var(--color-brand-blue), transparent); }
+.capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: clamp(2rem, 4vw, 4rem); }
+.capabilities a { display: grid; grid-template-columns: auto 1fr auto; gap: .65rem 1rem; min-height: 7rem; padding-top: .9rem; border-top: 1px solid var(--color-brand-blue); color: inherit; text-decoration: none; }
+.capabilities span, .capabilities b { color: var(--color-brand-blue); font-size: var(--type-h4); }
+.capabilities strong { font-size: var(--type-h4); }
+.capabilities small { grid-column: 2 / -1; color: var(--color-text-secondary); font-size: var(--type-h4); line-height: 1.35; }
+.dark .capabilities small { color: rgb(242 242 238 / .6); }
+.progressLine { position: absolute; right: max(var(--container-gutter), calc((100vw - var(--container-wide)) / 2)); bottom: clamp(2rem, 5vw, 4rem); left: max(var(--container-gutter), calc((100vw - var(--container-wide)) / 2)); height: 1px; background: linear-gradient(90deg, rgb(var(--color-brand-blue-rgb) / .8), rgb(var(--color-brand-blue-rgb) / .08)); }
+.staticStack { display: grid; gap: 0; }
+.staticStack > .moment { position: relative; width: 100%; padding: clamp(5rem, 9vw, 8rem) max(var(--container-gutter), calc((100vw - var(--container-wide)) / 2)); }
+.staticStack > .moment.dark { background: var(--color-brand-charcoal); color: var(--color-brand-mineral); }
+.staticStack > .moment h2 { max-width: 18ch; margin: 1.5rem 0; font-size: var(--type-h2); line-height: .98; letter-spacing: -.045em; }
+
+@media (max-width: 1024px) {
+  .moment { width: min(82vw, 62rem); }
+  .moment h2 { font-size: clamp(3.6rem, 8vw, 6rem); }
+}
+
+@media (max-width: 767px) {
+  .timeline { display: none; }
+  .staticStack > * { padding-block: 5rem 6rem; }
+  .staticStack .marker { display: grid; gap: .6rem; }
+  .staticStack .moment h2 { font-size: var(--type-h2); }
+  .staticStack .copy { font-size: var(--type-h3); }
+  .capabilities { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moment { will-change: auto; }
+}
