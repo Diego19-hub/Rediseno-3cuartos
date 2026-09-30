@@ -42,6 +42,9 @@
 .carousel { display: contents; }
 .stackOnScroll { overflow: clip; }
 .stackOnScroll .carousel { display: none; }
+@media (min-width: 768px) {
+  .stackOnScroll .intro h2 { margin-top: clamp(4rem, 9svh, 7rem); }
+}
 @media (max-width: 767px) {
   .section { padding: 5rem var(--container-gutter) 6rem; }
   .header { display: block; margin-bottom: 2.5rem; }

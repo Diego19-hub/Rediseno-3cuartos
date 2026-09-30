@@ -1,0 +1,86 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--color-brand-blue);
+  opacity: .92;
+}
+
+.heroForm,
+.wipe,
+.ring,
+.coreGlow,
+.fragments,
+.network {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.heroOutline {
+  fill: none;
+  stroke: rgb(var(--color-brand-blue-rgb) / .22);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.wipe {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+
+.ring {
+  fill: none;
+  stroke: rgb(var(--color-brand-blue-rgb) / .28);
+  stroke-width: 18;
+  vector-effect: non-scaling-stroke;
+}
+
+.coreGlow { fill: url(#resources-morph-glow); }
+
+.fragment {
+  fill: rgb(var(--color-brand-blue-rgb) / .13);
+  stroke: rgb(var(--color-brand-blue-rgb) / .4);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transform-origin: 500px 500px;
+}
+
+.fragment:nth-child(3n) { fill: rgb(var(--color-brand-blue-rgb) / .16); stroke: rgb(var(--color-brand-blue-rgb) / .42); }
+.fragment:nth-child(4n) { fill: none; stroke-width: 3; }
+
+.network {
+  fill: rgb(var(--color-brand-blue-rgb) / .2);
+  stroke: rgb(var(--color-brand-blue-rgb) / .66);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.network line {
+  fill: none;
+  stroke: rgb(var(--color-brand-blue-rgb) / .6);
+  stroke-width: 2;
+}
+
+@media (max-width: 767px) {
+  .backdrop { opacity: .58; }
+  .heroOutline { stroke-width: 2; }
+  .ring { stroke-width: 11; }
+  .fragment { stroke-width: 1.5; }
+  .fragment:nth-child(n + 3),
+  .network { display: none; }
+  .network { stroke-width: 1.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop { opacity: .42; }
+  .heroForm { opacity: .55; }
+  .ring { opacity: .2; }
+  .coreGlow { opacity: .12; }
+  .fragment { opacity: 0; }
+  .network { opacity: .42; }
+}

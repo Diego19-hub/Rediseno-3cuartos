@@ -74,8 +74,8 @@ function MobileServicesPage({ intro, services, servicesSource }: ServicesPagePro
         <p>{intro.copy}</p>
       </section>
       <section data-header-theme="light" className={styles.mobileDisciplines} aria-labelledby="mobile-disciplines-title">
-        <h2 id="mobile-disciplines-title">SISTEMA</h2>
-        <p className={styles.mobileLead}>Las necesidades de un proyecto no siempre pertenecen a una sola disciplina.</p>
+        <h2 id="mobile-disciplines-title">SERVICIOS</h2>
+        <p className={styles.mobileLead}>Nuestros servicios principales, perfectos para tu negocio.</p>
         <ol className={styles.mobileDisciplineList}>
           {mobileDisciplines.map((discipline) => (
             <li className={`${styles.mobileDisciplineBlock} ${styles.mobileReveal}`} key={discipline.index}>
@@ -96,12 +96,6 @@ function MobileServicesPage({ intro, services, servicesSource }: ServicesPagePro
             </li>
           ))}
         </ol>
-      </section>
-      <section data-header-theme="light" className={styles.mobileConnection} aria-labelledby="mobile-connection-title">
-        <p className={styles.sectionEyebrow}>DISCIPLINAS CONECTADAS</p>
-        <h2 id="mobile-connection-title">Una dirección. Múltiples capacidades.</h2>
-        <p className={styles.mobileConnectionCopy}>Un proyecto puede necesitar estrategia, identidad y tecnología al mismo tiempo. La dirección correcta conecta cada decisión.</p>
-        <div className={styles.mobileConnectionFlow}><div><span><i aria-hidden="true" />Estrategia</span><span><i aria-hidden="true" />Identidad</span><span><i aria-hidden="true" />Tecnología</span></div><strong>PROYECTO <span aria-hidden="true">→</span></strong></div>
       </section>
       <section data-header-theme="light" className={styles.mobileMatrix} aria-labelledby="mobile-matrix-title">
         <p className={styles.sectionEyebrow}>MATRIZ DE CAPACIDADES</p>

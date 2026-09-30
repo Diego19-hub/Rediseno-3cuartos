@@ -23,7 +23,6 @@ export function ServicesDisciplineTimeline({ disciplines, staticMode }: Services
   }
 
   return <ScrollTimeline className={styles.timeline}>{(progress) => <PinnedSection className={styles.pinned} contentClassName={styles.stage} height={315}>
-    <p className={styles.kicker}>Disciplinas conectadas</p>
     {disciplines.map((discipline, index) => <DisciplineMomentCard key={discipline.index} discipline={discipline} index={index} progress={progress} />)}
     <span className={styles.progressLine} aria-hidden="true" />
   </PinnedSection>}</ScrollTimeline>;

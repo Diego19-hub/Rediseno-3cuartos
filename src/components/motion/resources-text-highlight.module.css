@@ -1,0 +1,10 @@
+.highlight { position: relative; display: inline-block; isolation: isolate; vertical-align: baseline; }
+.content { position: relative; z-index: 1; display: inline; font: inherit; letter-spacing: inherit; line-height: inherit; }
+.accentMask { position: absolute; top: -.14em; right: -.08em; bottom: -.16em; left: -.08em; z-index: 2; overflow: hidden; pointer-events: none; }
+.accent { position: absolute; top: .14em; right: .08em; bottom: .16em; left: .08em; display: block; font: inherit; letter-spacing: inherit; line-height: inherit; white-space: inherit; }
+.band { position: absolute; right: -.08em; bottom: .08em; left: -.08em; z-index: 0; height: .28em; transform-origin: left center; border-radius: 999px; background: rgb(var(--color-brand-blue-rgb) / .16); pointer-events: none; }
+.strong .band { height: .42em; background: rgb(var(--color-brand-blue-rgb) / .22); }
+.refined .band { height: .2em; bottom: .02em; background: rgb(var(--color-brand-blue-rgb) / .2); }
+@media (prefers-reduced-motion: reduce) {
+  .band, .accentMask { display: none; }
+}

@@ -176,8 +176,8 @@ export function ServicesStory({ intro, videoSrc }: ServicesStoryProps) {
         <div className={styles.chapters}>
           <motion.article className={styles.chapter} {...reveal}>
             <div className={styles.chapterContent}>
-              <h2 className={styles.systemTitle}>Sistema</h2>
-              <p className={styles.copy}>Las necesidades de un proyecto no siempre pertenecen a una sola disciplina.</p>
+              <h2 className={styles.systemTitle}>Servicios</h2>
+              <p className={styles.copy}>Nuestros servicios principales, perfectos para tu negocio.</p>
               <span className={styles.architecturalLine} aria-hidden="true" />
             </div>
           </motion.article>

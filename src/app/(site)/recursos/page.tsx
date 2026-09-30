@@ -4,6 +4,9 @@ import { getResourcesContent, type ResourceWithCategories } from "@/lib/wordpres
 import { getServicesPageContent } from "@/lib/wordpress/services";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import { EditorialScrollScene } from "@/components/motion/editorial-scroll-scene";
+import { ResourcesMorphBackdrop } from "@/components/motion/resources-morph-backdrop";
+import { ResourcesMotionProvider } from "@/components/motion/resources-motion-context";
+import { ResourcesTextHighlight } from "@/components/motion/resources-text-highlight";
 import styles from "./resources-hub.module.css";
 
 export const metadata = {
@@ -35,9 +38,9 @@ const topics = [
 ] as const;
 
 const needs = [
-  { lines: ["QUIERO HACER CRECER", "MI NEGOCIO"], service: "Marketing", match: ["marketing"] },
-  { lines: ["QUIERO CONSTRUIR", "O MEJORAR MI MARCA"], service: "Branding", match: ["branding", "diseño"] },
-  { lines: ["NECESITO UNA MEJOR", "PRESENCIA DIGITAL"], service: "Desarrollo Web", match: ["desarrollo", "web"] },
+  { lines: ["QUIERO HACER CRECER", "MI NEGOCIO"], highlightLine: 0, highlightBefore: "QUIERO HACER ", highlightText: "CRECER", service: "Marketing", match: ["marketing"] },
+  { lines: ["QUIERO CONSTRUIR", "O MEJORAR MI MARCA"], highlightLine: 1, highlightBefore: "O MEJORAR MI ", highlightText: "MARCA", service: "Branding", match: ["branding", "diseño"] },
+  { lines: ["NECESITO UNA MEJOR", "PRESENCIA DIGITAL"], highlightLine: 1, highlightBefore: "", highlightText: "PRESENCIA DIGITAL", service: "Desarrollo Web", match: ["desarrollo", "web"] },
 ] as const;
 
 const invalidContentPattern = /provisional|demo|pendiente|contenido de respaldo/i;
@@ -83,7 +86,7 @@ function ResourceImage({ resource, featured = false }: { resource: EditorialReso
 
 function FeaturedResource({ resource }: { resource: EditorialResource }) {
   return (
-    <EditorialScrollScene direction="right" intensity="medium" className={`${styles.featured} ${resource.image ? "" : styles.featuredNoMedia}`} aria-labelledby="featured-resource-title">
+    <EditorialScrollScene direction="right" intensity="quiet" className={`${styles.featured} ${resource.image ? "" : styles.featuredNoMedia}`} aria-labelledby="featured-resource-title">
       <p className={styles.sectionLabel}>02 / RECURSO DESTACADO</p>
       <ResourceImage resource={resource} featured />
       <div className={styles.featuredCopy}>
@@ -91,7 +94,7 @@ function FeaturedResource({ resource }: { resource: EditorialResource }) {
           {resource.category ? <span>{resource.category}</span> : null}
           {resource.readingTime || resource.date ? <span>{resource.readingTime ?? resource.date}</span> : null}
         </div>
-        <h2 id="featured-resource-title">{resource.title}</h2>
+        <h2 id="featured-resource-title"><ResourcesTextHighlight emphasis="light" strength="refined">{resource.title}</ResourcesTextHighlight></h2>
         {resource.excerpt ? <p>{resource.excerpt}</p> : null}
         <Link className={styles.textLink} href={resource.href}>Leer recurso <span aria-hidden="true">→</span></Link>
       </div>
@@ -103,7 +106,7 @@ function EditorialGrid({ resources }: { resources: EditorialResource[] }) {
   if (resources.length === 0) return null;
 
   return (
-    <EditorialScrollScene direction="left" className={styles.editorialGrid} aria-labelledby="articles-title">
+    <EditorialScrollScene direction="left" intensity="quiet" className={styles.editorialGrid} aria-labelledby="articles-title">
       <div className={styles.gridHeading}>
         <p className={styles.sectionLabel}>04 / LECTURAS</p>
         <h2 id="articles-title">Ideas para volver a mirar.</h2>
@@ -117,7 +120,7 @@ function EditorialGrid({ resources }: { resources: EditorialResource[] }) {
                 {resource.category ? <span>{resource.category}</span> : null}
                 {resource.readingTime || resource.date ? <span>{resource.readingTime ?? resource.date}</span> : null}
               </div>
-              <h3><Link href={resource.href}>{resource.title}</Link></h3>
+              <h3><Link href={resource.href}><ResourcesTextHighlight>{resource.title}</ResourcesTextHighlight></Link></h3>
               {resource.excerpt ? <p>{resource.excerpt}</p> : null}
               <Link className={styles.textLink} href={resource.href}>Leer recurso <span aria-hidden="true">→</span></Link>
             </div>
@@ -146,12 +149,14 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
   });
 
   return <>
+    <ResourcesMotionProvider>
     <main className={styles.page}>
+      <ResourcesMorphBackdrop />
       <section data-header-theme="light" className={styles.hero} aria-labelledby="resources-title">
         <ScrollReveal>
           <p className={styles.eyebrow}>RECURSOS / 3CUARTOS</p>
-          <h1 id="resources-title"><span>Ideas para tomar</span><span>mejores decisiones</span><span>digitales.</span></h1>
-          <p className={styles.heroText}>Estrategia, marca, marketing y desarrollo web<br />explicados desde la experiencia.</p>
+          <h1 id="resources-title"><span>Ideas para tomar</span><span><ResourcesTextHighlight phase={[0.36, 0.72]}>mejores</ResourcesTextHighlight> <ResourcesTextHighlight phase={[0.42, 0.78]}>decisiones</ResourcesTextHighlight></span><span><ResourcesTextHighlight phase={[0.48, 0.84]}>digitales.</ResourcesTextHighlight></span></h1>
+          <p className={styles.heroText}>Estrategia, marca, <ResourcesTextHighlight phase={[0.3, 0.72]}>marketing</ResourcesTextHighlight> y desarrollo web<br />explicados desde la experiencia.</p>
           <div className={styles.editorialBand} aria-label="Temas de los recursos">
           <span>ESTRATEGIA</span><i>/</i><span>BRANDING</span><i>/</i><span>MARKETING</span><i>/</i><span>DESARROLLO WEB</span>
           </div>
@@ -173,7 +178,7 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
           {topics.map((topic, index) => (
             <li key={topic.slug}>
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <Link href={`/recursos?tema=${topic.slug}`}>{topic.label}</Link>
+              <Link href={`/recursos?tema=${topic.slug}`}><ResourcesTextHighlight>{topic.label}</ResourcesTextHighlight></Link>
               <span aria-hidden="true">↗</span>
             </li>
           ))}
@@ -182,29 +187,30 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
 
       <EditorialGrid resources={articles.slice(0, 4)} />
 
-      <EditorialScrollScene direction="left" intensity="medium" data-header-theme="light" className={styles.needs} aria-labelledby="needs-title">
+      <EditorialScrollScene direction="left" intensity="strong" data-header-theme="light" className={styles.needs} aria-labelledby="needs-title">
         <p className={styles.sectionLabel}>05 / ENTRADA POR PROBLEMA</p>
         <h2 id="needs-title">¿QUÉ ESTÁS INTENTANDO RESOLVER?</h2>
         <nav className={styles.needsList} aria-label="Explorar servicios por necesidad">
           {resolvedNeeds.map((need, index) => (
-            <Link href={need.href} key={need.href}>
+              <Link href={need.href} key={need.href}>
               <span className={styles.needIndex}>{String(index + 1).padStart(2, "0")}</span>
-              <strong><span>{need.lines[0]}</span><span>{need.lines[1]}</span></strong>
+              <strong>{need.lines.map((line, lineIndex) => lineIndex === need.highlightLine ? <span key={line}>{need.highlightBefore}<ResourcesTextHighlight phase={[0.3 + index * 0.06, 0.7 + index * 0.07]} strength="strong">{need.highlightText}</ResourcesTextHighlight>{line.slice(need.highlightBefore.length + need.highlightText.length)}</span> : <span key={line}>{line}</span>)}</strong>
               <small>→ {need.service}</small>
             </Link>
           ))}
         </nav>
       </EditorialScrollScene>
 
-      <EditorialScrollScene direction="right" data-header-theme="dark" className={styles.cta} aria-labelledby="resources-cta-title">
+      <EditorialScrollScene direction="right" intensity="medium" data-header-theme="dark" className={styles.cta} aria-labelledby="resources-cta-title">
         <p className={styles.sectionLabel}>06 / HABLEMOS</p>
-        <h2 id="resources-cta-title"><span>Una idea es más útil</span><span>cuando se convierte en acción.</span></h2>
+        <h2 id="resources-cta-title"><span>Una idea es <ResourcesTextHighlight emphasis="light" strength="refined" phase={[0.36, 0.72]}>más útil</ResourcesTextHighlight></span><span>cuando se <ResourcesTextHighlight emphasis="light" strength="refined" phase={[0.44, 0.8]}>convierte</ResourcesTextHighlight> en <ResourcesTextHighlight emphasis="light" strength="refined" phase={[0.5, 0.86]}>acción.</ResourcesTextHighlight></span></h2>
         <div className={styles.ctaAside}>
           <p>Si encontraste algo que conecta con lo que estás intentando resolver, hablemos.</p>
           <Link className={styles.ctaLink} href="/contacto">Cuéntanos tu proyecto <span aria-hidden="true">→</span></Link>
         </div>
       </EditorialScrollScene>
     </main>
+    </ResourcesMotionProvider>
     <Footer tone="dark" />
   </>;
 }

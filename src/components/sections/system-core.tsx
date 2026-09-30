@@ -15,9 +15,9 @@ export function SystemCore() {
       <motion.span className={`${styles.fragment} ${styles.technology}`} animate={reducedMotion ? undefined : { x: [14, 0, 16, 0, 14], y: [28, 0, 12, 0, 28], rotate: [10, 4, 13, 4, 10], scale: [.97, 1, .98, 1, .97] }} transition={{ duration: 6.6, repeat: Infinity, ease: "easeInOut", delay: -3 }}><i /><i /><i /></motion.span>
     </div>
     <figcaption className={styles.legend}>
-      <span>Estrategia</span>
-      <span>Creatividad</span>
-      <span>Tecnología</span>
+      <span>Branding</span>
+      <span>Marketing</span>
+      <span>Desarrollo web</span>
     </figcaption>
   </motion.figure>;
 }

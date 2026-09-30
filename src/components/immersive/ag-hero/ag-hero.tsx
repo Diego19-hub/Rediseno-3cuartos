@@ -93,7 +93,7 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
       </motion.div>
 
       <div className={styles.disciplines} aria-label="Disciplinas del sistema">
-        <span>Estrategia</span><span>Creatividad</span><span>Tecnología</span>
+        <span>Branding</span><span>Marketing</span><span>Desarrollo web</span>
       </div>
     </motion.section>
   );
