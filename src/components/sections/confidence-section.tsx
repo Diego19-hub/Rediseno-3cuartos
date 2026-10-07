@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useTransform } from "framer-motion";
+import { useMobileEditorialScroll } from "@/components/motion/use-mobile-editorial-scroll";
 import styles from "./confidence-section.module.css";
 
 export type ConfidenceBrand = {
@@ -11,10 +13,10 @@ export type ConfidenceBrand = {
 
 type ConfidenceSectionProps = {
   brands?: readonly ConfidenceBrand[];
-  preview?: boolean;
+  mobileEditorialMotion?: boolean;
 };
 
-const demoBrands: readonly ConfidenceBrand[] = [
+const homeBrands: readonly ConfidenceBrand[] = [
   { name: "Answare IT", logo: "/images/brand/answareit-display.png", approved: true },
   { name: "Calforce", approved: true },
   { name: "ReciclaGil", logo: "/images/brand/reciclagil-display.png", approved: true },
@@ -47,22 +49,43 @@ export function ConfidenceBrandCarousel({ brands }: { brands: readonly Confidenc
   );
 }
 
-export function ConfidenceSection({ brands = [], preview = false }: ConfidenceSectionProps) {
-  const usingDemo = preview && brands.length === 0;
-  const sourceBrands = usingDemo ? demoBrands : brands;
-  const approvedBrands = sourceBrands.filter((brand) => (usingDemo || brand.approved) && brand.name.trim());
+export function ConfidenceSection({ brands = homeBrands, mobileEditorialMotion = false }: ConfidenceSectionProps) {
+  const approvedBrands = brands.filter((brand) => brand.approved !== false && brand.name.trim());
 
   if (approvedBrands.length === 0) return null;
+
+  if (mobileEditorialMotion) return <MobileConfidenceSection brands={approvedBrands} />;
 
   return (
     <section data-header-theme="light" id="confianza" className={styles.section} aria-labelledby="confidence-title">
       <div className={styles.inner}>
         <div className={styles.intro}>
-          <h2 id="confidence-title">La confianza se construye en equipo.</h2>
+          <h2 id="confidence-title">Marcas y colaboraciones</h2>
         </div>
 
         <ConfidenceBrandCarousel brands={approvedBrands} />
       </div>
     </section>
   );
+}
+
+function MobileConfidenceSection({ brands }: { brands: readonly ConfidenceBrand[] }) {
+  const [ref, progress, reducedMotion] = useMobileEditorialScroll<HTMLElement>();
+  const titleX = useTransform(progress, [0, 1], [-15, 8]);
+  const titleY = useTransform(progress, [0, 1], [50, -10]);
+  const railY = useTransform(progress, [0, 1], [48, -12]);
+  const railScale = useTransform(progress, [0, 1], [0.95, 1]);
+  const lineScale = useTransform(progress, [0, 1], [0.2, 1]);
+
+  return <section ref={ref} data-header-theme="light" id="confianza" className={styles.section} aria-labelledby="confidence-title">
+    <div className={`${styles.inner} ${styles.mobileMotionInner}`}>
+      <motion.div className={styles.intro} style={reducedMotion ? undefined : { x: titleX, y: titleY }}>
+        <h2 id="confidence-title">Marcas y colaboraciones</h2>
+      </motion.div>
+      <motion.div style={reducedMotion ? undefined : { y: railY, scale: railScale }}>
+        <ConfidenceBrandCarousel brands={brands} />
+      </motion.div>
+      <motion.span className={styles.mobileRule} aria-hidden="true" style={reducedMotion ? undefined : { scaleX: lineScale }} />
+    </div>
+  </section>;
 }

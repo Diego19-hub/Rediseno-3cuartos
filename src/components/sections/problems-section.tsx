@@ -1,19 +1,20 @@
 "use client";
 
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./problems-section.module.css";
 
 const problems = [
-  { number: "01", headline: "Movimiento sin dirección.", discipline: "Estrategia", description: "Se hacen campañas, contenidos y acciones, pero sin una estrategia clara que ordene prioridades y objetivos." },
-  { number: "02", headline: "Marca sin conexión.", discipline: "Creatividad", description: "La propuesta puede ser buena, pero la comunicación, identidad o experiencia no consiguen transmitir su verdadero valor." },
-  { number: "03", headline: "Negocio, herramientas y objetivos sin alineación.", discipline: "Tecnología", description: "Procesos manuales, sitios limitados y sistemas desconectados empiezan a frenar lo que antes funcionaba." },
+  { number: "01", headline: "Movimiento sin dirección.", discipline: "Marketing", description: "Se hacen campañas, contenidos y acciones, pero sin una estrategia clara que ordene prioridades y objetivos." },
+  { number: "02", headline: "Marca sin conexión.", discipline: "Branding", description: "La propuesta puede ser buena, pero la comunicación, identidad o experiencia no consiguen transmitir su verdadero valor." },
+  { number: "03", headline: "Negocio, herramientas y objetivos sin alineación.", discipline: "Desarrollo web", description: "Procesos manuales, sitios limitados y sistemas desconectados empiezan a frenar lo que antes funcionaba." },
 ];
 
 // The desktop video is scrubbed through a shorter editorial window so the
 // three states arrive sooner while preserving the original asset and scenes.
 const START_TIME = 2.0;
 const END_TIME = 4.0;
+const SEEK_EPSILON = 1 / 48;
 
 function clampProgress(value: number) {
   return Math.min(1, Math.max(0, value));
@@ -34,7 +35,25 @@ export function ProblemsSection() {
   const video = useRef<HTMLVideoElement>(null);
   const frame = useRef<number | null>(null);
   const progress = useRef(0);
+  const lastRequestedTime = useRef<number | null>(null);
   const { scrollYProgress: videoProgress } = useScroll({ target: story, offset: ["start start", "end end"] });
+
+  const scheduleFrame = useCallback(() => {
+    if (frame.current !== null) return;
+    frame.current = requestAnimationFrame(() => {
+      frame.current = null;
+      const element = video.current;
+      const duration = element?.duration;
+      if (!element || duration === undefined || !Number.isFinite(duration) || duration <= 0) return;
+
+      const targetTime = reduced ? Math.max(0, duration - 0.04) : timeForProgress(progress.current, duration);
+      if (Math.abs(targetTime - element.currentTime) < SEEK_EPSILON) return;
+      if (lastRequestedTime.current !== null && Math.abs(targetTime - lastRequestedTime.current) < SEEK_EPSILON) return;
+
+      element.currentTime = targetTime;
+      lastRequestedTime.current = targetTime;
+    });
+  }, [reduced]);
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 767px)");
@@ -47,12 +66,13 @@ export function ProblemsSection() {
   useEffect(() => {
     const element = video.current;
     if (!element) return;
+    lastRequestedTime.current = null;
 
     const setInitialFrame = () => {
       const duration = element.duration;
       if (!Number.isFinite(duration) || duration <= 0) return;
       progress.current = clampProgress(videoProgress.get());
-      element.currentTime = reduced ? Math.max(0, duration - 0.04) : timeForProgress(progress.current, duration);
+      scheduleFrame();
     };
 
     element.addEventListener("loadedmetadata", setInitialFrame);
@@ -61,18 +81,12 @@ export function ProblemsSection() {
       element.removeEventListener("loadedmetadata", setInitialFrame);
       if (frame.current !== null) cancelAnimationFrame(frame.current);
     };
-  }, [mobile, reduced, videoProgress]);
+  }, [mobile, reduced, scheduleFrame, videoProgress]);
 
   useMotionValueEvent(videoProgress, "change", (nextProgress) => {
     progress.current = clampProgress(nextProgress);
-    if (mobile || reduced || frame.current !== null) return;
-    frame.current = requestAnimationFrame(() => {
-      frame.current = null;
-      const element = video.current;
-      const duration = element?.duration;
-      if (!element || duration === undefined || !Number.isFinite(duration) || duration <= 0) return;
-      element.currentTime = timeForProgress(progress.current, duration);
-    });
+    if (mobile || reduced) return;
+    scheduleFrame();
   });
 
   return <section data-header-theme="dark" ref={section} id="problemas" className={styles.section} aria-label="Problemas que resolvemos">

@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import styles from "./ag-hero.module.css";
 
 export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string }) {
   const reducedMotion = useReducedMotion();
+  const [motionVideoAllowed, setMotionVideoAllowed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -16,14 +17,18 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
   const copyOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0]);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setMotionVideoAllowed(!query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
-    if (reducedMotion) {
-      video.pause();
-      video.currentTime = 0;
-      return;
-    }
+  const showMotionVideo = motionVideoAllowed && !reducedMotion;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !showMotionVideo) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,7 +46,7 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
       observer.disconnect();
       video.pause();
     };
-  }, [reducedMotion]);
+  }, [showMotionVideo]);
 
   return (
     <motion.section
@@ -61,18 +66,22 @@ export function AgHero({ ctaLabel, ctaUrl }: { ctaLabel: string; ctaUrl: string 
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: reducedMotion ? 0 : 1.1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <video
-          ref={videoRef}
-          className={styles.video}
-          src="/video/3cuartos-logo-motion.mp4"
-          poster="/video/3cuartos-logo-motion-poster.jpg"
-          autoPlay={!reducedMotion}
-          muted
-          loop
-          playsInline
-          preload="auto"
-          tabIndex={-1}
-        />
+        {showMotionVideo ? (
+          <video
+            ref={videoRef}
+            className={styles.video}
+            src="/video/3cuartos-logo-motion-v2.mp4"
+            poster="/video/3cuartos-logo-motion-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            tabIndex={-1}
+          />
+        ) : (
+          <div className={`${styles.video} ${styles.videoPoster}`} />
+        )}
         <div className={styles.contrast} />
       </motion.div>
 

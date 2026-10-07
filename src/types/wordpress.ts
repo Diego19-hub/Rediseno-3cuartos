@@ -89,6 +89,7 @@ export type Resource = {
   readingTime: number;
   publishedAt: string;
   categoryIds: number[];
+  isProvisional: boolean;
 };
 
 export type GlobalSettings = {
@@ -101,4 +102,4 @@ export type GlobalSettings = {
   globalCta: CallToAction;
   defaultSeo: SeoMetadata;
 };
-export type LegalPage = { slug: string; title: string; content: string; excerpt: string; modifiedAt: string; isProvisional: boolean };
+export type LegalPage = { slug: string; title: string; content: string; excerpt: string; modifiedAt: string };

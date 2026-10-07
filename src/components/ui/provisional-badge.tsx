@@ -1,2 +1,6 @@
 import styles from "./primitives.module.css";
-export function ProvisionalBadge() { return <span className={styles.badge}>Provisional — cliente</span>; }
+
+/** Internal design-system fixture; never used by production routes. */
+export function ProvisionalBadge() {
+  return <span className={styles.badge}>Provisional — cliente</span>;
+}

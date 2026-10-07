@@ -6,8 +6,6 @@ import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Container } from "@/components/ui/container";
-import { MediaPlaceholder } from "@/components/ui/media-placeholder";
-import { ProvisionalBadge } from "@/components/ui/provisional-badge";
 import { caseStudyMetadata } from "@/lib/wordpress/case-study-metadata";
 import { getCaseStudiesContent, getCaseStudyPageContent } from "@/lib/wordpress/case-studies";
 import type { MediaAsset } from "@/types/wordpress";
@@ -31,7 +29,7 @@ const isExternalUrl = (value: string) => /^https?:\/\//i.test(value);
 
 function CaseStudyMedia({ media, alt, className }: { media?: MediaAsset; alt: string; className?: string }) {
   if (!media || !isValidMediaUrl(media.url)) {
-    return <div className={`${styles.mediaFrame} ${className ?? ""}`}><MediaPlaceholder label={`Imagen de ${alt} no disponible`} /></div>;
+    return <div className={`${styles.mediaFrame} ${className ?? ""}`} aria-hidden="true" />;
   }
   return <div className={`${styles.mediaFrame} ${className ?? ""}`}><img src={media.url} alt={media.alt || alt} width={media.width || 1920} height={media.height || 1200} /></div>;
 }
@@ -70,7 +68,6 @@ export default async function CaseStudyPage({ params }: Props) {
               {appliedServices.map((service) => <li key={service.id}>{service.name}</li>)}
             </ul>}
             {caseStudy.challenge && <p className={styles.heroSummary}>{caseStudy.challenge}</p>}
-            {caseStudy.isProvisional && <ProvisionalBadge />}
             {cta && <Button className={styles.heroCta} href={cta.url} target={isExternalUrl(cta.url) ? "_blank" : undefined} rel={isExternalUrl(cta.url) ? "noreferrer" : undefined}>{cta.label} <span aria-hidden="true">→</span></Button>}
           </ScrollReveal></div>
           <CaseStudyMedia media={caseStudy.gallery[0]} alt={caseStudy.title} className={styles.heroMedia} />
@@ -116,7 +113,6 @@ export default async function CaseStudyPage({ params }: Props) {
                 {testimonial.personName && <p className={styles.testimonialName}>{testimonial.personName}</p>}
                 {testimonial.jobTitle && <p>{testimonial.jobTitle}</p>}
                 {testimonial.company && <p>{testimonial.company}</p>}
-                {testimonial.isProvisional && <span className={styles.provisionalBadge}>Provisional — cliente</span>}
               </div>
             </ScrollReveal>
           </section>}

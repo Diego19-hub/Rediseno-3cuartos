@@ -7,6 +7,7 @@ import { ServicesDisciplineTimeline } from "./services-discipline-timeline";
 
 export type ServicesStoryProps = {
   intro: { copy: string; eyebrow: string; title: string };
+  heroVideoSrc: string;
   videoSrc: string;
 };
 
@@ -54,7 +55,7 @@ function mapStoryProgress(progress: number) {
   return 1;
 }
 
-export function ServicesStory({ intro, videoSrc }: ServicesStoryProps) {
+export function ServicesStory({ intro, heroVideoSrc, videoSrc }: ServicesStoryProps) {
   const storyRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const durationRef = useRef(0);
@@ -160,9 +161,21 @@ export function ServicesStory({ intro, videoSrc }: ServicesStoryProps) {
           <div className={styles.chapterContent}>
             <p className={styles.eyebrow}>{intro.eyebrow}</p>
             <h1 id="services-title">{intro.title}</h1>
-            <p className={styles.copy}>{intro.copy}</p>
+            {intro.copy ? <p className={styles.copy}>{intro.copy}</p> : null}
           </div>
         </motion.article>
+        <div className={styles.heroVisual} aria-hidden="true">
+          <video
+            className={styles.heroVideo}
+            src={heroVideoSrc}
+            autoPlay={!prefersReducedMotion}
+            muted
+            playsInline
+            loop
+            preload="auto"
+            tabIndex={-1}
+          />
+        </div>
       </section>
 
       <section data-header-theme="dark" ref={storyRef} className={styles.story} aria-label="Las tres disciplinas">

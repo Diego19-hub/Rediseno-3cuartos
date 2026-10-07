@@ -4,8 +4,6 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { MediaPlaceholder } from "@/components/ui/media-placeholder";
-import { ProvisionalBadge } from "@/components/ui/provisional-badge";
 import { EditorialScrollScene } from "@/components/motion/editorial-scroll-scene";
 import type { TeamMember } from "@/types/wordpress";
 import styles from "./nosotros.module.css";
@@ -15,7 +13,7 @@ type TeamSectionProps = {
 };
 
 export function TeamSection({ team }: TeamSectionProps) {
-  const visibleTeam = team.filter((member) => member.name.trim());
+  const visibleTeam = team;
   if (visibleTeam.length === 0) return null;
 
   return (
@@ -27,18 +25,13 @@ export function TeamSection({ team }: TeamSectionProps) {
         {visibleTeam.map((member, index) => (
           <TeamMemberMotion index={index} key={member.id}>
             <span className={styles.teamNumber}>{String(index + 1).padStart(2, "0")}</span>
-            <div className={styles.teamMedia}>
-              {member.image?.url ? (
+            {member.image?.url ? <div className={styles.teamMedia}>
                 <img src={member.image.url} alt={member.image.alt || member.name} width={member.image.width || 800} height={member.image.height || 1000} />
-              ) : (
-                <MediaPlaceholder label={`Imagen de ${member.name} pendiente`} />
-              )}
-            </div>
+            </div> : null}
             <div className={styles.teamInfo}>
               <h3>{member.name}</h3>
               {member.role ? <p>{member.role}</p> : null}
             </div>
-            {member.isProvisional ? <ProvisionalBadge /> : null}
           </TeamMemberMotion>
         ))}
       </div>

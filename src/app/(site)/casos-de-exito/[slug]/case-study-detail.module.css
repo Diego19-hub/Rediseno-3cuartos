@@ -437,6 +437,15 @@
 }
 
 @media (max-width: 767px) {
+  .page + :global(footer) {
+    margin-top: 0;
+  }
+
+  .heroCopy .eyebrow,
+  .client {
+    display: none;
+  }
+
   .detailContainer {
     width: min(100% - (var(--container-gutter) * 2), 42rem);
   }

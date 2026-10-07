@@ -41,7 +41,8 @@ export function ContactForm() {
     setErrors(nextErrors);
     const first = Object.keys(nextErrors)[0];
     if (first) {
-      document.getElementById(`contact-${first}`)?.focus();
+      const targetId = first === "needs" ? "contact-needs-marketing" : `contact-${first}`;
+      document.getElementById(targetId)?.focus();
       return;
     }
     setSubmitting(true);

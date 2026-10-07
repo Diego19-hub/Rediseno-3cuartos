@@ -1,0 +1,284 @@
+.scene {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 58% 72% at 72% 48%, rgb(74 112 204 / 11%), transparent 74%),
+    linear-gradient(115deg, #f7f7f5 0%, #f2f2ee 48%, #e9edf6 100%);
+}
+
+.scene::before {
+  position: absolute;
+  z-index: 6;
+  inset: 0 auto 0 0;
+  width: min(50vw, 48rem);
+  content: "";
+  background: linear-gradient(
+    90deg,
+    #f2f2ee 0%,
+    #f2f2ee 32%,
+    rgb(242 242 238 / 96%) 47%,
+    rgb(242 242 238 / 74%) 63%,
+    rgb(242 242 238 / 0%) 100%
+  );
+}
+
+:global(.casesHeroScreen) {
+  position: absolute;
+  z-index: 2;
+  top: 14%;
+  left: 24%;
+  width: min(72vw, 100rem);
+  aspect-ratio: 1907 / 1080;
+  overflow: hidden;
+  padding: clamp(0.3rem, 0.65vw, 0.65rem);
+  border: 1px solid rgb(8 9 10 / 78%);
+  border-radius: clamp(0.75rem, 1.35vw, 1.5rem);
+  background: #08090A;
+  box-shadow: 0 2rem 4rem rgb(16 24 40 / 19%), 0 0.4rem 1rem rgb(16 24 40 / 12%);
+  backface-visibility: hidden;
+  transform-origin: top left;
+  transition:
+    transform 1100ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 900ms ease,
+    box-shadow 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.projectImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(clamp(0.75rem, 1.35vw, 1.5rem) - 0.5rem);
+  object-fit: cover;
+  object-position: center;
+}
+
+:global(.casesHeroPrimary) {
+  z-index: 4;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1) rotate(-0.45deg);
+  box-shadow: 0 2rem 4.5rem rgb(16 24 40 / 23%), 0 0.4rem 1rem rgb(16 24 40 / 12%);
+}
+
+:global(.casesHeroTop) {
+  z-index: 2;
+  opacity: 0.76;
+  transform: translate3d(45vw, -10vh, 0) scale(0.6) rotate(0.35deg);
+}
+
+:global(.casesHeroBottom) {
+  z-index: 5;
+  opacity: 0.8;
+  transform: translate3d(40vw, 43vh, 0) scale(0.62) rotate(0.3deg);
+}
+
+:global(.casesHeroControls) {
+  position: absolute;
+  z-index: 3;
+  left: var(--container-gutter);
+  bottom: clamp(1.5rem, 3.5vh, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  width: min(34vw, 31rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid rgb(var(--color-brand-blue-rgb) / 0.56);
+  gap: 1.15rem 1rem;
+}
+
+:global(.casesHeroControls) p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: var(--type-h4);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.15em;
+  line-height: 1.25;
+}
+
+:global(.casesHeroExplore) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: max-content;
+  color: var(--color-text-primary);
+  font-size: var(--type-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+:global(.casesHeroExplore:hover),
+:global(.casesHeroExplore:focus-visible) {
+  color: var(--color-brand-blue);
+}
+
+:global(.casesHeroExplore:focus-visible) {
+  outline: 2px solid var(--color-brand-blue);
+  outline-offset: 5px;
+}
+
+:global(.casesHeroExploreIcon) {
+  display: grid;
+  flex: 0 0 3rem;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid rgb(23 23 22 / 0.45);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-regular);
+  transition: border-color 250ms ease, transform 250ms ease;
+}
+
+:global(.casesHeroExplore:hover .casesHeroExploreIcon),
+:global(.casesHeroExplore:focus-visible .casesHeroExploreIcon) {
+  border-color: var(--color-brand-blue);
+  transform: translateX(3px);
+}
+
+:global(.casesHeroProgress) {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  justify-items: end;
+  gap: 0.55rem;
+  color: var(--color-text-primary);
+  font-size: var(--type-h4);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+
+:global(.casesHeroProgress) > div {
+  display: flex;
+  gap: 0.2rem;
+}
+
+:global(.casesHeroProgress) > div span {
+  width: clamp(1.1rem, 2.2vw, 2rem);
+  height: 3px;
+  background: rgb(23 23 22 / 0.16);
+  transition: background-color 700ms ease;
+}
+
+:global(.casesHeroProgress) > div :global(.isActive) {
+  background: var(--color-brand-blue);
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .scene::before {
+    width: 58vw;
+  }
+
+  :global(.casesHeroScreen) {
+    top: 18%;
+    left: 17%;
+    width: 85vw;
+  }
+
+  :global(.casesHeroTop) {
+    transform: translate3d(47vw, -9vh, 0) scale(0.58) rotate(0.35deg);
+  }
+
+  :global(.casesHeroBottom) {
+    transform: translate3d(39vw, 42vh, 0) scale(0.6) rotate(0.3deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .scene {
+    position: relative;
+    inset: auto;
+    width: calc(100% - 2 * var(--container-gutter));
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    overflow: hidden;
+    background: none;
+  }
+
+  .scene::before {
+    display: none;
+  }
+
+  :global(.casesHeroScreen) {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    padding: 0.3rem;
+    border-radius: 0.9rem;
+    transform-origin: left top;
+    filter: none;
+  }
+
+  .projectImage {
+    border-radius: 0.6rem;
+    object-position: center;
+    opacity: 1;
+    filter: none;
+  }
+
+  :global(.casesHeroPrimary) {
+    opacity: 1;
+    transform: none;
+  }
+
+  :global(.casesHeroTop),
+  :global(.casesHeroBottom) {
+    opacity: 0;
+    transform: none;
+  }
+
+  :global(.casesHeroControls) {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    margin: 28px var(--container-gutter) 0;
+    padding-top: 0;
+    gap: 0.75rem;
+  }
+
+  :global(.casesHeroControls) p {
+    grid-column: auto;
+  }
+
+  :global(.casesHeroProgress) {
+    display: none;
+  }
+
+  :global(.casesHeroControls) p,
+  :global(.casesHeroExplore),
+  :global(.casesHeroProgress) {
+    font-size: var(--type-h4);
+  }
+
+  :global(.casesHeroExplore) {
+    gap: 0.55rem;
+  }
+
+  :global(.casesHeroExploreIcon) {
+    flex-basis: 2.7rem;
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.casesHeroScreen) {
+    transition: none;
+    will-change: auto;
+  }
+
+  :global(.casesHeroExploreIcon),
+  :global(.casesHeroProgress) > div span {
+    transition: none;
+  }
+}

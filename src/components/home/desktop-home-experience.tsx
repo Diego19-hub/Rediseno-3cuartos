@@ -17,10 +17,9 @@ type DesktopHomeExperienceProps = {
   ctaUrl: string;
   projects: CaseStudy[];
   services: Service[];
-  previewConfidence: boolean;
 };
 
-export function DesktopHomeExperience({ ctaLabel, ctaUrl, projects, services, previewConfidence }: DesktopHomeExperienceProps) {
+export function DesktopHomeExperience({ ctaLabel, ctaUrl, projects, services }: DesktopHomeExperienceProps) {
   return <>
     <AgHero ctaLabel={ctaLabel} ctaUrl={ctaUrl} />
     <ProblemsSection />
@@ -35,7 +34,7 @@ export function DesktopHomeExperience({ ctaLabel, ctaUrl, projects, services, pr
     </section>
     <SelectedProjectsCarousel projects={projects} services={services} stackOnScroll />
     <HowWeWork />
-    <ConfidenceSection preview={previewConfidence} />
+    <ConfidenceSection />
     <main>
       <Container><FaqSection /></Container>
       <FinalCta />

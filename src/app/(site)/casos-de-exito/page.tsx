@@ -4,14 +4,24 @@ import { SelectedProjectsCarousel } from "@/components/sections/selected-project
 import { ConfidenceBrandCarousel, type ConfidenceBrand } from "@/components/sections/confidence-section";
 import { getCaseStudiesContent } from "@/lib/wordpress/case-studies";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { CasesHeroMotion } from "./cases-hero-motion";
 import styles from "./selected-work.module.css";
 
 export const metadata = { title: "Casos de éxito | 3cuartos", description: "Proyectos seleccionados desarrollados por 3Cuartos." };
 
 export default async function CaseStudiesPage() {
   const content = await getCaseStudiesContent();
-  const cases = content.cases.filter((item) => item.slug && item.title);
-  const approvedTestimonial = content.testimonials.find((item) => item.quote.trim() && (process.env.NODE_ENV === "development" || !item.isProvisional));
+  const cases = content.cases;
+  const heroProjects = [
+    { label: "ANSWARE IT", match: /answare/i },
+    { label: "CALFORCE", match: /calforce/i },
+    { label: "NATUO", match: /natuo/i },
+  ].flatMap(({ label, match }) => {
+    const project = cases.find((item) => match.test(`${item.clientName} ${item.title} ${item.slug}`));
+    const image = project?.gallery[0];
+    return project && image?.url ? [{ label, image }] : [];
+  });
+  const approvedTestimonial = content.testimonials.find((item) => item.quote.trim());
   const collaborators: readonly ConfidenceBrand[] = [
     { name: "Answare IT", logo: "/images/brand/answareit-display.png", approved: true },
     { name: "Calforce", approved: true },
@@ -24,15 +34,12 @@ export default async function CaseStudiesPage() {
         <ScrollReveal className={styles.heroCopy}>
           <p className={styles.eyebrow}>CASOS / TRABAJO</p>
           <h1 id="cases-title">Ideas que <span>toman forma.</span></h1>
-          <div className={styles.heroIntro} aria-hidden="true" />
+          <p className={styles.heroIntro}>Diseño, desarrollo y tecnología para marcas que construyen el mañana.</p>
         </ScrollReveal>
-        <div className={styles.heroIndex}>
-          <p><span>PROYECTOS</span><span>SELECCIONADOS</span></p>
-          <div className={styles.indexRule}><span>01 — 04</span></div>
-        </div>
+        <CasesHeroMotion projects={heroProjects} />
       </section>
 
-      <SelectedProjectsCarousel projects={cases} services={content.services} title="Trabajo que toma forma." ctaLabel="" introReveal />
+      <SelectedProjectsCarousel projects={cases} services={content.services} title="" ctaLabel="" introReveal fillViewport />
 
       <section data-header-theme="dark" className={styles.manifest} aria-labelledby="manifest-title">
         <div className={styles.manifestInner}>
@@ -49,28 +56,25 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      <section data-header-theme="light" className={styles.testimonials} aria-labelledby="testimonials-title">
+      {approvedTestimonial ? <section data-header-theme="light" className={styles.testimonials} aria-labelledby="testimonials-title">
         <div className={styles.testimonialsInner}>
           <ScrollReveal className={styles.testimonialQuote}>
             <h2 id="testimonials-title">TESTIMONIO</h2>
-            {/* TODO: reemplazar por testimonio autorizado antes de publicar. */}
-            <blockquote>{approvedTestimonial ? `“${approvedTestimonial.quote}”` : "“Una relación que continúa después de la entrega.”"}</blockquote>
-            <p className={styles.testimonialSignature}>{approvedTestimonial ? `— ${approvedTestimonial.personName || approvedTestimonial.company || "TESTIMONIO"}` : "— TESTIMONIO PENDIENTE DE VALIDACIÓN"}</p>
+            <blockquote>“{approvedTestimonial.quote}”</blockquote>
+            {(approvedTestimonial.personName || approvedTestimonial.company) ? <p className={styles.testimonialSignature}>— {[approvedTestimonial.personName, approvedTestimonial.company].filter(Boolean).join(" · ")}</p> : null}
           </ScrollReveal>
           <div className={styles.testimonialMeta}>
             <span>01 / 03</span>
-            <span className={styles.validationNote}>CONTENIDO DEMO<br />PENDIENTE DE VALIDACIÓN</span>
           </div>
         </div>
-      </section>
+      </section> : null}
 
-      <section data-header-theme="light" className={styles.collaborators} aria-labelledby="collaborators-title">
+      {collaborators.length ? <section data-header-theme="light" className={styles.collaborators} aria-labelledby="collaborators-title">
         <div className={styles.collaboratorsInner}>
           <h2 id="collaborators-title">Marcas y colaboraciones</h2>
           <ConfidenceBrandCarousel brands={collaborators} />
-          <p className={styles.collaborationNote}>Relaciones y autorizaciones pendientes de validación.</p>
         </div>
-      </section>
+      </section> : null}
 
       <section data-header-theme="dark" className={styles.finalCta} aria-labelledby="final-cta-title">
         <div className={styles.finalCtaInner}>

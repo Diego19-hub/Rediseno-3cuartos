@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/footer";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { ProvisionalBadge } from "@/components/ui/provisional-badge";
 import { Container } from "@/components/ui/container";
 import { CtaSection } from "@/components/sections/cards";
-import { getPageBySlug, getGlobalSettings } from "@/lib/wordpress/queries";
+import { getPageBySlug } from "@/lib/wordpress/queries";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import styles from "./page.module.css";
-const fallback = { title: "Aviso de privacidad", content: "Este aviso de privacidad es provisional y está pendiente de revisión y aprobación del cliente. No constituye un documento legal definitivo.", modifiedAt: "" };
-export const metadata: Metadata = { title: "Aviso de privacidad", description: "Aviso de privacidad provisional pendiente de revisión del cliente." };
-export default async function PrivacyPage() { const [page, settings] = await Promise.all([getPageBySlug("aviso-de-privacidad"), getGlobalSettings().catch(() => null)]); const content = page ?? fallback; const date = content.modifiedAt ? new Intl.DateTimeFormat("es-MX", { dateStyle: "long" }).format(new Date(content.modifiedAt)) : "Pendiente de confirmación"; return <><main><Container><ScrollReveal><section className={styles.header}><Breadcrumb current={content.title} sectionLabel="Legal" sectionHref="/aviso-de-privacidad"/><p className={styles.eyebrow}>Información legal</p><h1>{content.title}</h1><ProvisionalBadge/><p>Última actualización: {date}</p></section><article className={styles.article}>{content.content.split(/\n{2,}/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}{settings?.contact?.publicEmail && <p>Para consultas, puedes escribir a <a href={`mailto:${settings.contact.publicEmail}`}>{settings.contact.publicEmail}</a>.</p>}</article></ScrollReveal><CtaSection url="/contacto" /></Container></main><Footer/></>; }
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageBySlug("aviso-de-privacidad");
+  return page
+    ? { title: page.title, description: page.excerpt || undefined }
+    : { title: "Aviso de privacidad | 3cuartos", robots: { index: false, follow: false } };
+}
+
+export default async function PrivacyPage() {
+  const page = await getPageBySlug("aviso-de-privacidad");
+  if (!page) notFound();
+  const date = page.modifiedAt ? new Intl.DateTimeFormat("es-MX", { dateStyle: "long" }).format(new Date(page.modifiedAt)) : undefined;
+  return <><main><Container><ScrollReveal><section className={styles.header}><Breadcrumb current={page.title} sectionLabel="Legal" sectionHref="/aviso-de-privacidad"/><p className={styles.eyebrow}>Información legal</p><h1>{page.title}</h1>{date ? <p>Última actualización: {date}</p> : null}</section><article className={styles.article}>{page.content.split(/\n{2,}/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</article></ScrollReveal><CtaSection url="/contacto" /></Container></main><Footer/></>;
+}

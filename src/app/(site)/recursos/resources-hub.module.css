@@ -120,13 +120,13 @@
 }
 
 @media (max-width: 767px) {
-  .hero { min-height: auto; padding-block: 7rem 2rem; }
+  .hero { min-height: auto; grid-template-columns: minmax(0, 1fr); padding-block: 5rem 1.5rem; }
   .hero::before { top: 22%; right: -54%; width: 34rem; opacity: .65; }
   .hero::after { right: -24%; width: 16rem; }
-  .hero h1 { max-width: 9ch; margin-block: 4rem 3rem; font-size: clamp(3.7rem, 16vw, 5.4rem); }
+  .hero h1 { max-width: 100%; margin-block: 1.5rem 1.25rem; font-size: clamp(2.5rem, 12vw, 3.25rem); line-height: .96; }
   .hero h1 > span { width: auto; }
   .hero h1 > span:nth-child(2), .hero h1 > span:nth-child(3) { margin-left: 0; transform: none; }
-  .heroText br { display: none; }
+  .heroText { width: 100%; min-width: 0; max-width: 100%; overflow-wrap: normal; word-break: normal; }
   .editorialBand { overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: none; }
   .editorialBand::-webkit-scrollbar { display: none; }
   .featured, .topics, .editorialGrid, .needs { padding-block: 5rem; }
@@ -141,7 +141,7 @@
   .needsList > a { grid-template-columns: 2.5rem minmax(0, 1fr); }
   .needsList small { grid-column: 2; }
   .needsList strong { font-size: clamp(1.65rem, 8vw, 2.5rem); }
-  .cta { min-height: auto; padding-block: 7rem; }
+  .cta { min-height: auto; padding-block: 4.9rem; }
   .cta::before { left: 82%; width: 38rem; opacity: .65; }
   .cta::after { right: -15%; width: 15rem; }
   .cta h2 { font-size: clamp(3.2rem, 15vw, 5.3rem); }
@@ -150,4 +150,11 @@
 @media (prefers-reduced-motion: reduce) {
   .featuredMedia img, .articleMedia img, .topicList a, .topicList li, .needsList > a, .needsList strong { transition: none; }
   .articleImageLink:hover img, .articleImageLink:focus-visible img, .topicList li:hover, .topicList li:focus-within, .topicList li:hover a, .topicList li:focus-within a, .needsList > a:hover, .needsList > a:focus-visible, .needsList > a:hover strong, .needsList > a:focus-visible strong { transform: none; }
+}
+
+@media (min-width: 768px) {
+  .cta {
+    min-height: max(clamp(29.4rem, 61.6svh, 40.6rem), min(61.6vw, 61.6rem));
+    padding-block: clamp(4.2rem, 8.4vw, 7.7rem);
+  }
 }

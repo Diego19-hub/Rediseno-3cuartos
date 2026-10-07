@@ -9,10 +9,9 @@ type HomeResponsiveProps = {
   ctaUrl: string;
   projects: CaseStudy[];
   services: Service[];
-  previewConfidence: boolean;
 };
 
-export function HomeResponsive({ ctaLabel, ctaUrl, projects, services, previewConfidence }: HomeResponsiveProps) {
+export function HomeResponsive({ ctaLabel, ctaUrl, projects, services }: HomeResponsiveProps) {
   const [isDesktop, setIsDesktop] = useState(false);
   const [DesktopHomeExperience, setDesktopHomeExperience] = useState<ComponentType<HomeResponsiveProps> | null>(null);
 
@@ -38,8 +37,8 @@ export function HomeResponsive({ ctaLabel, ctaUrl, projects, services, previewCo
   }, []);
 
   if (isDesktop && DesktopHomeExperience) {
-    return <DesktopHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} projects={projects} services={services} previewConfidence={previewConfidence} />;
+    return <DesktopHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} projects={projects} services={services} />;
   }
 
-  return <MobileHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} projects={projects} services={services} previewConfidence={previewConfidence} />;
+  return <MobileHomeExperience ctaLabel={ctaLabel} ctaUrl={ctaUrl} projects={projects} services={services} />;
 }

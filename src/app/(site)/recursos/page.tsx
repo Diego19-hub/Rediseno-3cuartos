@@ -43,15 +43,6 @@ const needs = [
   { lines: ["NECESITO UNA MEJOR", "PRESENCIA DIGITAL"], highlightLine: 1, highlightBefore: "", highlightText: "PRESENCIA DIGITAL", service: "Desarrollo Web", match: ["desarrollo", "web"] },
 ] as const;
 
-const invalidContentPattern = /provisional|demo|pendiente|contenido de respaldo/i;
-
-function isPublishableResource(resource: ResourceWithCategories, source: "wordpress" | "fallback") {
-  return source === "wordpress"
-    && resource.id > 0
-    && Boolean(resource.slug && resource.title && (resource.featuredExcerpt || resource.excerpt))
-    && !invalidContentPattern.test(`${resource.title} ${resource.featuredExcerpt} ${resource.excerpt}`);
-}
-
 function formatDate(value: string) {
   if (!value) return undefined;
   const date = new Date(value);
@@ -134,10 +125,9 @@ function EditorialGrid({ resources }: { resources: EditorialResource[] }) {
 export default async function ResourcesPage({ searchParams }: ResourcesPageProps) {
   const [{ tema }, content, servicesContent] = await Promise.all([searchParams, getResourcesContent(), getServicesPageContent()]);
   const selectedTopic = Array.isArray(tema) ? tema[0] : tema;
-  const publishable = content.resources.filter((resource) => isPublishableResource(resource, content.source));
   const filtered = selectedTopic
-    ? publishable.filter((resource) => resource.categories.some((category) => category.slug === selectedTopic))
-    : publishable;
+    ? content.resources.filter((resource) => resource.categories.some((category) => category.slug === selectedTopic))
+    : content.resources;
   const resources = filtered.map(toEditorialResource);
   const [featured, ...articles] = resources;
   const resolvedNeeds = needs.flatMap((need) => {
@@ -156,7 +146,7 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
         <ScrollReveal>
           <p className={styles.eyebrow}>RECURSOS / 3CUARTOS</p>
           <h1 id="resources-title"><span>Ideas para tomar</span><span><ResourcesTextHighlight phase={[0.36, 0.72]}>mejores</ResourcesTextHighlight> <ResourcesTextHighlight phase={[0.42, 0.78]}>decisiones</ResourcesTextHighlight></span><span><ResourcesTextHighlight phase={[0.48, 0.84]}>digitales.</ResourcesTextHighlight></span></h1>
-          <p className={styles.heroText}>Estrategia, marca, <ResourcesTextHighlight phase={[0.3, 0.72]}>marketing</ResourcesTextHighlight> y desarrollo web<br />explicados desde la experiencia.</p>
+          <p className={styles.heroText}>Estrategia, marca, <ResourcesTextHighlight phase={[0.3, 0.72]}>marketing</ResourcesTextHighlight> y desarrollo web explicados desde la experiencia.</p>
           <div className={styles.editorialBand} aria-label="Temas de los recursos">
           <span>ESTRATEGIA</span><i>/</i><span>BRANDING</span><i>/</i><span>MARKETING</span><i>/</i><span>DESARROLLO WEB</span>
           </div>
@@ -168,12 +158,10 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
         <section className={styles.topicEmpty} aria-live="polite">
           <p className={styles.sectionLabel}>{topics.find((topic) => topic.slug === selectedTopic)?.label ?? selectedTopic}</p>
           <p>Todavía no hay recursos publicados sobre este tema.</p>
-          <p>Próximamente compartiremos nuevas ideas de 3Cuartos.</p>
         </section>
       ) : null}
 
-      <EditorialScrollScene direction="right" intensity="medium" data-header-theme="light" className={styles.topics} aria-labelledby="topics-title">
-        <h2 id="topics-title">03 / EXPLORAR POR TEMA</h2>
+      <EditorialScrollScene direction="right" intensity="medium" data-header-theme="light" className={styles.topics} aria-label="Explorar por tema">
         <ol className={styles.topicList}>
           {topics.map((topic, index) => (
             <li key={topic.slug}>
@@ -188,7 +176,6 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
       <EditorialGrid resources={articles.slice(0, 4)} />
 
       <EditorialScrollScene direction="left" intensity="strong" data-header-theme="light" className={styles.needs} aria-labelledby="needs-title">
-        <p className={styles.sectionLabel}>05 / ENTRADA POR PROBLEMA</p>
         <h2 id="needs-title">¿QUÉ ESTÁS INTENTANDO RESOLVER?</h2>
         <nav className={styles.needsList} aria-label="Explorar servicios por necesidad">
           {resolvedNeeds.map((need, index) => (
@@ -202,7 +189,7 @@ export default async function ResourcesPage({ searchParams }: ResourcesPageProps
       </EditorialScrollScene>
 
       <EditorialScrollScene direction="right" intensity="medium" data-header-theme="dark" className={styles.cta} aria-labelledby="resources-cta-title">
-        <p className={styles.sectionLabel}>06 / HABLEMOS</p>
+  <p className={styles.sectionLabel}>HABLEMOS</p>
         <h2 id="resources-cta-title"><span>Una idea es <ResourcesTextHighlight emphasis="light" strength="refined" phase={[0.36, 0.72]}>más útil</ResourcesTextHighlight></span><span>cuando se <ResourcesTextHighlight emphasis="light" strength="refined" phase={[0.44, 0.8]}>convierte</ResourcesTextHighlight> en <ResourcesTextHighlight emphasis="light" strength="refined" phase={[0.5, 0.86]}>acción.</ResourcesTextHighlight></span></h2>
         <div className={styles.ctaAside}>
           <p>Si encontraste algo que conecta con lo que estás intentando resolver, hablemos.</p>

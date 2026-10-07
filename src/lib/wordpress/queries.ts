@@ -76,6 +76,9 @@ export async function getPageBySlug(slug: string): Promise<LegalPage | null> {
     const page = data[0];
     if (!page?.slug) return null;
     const plain = (value?: string) => (value ?? "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-    return { slug: page.slug, title: plain(page.title?.rendered) || "Página legal", content: plain(page.content?.rendered), excerpt: plain(page.excerpt?.rendered), modifiedAt: page.modified ?? "", isProvisional: true };
+    const title = plain(page.title?.rendered);
+    const content = plain(page.content?.rendered);
+    if (!title || !content) return null;
+    return { slug: page.slug, title, content, excerpt: plain(page.excerpt?.rendered), modifiedAt: page.modified ?? "" };
   } catch { return null; }
 }

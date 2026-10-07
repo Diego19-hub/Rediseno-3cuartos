@@ -83,16 +83,38 @@
   font-size: var(--type-h2);
 }
 
+.matrixTitle {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin: 0;
+  color: #090b0d;
+  font-size: var(--type-h1);
+  font-weight: 560;
+  letter-spacing: -0.065em;
+  line-height: 0.93;
+  text-align: center;
+}
+
 .disciplineList {
   border-top: 1px solid rgb(9 11 13 / 0.24);
 }
 
 .discipline {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1.3fr);
   gap: clamp(2rem, 5vw, 7rem);
   padding-block: clamp(2.5rem, 5vw, 5rem);
-  border-bottom: 1px solid rgb(9 11 13 / 0.24);
+}
+
+.disciplineDivider {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: rgb(9 11 13 / 0.24);
+  transform-origin: left center;
 }
 
 .disciplineTitle {
@@ -273,6 +295,10 @@
   .matrixHeader {
     gap: 1.5rem;
     padding-bottom: 4rem;
+  }
+
+  .matrixTitle {
+    font-size: var(--type-h2);
   }
 
   .discipline {
@@ -501,8 +527,9 @@
   }
 
   .mobileHero {
+    position: relative;
     min-height: auto;
-    border-bottom: 1px solid rgb(var(--color-brand-blue-rgb) / 0.45);
+    border-bottom: 0;
   }
 
   .mobileHero h1,
@@ -522,7 +549,7 @@
     display: block;
   }
 
-  .mobileHero > p:last-child,
+  .mobileHero > p:not(.sectionEyebrow),
   .mobileLead,
   .mobileProblemEntry > p:not(.sectionEyebrow) {
     max-width: 34rem;
@@ -533,6 +560,7 @@
   }
 
   .mobileDisciplines {
+    padding-top: 2rem;
     background: var(--color-brand-charcoal);
   }
 
@@ -597,14 +625,16 @@
   }
 
   .mobileDisciplines h2 {
+    margin-top: 0;
     color: var(--color-brand-mineral);
+    font-size: clamp(2.85rem, 10.5vw, 4.2rem);
     text-transform: uppercase;
   }
 
   .mobileDisciplineList {
     width: 100%;
     max-width: 100%;
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 0;
     padding: 0;
     list-style: none;
@@ -617,13 +647,13 @@
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: clamp(2.75rem, 11vw, 4rem) 0;
-    border-top: 1px solid rgb(var(--color-brand-blue-rgb) / 0.55);
+    padding: 1.25rem 0;
+    border-top: 0;
     overflow: hidden;
   }
 
   .mobileDisciplineBlock:last-child {
-    border-bottom: 1px solid rgb(var(--color-brand-blue-rgb) / 0.55);
+    border-bottom: 0;
   }
 
   .mobileDisciplineNumber {
@@ -638,6 +668,30 @@
     pointer-events: none;
   }
 
+  .mobileEditorialRule {
+    position: absolute;
+    right: var(--container-gutter);
+    bottom: 0;
+    left: var(--container-gutter);
+    display: block;
+    height: 1px;
+    background: rgb(var(--color-brand-blue-rgb) / .45);
+    transform-origin: left center;
+  }
+
+  .mobileRowRule {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    height: 1px;
+    background: rgb(var(--color-brand-blue-rgb) / .55);
+    transform-origin: left center;
+  }
+
+  .mobileDisciplineBlock > .mobileRowRule { top: 0; bottom: auto; }
+
   .mobileDisciplineContent {
     position: relative;
     z-index: 1;
@@ -645,7 +699,7 @@
   }
 
   .mobileDisciplineIndex {
-    margin: 0 0 1.5rem;
+    margin: 0 0 0.5rem;
     color: var(--color-brand-blue);
     font-size: var(--type-h4);
     font-weight: 650;
@@ -711,18 +765,6 @@
     outline-offset: 4px;
   }
 
-  .mobileReveal {
-    animation: mobile-editorial-reveal 420ms ease-out both;
-  }
-
-  .mobileReveal:nth-child(2) {
-    animation-delay: 70ms;
-  }
-
-  .mobileReveal:nth-child(3) {
-    animation-delay: 140ms;
-  }
-
   .mobileConnection {
     background: var(--color-brand-mineral);
     color: var(--color-brand-charcoal);
@@ -743,12 +785,13 @@
 
   .mobileMatrixRows {
     margin-top: 3rem;
-    border-top: 1px solid #aeb1ac;
+    border-top: 0;
   }
 
   .mobileMatrixRow {
+    position: relative;
     padding: 1.4rem 0;
-    border-bottom: 1px solid #c2c4bf;
+    border-bottom: 0;
   }
 
   .mobileMatrixRow > div {
@@ -778,6 +821,7 @@
   }
 
   .mobileProblemEntry {
+    position: relative;
     background: var(--color-brand-charcoal);
     color: var(--color-brand-mineral);
     min-height: 100svh;
@@ -823,23 +867,21 @@
     text-decoration: none;
   }
 
-  @keyframes mobile-editorial-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .mobileReveal {
-      animation: none;
-    }
+    .mobileEditorialRule,
+    .mobileRowRule { transform: none !important; }
   }
+
+}
+
+.mobileMatrixTitle {
+  max-width: 18ch !important;
+  margin: 0 auto !important;
+  color: #090b0d;
+  font-size: clamp(2.4rem, 9vw, 4rem) !important;
+  letter-spacing: -0.065em;
+  line-height: 0.96;
+  text-align: center;
 }
 
 .connectedInner {

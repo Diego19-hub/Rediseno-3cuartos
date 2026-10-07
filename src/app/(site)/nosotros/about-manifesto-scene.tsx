@@ -1,6 +1,8 @@
 "use client";
 
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useRef } from "react";
 import styles from "./about-manifesto-scene.module.css";
 
 type ManifestoSceneProps = {
@@ -23,28 +25,36 @@ const moments: ManifestoMoment[] = [
     copy: "Desarrollamos soluciones y activos digitales orientados a objetivos empresariales, conectando estrategia, creatividad y tecnología.",
   },
   {
-    marker: "02 / POR QUÉ 3CUARTOS",
-    label: "Una idea compartida",
-    title: "El nombre abre una forma de mirar el conjunto.",
-    copy: "La historia oficial de 3Cuartos tendrá aquí su espacio cuando exista una versión validada para compartir.",
-    dark: true,
-  },
-  {
-    marker: "03 / NUESTRA FORMA DE PENSAR",
+    marker: "02 / NUESTRA FORMA DE PENSAR",
     title: "Tres capacidades que trabajan como un sistema.",
     copy: "Cada proyecto puede necesitar una combinación distinta. La dirección compartida mantiene conectadas las decisiones.",
   },
 ];
 
 export function AboutManifestoScene({ capabilities }: ManifestoSceneProps) {
-  return <div className={styles.staticStack}>{moments.map((moment, index) => <article className={`${styles.moment} ${moment.dark ? styles.dark : ""}`} key={moment.marker}><ManifestoContent moment={moment} capabilities={index === 2 ? capabilities : undefined} /></article>)}</div>;
+  return <div className={styles.staticStack}>{moments.map((moment, index) => <ManifestoMoment key={moment.marker} moment={moment} capabilities={index === 2 ? capabilities : undefined} index={index} />)}</div>;
 }
 
-function ManifestoContent({ moment, capabilities }: { moment: ManifestoMoment; capabilities?: ManifestoSceneProps["capabilities"] }) {
-  return <>
-    <div className={styles.marker}><span>{moment.marker}</span>{moment.label && <span>{moment.label}</span>}</div>
-    <h2>{moment.title}</h2>
-    <p className={styles.copy}>{moment.copy}</p>
-    {capabilities ? <div className={styles.capabilities}>{capabilities.map((item, index) => <Link href={item.href} key={item.href}><span>0{index + 1}</span><strong>{item.discipline}</strong><small>{item.capability}</small><b aria-hidden="true">↗</b></Link>)}</div> : <span className={styles.rule} aria-hidden="true" />}
-  </>;
+function ManifestoMoment({ moment, capabilities, index }: { moment: ManifestoMoment; capabilities?: ManifestoSceneProps["capabilities"]; index: number }) {
+  const reduced = useReducedMotion() === true;
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.25"] });
+  const second = index === 1;
+  const markerX = useTransform(scrollYProgress, [0, 1], second ? [20, -10] : [-20, 10]);
+  const markerY = useTransform(scrollYProgress, [0, 1], second ? [35, -15] : [0, 0]);
+  const titleX = useTransform(scrollYProgress, [0, 1], second ? [45, -15] : [-40, 15]);
+  const titleY = useTransform(scrollYProgress, [0, 1], second ? [35, -15] : [30, -10]);
+  const copyX = useTransform(scrollYProgress, [0, 1], second ? [20, -5] : [-15, 5]);
+  const copyY = useTransform(scrollYProgress, [0, 1], second ? [25, -10] : [20, -5]);
+  const ruleScale = useTransform(scrollYProgress, [0, 1], second ? [0.25, 1] : [0.35, 1]);
+  const ruleY = useTransform(scrollYProgress, [0, 1], [second ? 18 : 0, second ? -8 : 0]);
+
+  return <article ref={ref} className={`${styles.moment} ${moment.dark ? styles.dark : ""}`}>
+    <motion.div className={styles.marker} style={reduced ? undefined : { x: markerX, y: markerY }}>
+      <span>{moment.marker}</span>{moment.label && <span>{moment.label}</span>}
+    </motion.div>
+    <motion.h2 style={reduced ? undefined : { x: titleX, y: titleY }}>{moment.title}</motion.h2>
+    <motion.p className={styles.copy} style={reduced ? undefined : { x: copyX, y: copyY }}>{moment.copy}</motion.p>
+    {capabilities ? <div className={styles.capabilities}>{capabilities.map((item, itemIndex) => <Link href={item.href} key={item.href}><span>0{itemIndex + 1}</span><strong>{item.discipline}</strong><small>{item.capability}</small><b aria-hidden="true">↗</b></Link>)}</div> : <motion.span className={styles.rule} aria-hidden="true" style={reduced ? undefined : { scaleX: ruleScale, y: ruleY }} />}
+  </article>;
 }

@@ -18,12 +18,134 @@
 }
 
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, .94fr) minmax(20rem, .86fr);
   gap: clamp(3rem, 8vw, 10rem);
   align-items: center;
   min-height: min(72svh, 52rem);
   padding-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+.heroAmbient {
+  position: absolute;
+  z-index: 0;
+  top: 2%;
+  right: -10%;
+  left: 24%;
+  height: 96%;
+  opacity: .96;
+  filter: saturate(1.65) contrast(1.14) brightness(1.04);
+}
+
+.heroLabels {
+  position: absolute;
+  z-index: 2;
+  top: 2%;
+  left: 24%;
+  width: 100%;
+  height: 96%;
+  pointer-events: none;
+}
+
+.heroLabel {
+  position: absolute;
+  width: 10rem;
+  color: #17243d;
+  line-height: 1.25;
+}
+
+.heroLabelTitle {
+  display: flex;
+  min-height: 2.2rem;
+  align-items: center;
+  gap: .55rem;
+  padding: .25rem .55rem;
+  border: 1px solid rgb(59 107 213 / .16);
+  border-radius: 999px;
+  background: rgb(255 255 255 / .9);
+  box-shadow: 0 5px 16px rgb(52 93 173 / .08);
+}
+
+.heroLabelTitle > span { font-size: 1.25rem; }
+.heroLabelTitle > strong { font-size: .9rem; font-weight: 650; }
+.heroLabelDescription { display: block; margin: .45rem 0 0 2.35rem; color: #33415c; font-size: .62rem; font-weight: 650; letter-spacing: .1em; line-height: 1.55; text-transform: uppercase; }
+.heroLabelStrategy { top: 23%; left: 21%; }
+.heroLabelAudience { top: 62%; left: 21%; }
+.heroLabelContent,
+.heroLabelOptimization,
+.heroLabelResults { width: 9rem; left: 71%; }
+.heroLabelContent { top: 13%; }
+.heroLabelOptimization { top: 39%; }
+.heroLabelResults { top: 65%; }
+
+.heroAmbient::before,
+.heroAmbient::after {
+  position: absolute;
+  z-index: 1;
+  inset: 4% 0;
+  content: "";
+  pointer-events: none;
+  background-repeat: no-repeat;
+  will-change: transform, opacity;
+}
+
+.heroAmbient::before {
+  background-image:
+    radial-gradient(circle, #1768ff 0 3px, rgb(23 104 255 / .28) 4px, transparent 8px),
+    radial-gradient(circle, #478aff 0 2px, transparent 5px),
+    radial-gradient(circle, #285ff2 0 3px, rgb(40 95 242 / .22) 4px, transparent 8px),
+    radial-gradient(circle, #7b55ee 0 3px, rgb(123 85 238 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #2877ff 0 2px, transparent 5px),
+    radial-gradient(circle, #386cff 0 3px, rgb(56 108 255 / .22) 4px, transparent 8px),
+    radial-gradient(circle, #5c8fff 0 2px, transparent 5px),
+    radial-gradient(circle, #6a4ce8 0 3px, rgb(106 76 232 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #1768ff 0 2px, transparent 5px),
+    radial-gradient(circle, #3981ff 0 3px, rgb(57 129 255 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #2468ff 0 2px, transparent 5px),
+    radial-gradient(circle, #8555ee 0 2px, transparent 6px),
+    radial-gradient(circle, #1478ff 0 3px, rgb(20 120 255 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #507fff 0 2px, transparent 5px),
+    radial-gradient(circle, #376eff 0 2px, transparent 5px),
+    radial-gradient(circle, #7751ec 0 3px, rgb(119 81 236 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #1b73ff 0 2px, transparent 5px),
+    radial-gradient(circle, #4a86ff 0 2px, transparent 5px),
+    radial-gradient(circle, #2668f5 0 3px, rgb(38 104 245 / .2) 4px, transparent 8px);
+  background-position: 8% 22%, 21% 68%, 34% 34%, 45% 78%, 58% 18%, 67% 60%, 78% 34%, 87% 75%, 94% 21%, 53% 92%, 16% 84%, 27% 40%, 39% 9%, 48% 57%, 61% 38%, 72% 88%, 82% 8%, 91% 48%, 99% 68%;
+  background-size: 22px 22px, 12px 12px, 20px 20px, 18px 18px, 12px 12px, 20px 20px, 12px 12px, 18px 18px, 12px 12px, 18px 18px, 12px 12px, 16px 16px, 20px 20px, 12px 12px, 18px 18px, 12px 12px, 12px 12px, 16px 16px, 16px 16px;
+}
+
+.heroAmbient::after {
+  inset: 0 -2%;
+  background-image:
+    radial-gradient(circle, #3180ff 0 2px, transparent 5px),
+    radial-gradient(circle, #674bed 0 3px, rgb(103 75 237 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #1269ff 0 2px, transparent 5px),
+    radial-gradient(circle, #3a84ff 0 3px, rgb(58 132 255 / .18) 4px, transparent 8px),
+    radial-gradient(circle, #8162ef 0 2px, transparent 5px),
+    radial-gradient(circle, #286bff 0 2px, transparent 5px),
+    radial-gradient(circle, #458cff 0 3px, rgb(69 140 255 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #1768ff 0 2px, transparent 5px),
+    radial-gradient(circle, #7651eb 0 2px, transparent 5px),
+    radial-gradient(circle, #2479ff 0 3px, rgb(36 121 255 / .2) 4px, transparent 8px),
+    radial-gradient(circle, #4c86ff 0 2px, transparent 5px),
+    radial-gradient(circle, #2368f4 0 2px, transparent 5px),
+    radial-gradient(circle, #8757ef 0 3px, rgb(135 87 239 / .18) 4px, transparent 8px),
+    radial-gradient(circle, #2878ff 0 2px, transparent 5px),
+    radial-gradient(circle, #4a8cff 0 2px, transparent 5px),
+    radial-gradient(circle, #2168f7 0 3px, rgb(33 104 247 / .18) 4px, transparent 8px);
+  background-position: 14% 48%, 28% 12%, 39% 87%, 51% 43%, 63% 77%, 73% 12%, 84% 54%, 97% 91%, 6% 8%, 22% 91%, 34% 57%, 47% 22%, 59% 93%, 69% 68%, 78% 25%, 89% 80%;
+  background-size: 12px 12px, 18px 18px, 12px 12px, 20px 20px, 12px 12px, 12px 12px, 18px 18px, 12px 12px, 14px 14px, 12px 12px, 14px 14px, 12px 12px, 18px 18px, 12px 12px, 14px 14px, 12px 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroAmbient::before { animation: heroSignalDrift 3.9s ease-in-out infinite alternate; }
+  .heroAmbient::after { animation: heroSignalDrift 3.2s ease-in-out -1.2s infinite alternate-reverse; }
+}
+
+@keyframes heroSignalDrift {
+  from { transform: translate3d(-2.2%, -2%, 0) scale(.97); opacity: .68; }
+  to { transform: translate3d(2.4%, 2.2%, 0) scale(1.045); opacity: 1; }
 }
 
 .heroCopy,
@@ -34,6 +156,9 @@
 .related {
   min-width: 0;
 }
+
+.heroCopy,
+.heroVisual { position: relative; z-index: 1; }
 
 .eyebrow {
   margin: 0;
@@ -84,6 +209,8 @@
   position: relative;
   border-top: 1px solid var(--color-brand-blue);
   padding-top: .9rem;
+  width: 74%;
+  justify-self: center;
 }
 
 .featuredImage,
@@ -121,6 +248,8 @@
   border-top: 1px solid rgb(9 11 13 / .2);
 }
 
+.marketingOverview { row-gap: clamp(1rem, 2vw, 2rem); }
+
 .overview h2,
 .sectionHeading h2,
 .process h2,
@@ -147,6 +276,7 @@
 }
 
 .sectionHeading h2 { max-width: 10ch; margin-top: 1.1rem; }
+.sectionHeadingNoEyebrow h2 { margin-top: 0; }
 
 .capabilityList {
   margin: 0;
@@ -176,6 +306,35 @@
   letter-spacing: -.035em;
   line-height: 1.08;
 }
+
+.capabilityPipeline { position: relative; min-width: 0; }
+.capabilityBranches { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.capabilitySpine { fill: none; stroke: rgb(48 105 224 / .55); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.capabilityBranch { fill: none; stroke: rgb(72 132 239 / .24); stroke-width: 1.15; stroke-dasharray: 3 5; vector-effect: non-scaling-stroke; }
+.capabilityPipeline .capabilityList { position: relative; z-index: 1; }
+.capabilityPipeline .capabilityList li { position: relative; grid-template-columns: 2.8rem 2.8rem 3.35rem minmax(0, 1fr); gap: .7rem; align-items: center; min-height: clamp(5.8rem, 7vw, 7.2rem); padding-left: .3rem; }
+.capabilityPipeline .capabilityList li::before { position: absolute; z-index: 1; top: 50%; left: .62rem; width: 1rem; aspect-ratio: 1; border: 3px solid white; border-radius: 50%; background: #2465ed; box-shadow: 0 0 0 2px rgb(36 101 237 / .38), 0 0 16px rgb(36 101 237 / .24); content: ""; transform: translateY(-50%); }
+.capabilityPipeline .capabilityList li:nth-child(1)::before,
+.capabilityPipeline .capabilityList li:nth-child(3)::before,
+.capabilityPipeline .capabilityList li:nth-child(5)::before { width: 1.2rem; }
+.capabilityPipeline .capabilityNumber { grid-column: 2; color: var(--color-brand-blue); font-size: var(--type-h4); font-weight: 700; letter-spacing: .04em; }
+.capabilityIcon { display: grid; grid-column: 3; width: 2.85rem; aspect-ratio: 1; place-items: center; border: 1px solid rgb(47 104 231 / .08); border-radius: 50%; background: rgb(44 105 238 / .08); color: #2465ed; }
+.capabilityIcon svg { width: 1.45rem; height: 1.45rem; }
+.capabilityPipeline .capabilityList h3 { grid-column: 4; font-size: clamp(1.15rem, 1.65vw, 1.55rem); font-weight: 620; letter-spacing: -.03em; }
+.capabilityPulse { position: absolute; z-index: 2; top: .1rem; left: 1.18rem; width: .52rem; aspect-ratio: 1; border-radius: 50%; background: #0e69ff; box-shadow: 0 0 0 4px rgb(42 113 255 / .14), 0 0 14px 4px rgb(42 113 255 / .58); pointer-events: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .capabilityPipeline .capabilityList li::before { animation: capabilityNodePulse 3.8s ease-in-out infinite; }
+  .capabilityPipeline .capabilityList li:nth-child(2)::before { animation-delay: .65s; }
+  .capabilityPipeline .capabilityList li:nth-child(3)::before { animation-delay: 1.3s; }
+  .capabilityPipeline .capabilityList li:nth-child(4)::before { animation-delay: 1.95s; }
+  .capabilityPipeline .capabilityList li:nth-child(5)::before { animation-delay: 2.6s; }
+  .capabilityPipeline .capabilityList li:nth-child(6)::before { animation-delay: 3.25s; }
+  .capabilityPulse { animation: capabilitySignal 11s linear infinite; }
+}
+
+@keyframes capabilityNodePulse { 0%, 100% { filter: brightness(1); box-shadow: 0 0 0 2px rgb(36 101 237 / .32), 0 0 10px rgb(36 101 237 / .16); } 50% { filter: brightness(1.08); box-shadow: 0 0 0 4px rgb(36 101 237 / .2), 0 0 18px rgb(36 101 237 / .28); } }
+@keyframes capabilitySignal { from { top: .15rem; opacity: .25; } 8%, 88% { opacity: 1; } to { top: calc(100% - .7rem); opacity: .3; } }
 
 .emptyCapabilities { margin: 0; color: #565b5d; line-height: 1.6; }
 
@@ -237,8 +396,175 @@
 
 .related { padding-block: clamp(5rem, 10vw, 10rem); border-top: 1px solid rgb(9 11 13 / .2); }
 .related h2 { max-width: 12ch; margin-top: 1.1rem; }
-.relatedGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 2.5rem); margin-top: clamp(3rem, 6vw, 6rem); }
+.relatedHeading { max-width: none; margin: 0; color: #090b0d; font-size: clamp(1.5rem, 3.2vw, var(--type-h2)); font-weight: 580; letter-spacing: -.065em; line-height: 1.1; white-space: nowrap; }
+.relatedIntro { max-width: 43rem; margin: 1rem 0 0; color: var(--color-text-secondary); font-size: var(--type-h3); line-height: 1.45; }
+.relatedGrid { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); margin-top: clamp(2.25rem, 4vw, 4rem); }
+.relatedGrid:has(.caseStudyCard) { position: relative; left: 50%; width: min(96vw, 96rem); margin-inline: 0; transform: translateX(-50%); }
 .relatedGrid > a { color: inherit; text-decoration: none; }
+.relatedGrid:not(:has(.caseStudyCard)) > a { display: flex; }
+.relatedGrid:not(:has(.caseStudyCard)) > a .serviceCard { flex: 1; }
+
+.caseAmbient {
+  position: absolute;
+  z-index: 0;
+  top: -5rem;
+  right: -2%;
+  left: -2%;
+  width: 104%;
+  height: calc(100% + 10rem);
+  opacity: 1;
+  filter: saturate(2.6) brightness(1.35) contrast(1.24) drop-shadow(0 0 12px rgb(37 99 255 / .3));
+}
+
+.caseAmbient::before,
+.caseAmbient::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-repeat: no-repeat;
+  will-change: transform, background-position, opacity;
+}
+
+.caseAmbient::before {
+  background-image:
+    radial-gradient(circle, #0057ff 0 10px, rgb(0 87 255 / .68) 12px, transparent 23px),
+    radial-gradient(circle, #126cff 0 8px, rgb(18 108 255 / .5) 10px, transparent 20px),
+    radial-gradient(circle, #0754ff 0 10px, rgb(7 84 255 / .58) 12px, transparent 23px),
+    radial-gradient(circle, #8535ff 0 8px, rgb(133 53 255 / .58) 10px, transparent 22px),
+    radial-gradient(circle, #0078ff 0 8px, rgb(0 120 255 / .5) 10px, transparent 20px),
+    radial-gradient(circle, #135cff 0 10px, rgb(19 92 255 / .6) 12px, transparent 23px),
+    radial-gradient(circle, #2683ff 0 8px, rgb(38 131 255 / .5) 10px, transparent 20px),
+    radial-gradient(circle, #0755ff 0 10px, rgb(7 85 255 / .58) 12px, transparent 23px),
+    radial-gradient(circle, #9638ff 0 8px, rgb(150 56 255 / .52) 10px, transparent 22px),
+    radial-gradient(circle, #0078ff 0 10px, rgb(0 120 255 / .62) 12px, transparent 23px),
+    radial-gradient(circle, #126bff 0 8px, rgb(18 107 255 / .5) 10px, transparent 20px),
+    radial-gradient(circle, #0755ff 0 8px, rgb(7 85 255 / .5) 10px, transparent 20px);
+  background-position: 8% 22%, 21% 68%, 34% 34%, 45% 78%, 58% 18%, 67% 60%, 78% 34%, 87% 75%, 94% 21%, 53% 92%, 16% 84%, 72% 88%;
+  background-size: 28px 28px, 20px 20px, 27px 27px, 25px 25px, 20px 20px, 28px 28px, 20px 20px, 27px 27px, 24px 24px, 28px 28px, 20px 20px, 20px 20px;
+}
+
+.caseAmbient::after {
+  inset: -2% 0;
+  background-image:
+    radial-gradient(circle, #187bff 0 5px, rgb(24 123 255 / .28) 6px, transparent 13px),
+    radial-gradient(circle, #9145f2 0 5px, rgb(145 69 242 / .36) 6px, transparent 13px),
+    radial-gradient(circle, #075eff 0 4px, rgb(7 94 255 / .25) 5px, transparent 11px),
+    radial-gradient(circle, #338cff 0 5px, rgb(51 140 255 / .34) 6px, transparent 13px),
+    radial-gradient(circle, #1467ff 0 4px, rgb(20 103 255 / .26) 5px, transparent 11px),
+    radial-gradient(circle, #438aff 0 5px, rgb(67 138 255 / .34) 6px, transparent 13px),
+    radial-gradient(circle, #0d62ff 0 4px, rgb(13 98 255 / .26) 5px, transparent 11px),
+    radial-gradient(circle, #1678ff 0 5px, rgb(22 120 255 / .34) 6px, transparent 13px),
+    radial-gradient(circle, #538fff 0 4px, rgb(83 143 255 / .25) 5px, transparent 11px),
+    radial-gradient(circle, #1263f4 0 4px, rgb(18 99 244 / .25) 5px, transparent 11px),
+    radial-gradient(circle, #a147f2 0 5px, rgb(161 71 242 / .34) 6px, transparent 13px),
+    radial-gradient(circle, #137dff 0 4px, rgb(19 125 255 / .28) 5px, transparent 11px);
+  background-position: 14% 48%, 28% 12%, 39% 87%, 51% 43%, 73% 12%, 84% 54%, 97% 91%, 22% 91%, 34% 57%, 47% 22%, 59% 93%, 89% 80%;
+  background-size: 26px 26px, 25px 25px, 20px 20px, 27px 27px, 20px 20px, 27px 27px, 20px 20px, 27px 27px, 20px 20px, 20px 20px, 25px 25px, 20px 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .caseAmbient::before { animation: caseSignalNodes 1.9s ease-in-out infinite alternate; }
+  .caseAmbient::after { animation: caseSignalNodesSecondary 2.3s ease-in-out -1.1s infinite alternate-reverse; }
+}
+
+@keyframes caseSignalNodes {
+  from { background-position: 8% 22%, 21% 68%, 34% 34%, 45% 78%, 58% 18%, 67% 60%, 78% 34%, 87% 75%, 94% 21%, 53% 92%, 16% 84%, 72% 88%; transform: translate3d(-2%, -2.2%, 0) scale(.96); opacity: .72; }
+  to { background-position: 12% 27%, 17% 62%, 38% 29%, 41% 83%, 63% 24%, 62% 55%, 83% 29%, 82% 80%, 89% 26%, 58% 87%, 20% 78%, 67% 82%; transform: translate3d(2.4%, 2.6%, 0) scale(1.045); opacity: 1; }
+}
+
+@keyframes caseSignalNodesSecondary {
+  from { background-position: 14% 48%, 28% 12%, 39% 87%, 51% 43%, 73% 12%, 84% 54%, 97% 91%, 22% 91%, 34% 57%, 47% 22%, 59% 93%, 89% 80%; transform: translate3d(2%, -1.8%, 0) scale(1.035); opacity: .68; }
+  to { background-position: 19% 42%, 23% 18%, 44% 81%, 56% 49%, 68% 18%, 79% 60%, 92% 85%, 27% 85%, 39% 63%, 42% 28%, 64% 87%, 84% 74%; transform: translate3d(-2.4%, 2.1%, 0) scale(.97); opacity: 1; }
+}
+
+.caseSignalLabels { position: absolute; z-index: 2; top: -5rem; right: -2%; left: -2%; width: 104%; height: calc(100% + 10rem); pointer-events: none; }
+.caseSignalLabel { position: absolute; display: flex; min-height: 3rem; align-items: center; gap: .55rem; padding: .2rem 1.1rem; border: 1px solid rgb(45 104 226 / .3); border-radius: 999px; background: rgb(255 255 255 / .94); box-shadow: 0 8px 22px rgb(35 82 170 / .16), 0 0 18px rgb(119 68 222 / .14); color: #10213d; font-size: clamp(.9rem, 1.2vw, 1.15rem); font-weight: 650; white-space: nowrap; transform: translate(-50%, -50%); }
+.caseSignalLabel > svg { width: 1.35rem; height: 1.35rem; color: #1768ff; }
+.caseSignalLabel::after { position: absolute; bottom: -.55rem; left: 50%; width: 1px; height: .55rem; background: #216cff; content: ""; }
+.caseSignalLabel::before { position: absolute; bottom: -.78rem; left: calc(50% - 2px); width: 5px; height: 5px; border-radius: 50%; background: #1768ff; box-shadow: 0 0 8px rgb(23 104 255 / .65); content: ""; }
+.caseStrategyLabel { top: 14%; left: 18%; }
+.caseContentLabel { top: 14%; left: 50%; }
+.caseResultsLabel { top: 14%; left: 82%; }
+
+.caseStudyCard { grid-template-columns: minmax(0, .88fr) minmax(18rem, 1.12fr); grid-template-rows: auto auto 1fr auto; align-items: start; gap: .55rem 1rem; min-height: 16rem; padding: clamp(1rem, 1.35vw, 1.3rem); }
+.caseStudyCard > :nth-child(1) { grid-column: 1; grid-row: 1; }
+.caseStudyCard > :nth-child(2) { grid-column: 1; grid-row: 2; }
+.caseStudyCard > :nth-child(3) { grid-column: 1; grid-row: 3; }
+.caseStudyCard > :global(img) { grid-column: 2; grid-row: 1 / span 4; align-self: center; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: 16 / 9; border-radius: .8rem; object-fit: contain; }
+.caseStudyCard > :global(a) { display: inline-flex; grid-column: 1; grid-row: 4; align-items: center; gap: .6rem; width: fit-content; color: #165fff; font-weight: 650; text-decoration: none; }
+.caseStudyCard > :global(a):hover { text-decoration: underline; text-underline-offset: .25em; }
+.caseStudyCard > :global(h3) { margin: 0; font-size: clamp(1.5rem, 2.1vw, 2.3rem); line-height: 1.1; }
+.caseStudyCard > :global(p) { margin: 0; color: var(--color-text-secondary); font-size: clamp(1rem, 1.05vw, 1.1rem) !important; line-height: 1.4; }
+
+.relatedGrid > :not(.caseAmbient):not(.caseSignalLabels) { position: relative; z-index: 1; }
+
+.related:has(+ .marketingCtaFrame) { padding-bottom: 15px; }
+.marketingCtaFrame { position: relative; isolation: isolate; overflow: clip; width: 100vw; margin-left: calc(50% - 50vw); }
+.ctaAmbient { position: absolute; z-index: 0; top: calc(50% - 2.625rem); right: -10%; left: 28%; width: 82%; height: 86%; opacity: 1; transform: translateY(-50%); isolation: isolate; filter: saturate(1.65) brightness(1.08) contrast(1.12) drop-shadow(0 0 8px rgb(38 92 255 / .3)) drop-shadow(0 0 18px rgb(133 75 230 / .16)); }
+.ctaAmbient::before { position: absolute; z-index: 0; top: 51%; left: 50%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(24 94 255 / .45) 0%, rgb(52 109 255 / .25) 24%, rgb(127 74 226 / .18) 43%, transparent 72%); content: ""; filter: blur(9px); transform: translate(-50%, -50%); }
+.ctaAmbient::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle, #1768ff 0 4px, rgb(23 104 255 / .34) 5px, transparent 12px),
+    radial-gradient(circle, #478aff 0 3px, transparent 7px),
+    radial-gradient(circle, #285ff2 0 4px, rgb(40 95 242 / .28) 5px, transparent 12px),
+    radial-gradient(circle, #8955ee 0 4px, rgb(137 85 238 / .3) 5px, transparent 12px),
+    radial-gradient(circle, #2877ff 0 3px, transparent 7px),
+    radial-gradient(circle, #386cff 0 4px, rgb(56 108 255 / .28) 5px, transparent 12px),
+    radial-gradient(circle, #5c8fff 0 3px, transparent 7px),
+    radial-gradient(circle, #7651eb 0 4px, rgb(118 81 235 / .28) 5px, transparent 12px),
+    radial-gradient(circle, #1768ff 0 3px, transparent 7px),
+    radial-gradient(circle, #3981ff 0 4px, rgb(57 129 255 / .3) 5px, transparent 12px),
+    radial-gradient(circle, #2468ff 0 3px, transparent 7px),
+    radial-gradient(circle, #8555ee 0 3px, transparent 8px),
+    radial-gradient(circle, #1478ff 0 4px, rgb(20 120 255 / .28) 5px, transparent 12px),
+    radial-gradient(circle, #507fff 0 3px, transparent 7px),
+    radial-gradient(circle, #376eff 0 3px, transparent 7px),
+    radial-gradient(circle, #7751ec 0 4px, rgb(119 81 236 / .28) 5px, transparent 12px);
+  background-position: 8% 22%, 21% 68%, 34% 34%, 45% 78%, 58% 18%, 67% 60%, 78% 34%, 87% 75%, 94% 21%, 53% 92%, 16% 84%, 27% 40%, 39% 9%, 48% 57%, 61% 38%, 72% 88%;
+  background-size: 26px 26px, 16px 16px, 24px 24px, 23px 23px, 16px 16px, 24px 24px, 16px 16px, 23px 23px, 16px 16px, 24px 24px, 16px 16px, 19px 19px, 24px 24px, 16px 16px, 20px 20px, 16px 16px;
+  filter: drop-shadow(0 0 5px rgb(38 92 255 / .4));
+  will-change: transform, background-position, opacity;
+}
+.ctaAmbient :global(svg) { position: relative; z-index: 1; }
+.ctaSignalLabels { position: absolute; z-index: 1; top: calc(50% - 2.625rem); right: -10%; left: 28%; width: 82%; height: 86%; pointer-events: none; transform: translateY(-50%); }
+.ctaSignalLabel { position: absolute; display: flex; min-height: 3.1rem; align-items: center; justify-content: center; gap: .55rem; padding-inline: 1.25rem; border: 1px solid rgb(74 112 204 / .2); border-radius: 999px; background: rgb(255 255 255 / .98); box-shadow: 0 10px 26px rgb(45 82 170 / .16), 0 0 22px rgb(115 75 220 / .12); color: #090b0d; font-size: clamp(1rem, 1.15vw, 1.25rem); font-weight: 650; line-height: 1; white-space: nowrap; transform: translate(-50%, -50%); }
+.ctaSignalLabel > span { font-size: 1.3em; line-height: 1; }
+.ctaSignalIdeas { top: 41%; left: 33.3%; min-width: 9.2rem; }
+.ctaSignalGrowth { top: 50%; left: 64.4%; min-width: 12rem; }
+.ctaSignalResults { top: 76%; left: 48%; min-width: 10rem; }
+.marketingCtaFrame > :global(section) { position: relative; z-index: 1; grid-template-columns: minmax(0, 44%) minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; min-height: clamp(38rem, 80svh, 56rem); padding: clamp(3rem, 7vw, 6rem) max(var(--container-gutter), calc((100vw - var(--container-content)) / 2 + var(--container-gutter))); background: transparent; }
+.marketingCtaFrame > :global(section) > div { display: grid; grid-column: 1; grid-row: 1; gap: .45rem; max-width: 38rem; }
+.marketingCtaFrame > :global(section) > div > :global(h1) { margin: 0; font-size: clamp(3rem, 6vw, 6rem); line-height: .94; letter-spacing: -.055em; }
+.marketingCtaFrame > :global(section) > div > :global(p:not(.eyebrow)) { max-width: 39rem; margin: .35rem 0 0; color: var(--color-text-secondary); font-size: clamp(1.05rem, 1.55vw, 1.45rem); line-height: 1.4; }
+.marketingCtaFrame > :global(section) > :global(a) { grid-column: 1; grid-row: 2; justify-self: start; }
+.marketingCtaFrame > :global(section) > :global(a) { display: inline-flex; min-width: 11rem; justify-content: center; border: 1px solid var(--color-action-primary); background: var(--color-action-primary); box-shadow: 0 8px 24px rgb(35 67 142 / .2); color: #fff; text-align: center; }
+.marketingCtaFrame > :global(section) > :global(a)::after { margin-left: .65rem; content: "→"; }
+.marketingCtaFrame > :global(section) > div,
+.marketingCtaFrame > :global(section) > :global(a) { position: relative; left: clamp(-13rem, -11vw, -5rem); }
+.page:has(.marketingCtaFrame) + :global(footer) { margin-top: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ctaAmbient::before { animation: ctaCoreAura 2.13s ease-in-out infinite alternate; }
+  .ctaAmbient::after { animation: ctaSignalNodes 3.4s ease-in-out infinite alternate; }
+}
+
+@keyframes ctaCoreAura {
+  from { opacity: .58; transform: translate(-50%, -50%) scale(.8); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.18); }
+}
+
+@keyframes ctaSignalNodes {
+  from { background-position: 8% 22%, 21% 68%, 34% 34%, 45% 78%, 58% 18%, 67% 60%, 78% 34%, 87% 75%, 94% 21%, 53% 92%, 16% 84%, 27% 40%, 39% 9%, 48% 57%, 61% 38%, 72% 88%; transform: translate3d(-1.8%, -1.7%, 0) scale(.97); opacity: .7; }
+  to { background-position: 14% 28%, 16% 61%, 40% 28%, 40% 84%, 64% 25%, 61% 54%, 84% 29%, 81% 81%, 88% 27%, 59% 86%, 21% 77%, 32% 46%, 45% 15%, 42% 50%, 67% 44%, 67% 82%; transform: translate3d(2%, 2.1%, 0) scale(1.04); opacity: 1; }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .heroCopy { animation: enter .5s cubic-bezier(.22, 1, .36, 1) both; }
@@ -256,19 +582,109 @@
 
 @media (max-width: 767px) {
   .hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; padding-bottom: 4.5rem; }
+  .heroAmbient { top: 0; right: -5%; left: 5%; height: 34%; opacity: .34; }
+  .heroLabels { display: none; }
+  .heroAmbient::before,
+  .heroAmbient::after { inset: 0; }
   .hero h1 { max-width: 10ch; font-size: var(--type-h1); }
   .summary { margin-top: 1.4rem; font-size: var(--type-h3); }
   .heroActions { margin-top: 1.5rem; }
-  .heroVisual { order: 2; }
+  .heroVisual { order: 2; width: 100%; justify-self: stretch; }
   .featuredImage, .imageFallback { aspect-ratio: 4 / 3; }
   .overview, .capabilities { grid-template-columns: 1fr; gap: 2.5rem; padding-block: 4.5rem; }
+  .marketingOverview { grid-template-columns: minmax(0, 1fr); gap: 0; row-gap: .35rem; padding-block: 3.5rem; }
+  .marketingOverview > article:first-child { grid-row: 1; }
+  .marketingOverview > div { grid-row: 2; }
+  .marketingOverview > article:last-child { grid-row: 3; margin-top: .3rem; }
   .overview h2, .sectionHeading h2, .process h2, .related h2 { font-size: var(--type-h2); }
+  .relatedHeading { font-size: clamp(1.35rem, 6vw, 2.5rem); }
   .overview h2, .sectionHeading h2 { margin-top: .9rem; }
   .capabilityList li { grid-template-columns: 3rem minmax(0, 1fr); min-height: 4.5rem; }
+  .capabilityPipeline .capabilityList li { grid-template-columns: 1.45rem 1.8rem 2.1rem minmax(0, 1fr); gap: .3rem; min-height: 4rem; padding-left: 0; }
+  .capabilityPipeline .capabilityList li::before { left: .36rem; width: .72rem; border-width: 1.8px; box-shadow: 0 0 0 1px rgb(36 101 237 / .3), 0 0 10px rgb(36 101 237 / .16); animation: none; }
+  .capabilityPipeline .capabilityList li:nth-child(1)::before,
+  .capabilityPipeline .capabilityList li:nth-child(3)::before,
+  .capabilityPipeline .capabilityList li:nth-child(5)::before { left: .3rem; width: .84rem; }
+  .capabilityBranches { top: .2rem; bottom: .2rem; height: calc(100% - .4rem); overflow: hidden; }
+  .capabilitySpine { stroke-width: 1.15; }
+  .capabilityBranch { display: none; }
+  .capabilityBranches .capabilityBranch:nth-of-type(2),
+  .capabilityBranches .capabilityBranch:nth-of-type(4),
+  .capabilityBranches .capabilityBranch:nth-of-type(6) { display: initial; }
+  .capabilityPipeline .capabilityList h3 { font-size: clamp(1rem, 4.2vw, 1.15rem); }
+  .capabilityIcon { width: 2rem; }
+  .capabilityIcon svg { width: 1rem; height: 1rem; }
+  .capabilityPulse { left: .63rem; width: .38rem; box-shadow: 0 0 0 3px rgb(42 113 255 / .12), 0 0 10px 3px rgb(42 113 255 / .42); }
   .process { min-height: 0; }
   .processInner { width: 100%; min-height: 0; padding-block: 4.5rem; }
   .process ol { grid-template-columns: 1fr; margin-top: 3rem; }
   .process li, .process li + li { grid-template-columns: 3rem 1fr; min-height: 0; padding: 1rem 0; }
   .related { padding-block: 4.5rem; }
+  .related:has(.caseStudyCard) { padding-block: 3rem 2.25rem; }
+  .related:has(.caseStudyCard) h2 { margin-top: .55rem; }
+  .related:has(.caseStudyCard) .relatedIntro { margin-top: .65rem; font-size: clamp(1rem, 4.2vw, 1.25rem); line-height: 1.4; }
   .relatedGrid { grid-template-columns: 1fr; margin-top: 2.5rem; }
+  .relatedGrid:has(.caseStudyCard) { left: auto; width: 100%; transform: none; }
+  .relatedGrid:has(.caseStudyCard) { gap: .9rem; margin-top: 1.15rem; }
+  .caseAmbient { top: .25rem; right: 0; left: 0; width: 100%; height: calc(100% - .5rem); opacity: .24; filter: saturate(1.15) brightness(1.03) contrast(1.02); }
+  .caseAmbient::before,
+  .caseAmbient::after { display: none; }
+  .caseAmbient :global(svg > g:nth-of-type(1)) { display: none; }
+  .caseSignalLabels { position: relative; top: auto; right: auto; left: auto; grid-row: 1; display: flex; width: 100%; height: auto; align-items: center; justify-content: space-between; gap: .5rem; margin: 0 0 -.1rem; pointer-events: none; }
+  .caseSignalLabel { position: relative; top: auto; left: auto; min-height: 2.05rem; gap: .3rem; padding: .2rem .6rem; border-radius: 999px; box-shadow: 0 4px 12px rgb(35 82 170 / .1); font-size: .74rem; transform: none; }
+  .caseSignalLabel > svg { width: 1rem; height: 1rem; }
+  .caseSignalLabel::before,
+  .caseSignalLabel::after { display: none; }
+  .caseStrategyLabel,
+  .caseResultsLabel { top: auto; left: auto; }
+  .caseContentLabel { display: none; }
+  .caseStudyCard { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto auto; min-height: 0; gap: .55rem; padding: .95rem; }
+  .caseStudyCard > :nth-child(1) { grid-column: 1; grid-row: 1; }
+  .caseStudyCard > :nth-child(2) { grid-column: 1; grid-row: 2; }
+  .caseStudyCard > :nth-child(3) { grid-column: 1; grid-row: 3; }
+  .caseStudyCard > :global(img) { grid-column: 1; grid-row: 4; justify-self: center; width: min(100%, 18rem); height: auto; min-height: 0; max-height: none; aspect-ratio: 16 / 9; }
+  .caseStudyCard > :global(a) { grid-column: 1; grid-row: 5; }
+  .caseStudyCard + :global(figure) { gap: .6rem; padding: 1rem; }
+  .caseStudyCard + :global(figure) > :global(blockquote) { margin: 0; font-size: clamp(1.12rem, 4.5vw, 1.35rem); line-height: 1.38; }
+  .caseStudyCard + :global(figure) > :global(figcaption) { font-size: .82rem; line-height: 1.4; }
+  .marketingCtaFrame { overflow: clip; }
+  .marketingCtaFrame > :global(section) { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; align-content: start; min-height: 0; padding: 3.5rem var(--container-gutter) 17rem; }
+  .marketingCtaFrame > :global(section) > div,
+  .marketingCtaFrame > :global(section) > :global(a) { grid-column: 1; }
+  .marketingCtaFrame > :global(section) > :global(a) { grid-row: 2; }
+  .related:has(+ .marketingCtaFrame) { padding-bottom: 15px; }
+  .ctaAmbient { top: auto; right: auto; bottom: 1.1rem; left: 50%; width: min(calc(100% - 1.5rem), 390px); height: auto; aspect-ratio: 1.8; max-width: 100%; opacity: .58; transform: translateX(-50%); filter: saturate(1.15) brightness(1.02) contrast(1.04) drop-shadow(0 0 6px rgb(38 92 255 / .22)); }
+  .ctaSignalLabels { top: auto; right: auto; bottom: 1.1rem; left: 50%; width: min(calc(100% - 1.5rem), 390px); height: auto; aspect-ratio: 1.8; max-width: 100%; transform: translateX(-50%); }
+  .ctaSignalLabel { min-height: 2.2rem; gap: .35rem; padding-inline: .75rem; font-size: .82rem; }
+  .ctaSignalLabel > span { font-size: 1.1em; }
+  .ctaSignalIdeas,
+  .ctaSignalGrowth { display: none; }
+  .ctaSignalResults { display: none; }
+  .ctaAmbient::before { top: 53%; left: 51%; width: 38%; background: radial-gradient(circle, rgb(24 94 255 / .29) 0%, rgb(52 109 255 / .17) 28%, rgb(127 74 226 / .1) 46%, transparent 72%); filter: blur(7px); }
+  .ctaAmbient::after {
+    opacity: .48;
+    transform: scale(.82);
+    background-image:
+      radial-gradient(circle, #1768ff 0 3px, rgb(23 104 255 / .26) 4px, transparent 9px),
+      radial-gradient(circle, #478aff 0 2px, transparent 5px),
+      radial-gradient(circle, #285ff2 0 3px, rgb(40 95 242 / .2) 4px, transparent 9px),
+      radial-gradient(circle, #8955ee 0 3px, rgb(137 85 238 / .2) 4px, transparent 9px),
+      radial-gradient(circle, #2877ff 0 2px, transparent 5px),
+      radial-gradient(circle, #386cff 0 3px, rgb(56 108 255 / .2) 4px, transparent 9px);
+    background-position: 8% 22%, 21% 68%, 34% 34%, 45% 78%, 58% 18%, 67% 60%;
+    background-size: 20px 20px, 13px 13px, 19px 19px, 18px 18px, 13px 13px, 19px 19px;
+  }
+  .marketingCtaFrame > :global(section) > :global(a) { margin-top: .25rem; }
+  .marketingCtaFrame > :global(section) > div,
+  .marketingCtaFrame > :global(section) > :global(a) { left: 0; }
+}
+
+@media (max-width: 359px) {
+  .marketingCtaFrame > :global(section) { padding-bottom: 15.5rem; }
+  .ctaAmbient,
+  .ctaSignalLabels { width: min(calc(100% - 1rem), 350px); }
+}
+
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
+  .ctaAmbient::after { animation-duration: 5.1s; }
 }

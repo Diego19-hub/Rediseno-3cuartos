@@ -75,14 +75,12 @@
 }
 
 .aboutScene .orbital {
-  top: 17%;
-  right: 5%;
+  top: 12%;
+  right: calc(13% + 15px);
   width: min(38vw, 500px);
 }
 
-.aboutScene .modules {
-  bottom: clamp(7rem, 12vh, 9rem);
-}
+.aboutScene .modules { bottom: clamp(7rem, 12vh, 9rem); }
 
 .aboutScene .modules .moduleWrap {
   min-height: 148px;
@@ -160,4 +158,43 @@
   .aboutScene .heroCopy h1 span {
     transform: none !important;
   }
+}
+
+@media (min-width: 768px) {
+  .aboutScene .orbital {
+    top: -26px;
+    right: auto;
+    left: calc(66% - min(260px, 19vw));
+    width: min(520px, 38vw);
+  }
+
+  .aboutScene .modules {
+    right: 2%;
+    bottom: clamp(4.5rem, 7vh, 6.5rem);
+    left: 34%;
+    gap: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  .aboutScene .modules .moduleWrap {
+    min-height: 17rem;
+    height: auto;
+    align-content: start;
+    padding: clamp(1.5rem, 2vw, 2rem);
+  }
+
+  .aboutScene .modules .capabilityList {
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    margin: .75rem 0 1rem;
+    overflow: visible;
+    opacity: 1;
+  }
+
+  .aboutScene .modules .capabilityList li {
+    padding: .35rem .65rem;
+    font-size: var(--type-h4);
+  }
+
+  .aboutScene .modules .moduleLink { margin-top: auto; }
 }

@@ -20,7 +20,7 @@ export default async function ContactPage() {
             <p className={styles.eyebrow}>CONTACTO / 3CUARTOS</p>
             <h1 id="contact-title">Cuéntanos qué quieres construir.</h1>
             <p className={styles.introText}>No necesitas llegar con todas las respuestas. Cuéntanos dónde estás y qué quieres conseguir; nosotros empezamos por entenderlo.</p>
-            <p className={styles.closing}>ESTRATEGIA <span aria-hidden="true">·</span> CREATIVIDAD <span aria-hidden="true">·</span> TECNOLOGÍA</p>
+            <p className={styles.closing}>BRANDING <span aria-hidden="true">·</span> MARKETING <span aria-hidden="true">·</span> DESARROLLO WEB</p>
           </ScrollReveal>
         </section>
         <div className={styles.archLine} aria-hidden="true" />

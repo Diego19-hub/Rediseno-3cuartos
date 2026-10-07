@@ -11,13 +11,14 @@
 .actions a, .cta a { display: inline-flex; min-height: 2.9rem; align-items: center; justify-content: center; width: 100%; padding: .75rem 1rem; border-radius: var(--button-radius); font-weight: 650; }
 .primaryAction { background: var(--color-brand-blue); color: var(--color-brand-mineral); }
 .secondaryAction { border: 1px solid rgb(242 242 238 / .6); color: var(--color-brand-mineral); }
-.heroRule { width: 100%; height: 1px; margin-top: 3.25rem; background: linear-gradient(90deg, var(--color-brand-blue), transparent); }
+.heroRule { width: 100%; height: 1px; margin-top: 3.25rem; background: linear-gradient(90deg, var(--color-brand-blue), transparent); transform-origin: left center; }
 .sectionIntro { max-width: 36rem; }
 .sectionIntro h2, .confidence h2, .faq h2, .cta h2 { max-width: 12ch; margin: 0; font-size: var(--type-h2); line-height: .94; letter-spacing: -.06em; }
 .sectionIntro > p:last-child { margin: 1.5rem 0 0; color: #747a7d; line-height: 1.55; }
 .dark .sectionIntro > p:last-child { color: #b9bdc0; }
 .problemList { display: grid; gap: 0; margin-top: 3rem; }
-.problem { position: relative; padding: 1.4rem 0 2.6rem; border-top: 1px solid rgb(74 112 204 / .5); }
+.problem { position: relative; padding: 1.4rem 0 2.6rem; border-top: 0; }
+.rowRule { position: absolute; top: 0; right: 0; left: 0; display: block; height: 1px; background: rgb(74 112 204 / .5); transform-origin: left center; }
 .index { display: block; color: var(--color-brand-blue); font-size: var(--type-h4); letter-spacing: -.08em; line-height: .8; }
 .discipline { margin: 1.4rem 0 .75rem; color: #8f9697; font-size: var(--type-h4); font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
 .problem h2 { max-width: 12ch; margin: 0; font-size: var(--type-h1); line-height: .9; letter-spacing: var(--type-h1-letter-spacing); }
@@ -25,9 +26,10 @@
 .closing { margin: 1rem 0 0; padding-top: 1.5rem; border-top: 1px solid rgb(242 242 238 / .26); font-size: var(--type-h4); line-height: 1; letter-spacing: -.04em; }
 .disciplines { padding-block: 5.5rem; }
 .disciplines .sectionIntro > p:last-child { color: #505558; }
-.disciplineList { margin-top: 3rem; border-top: 1px solid rgb(9 11 13 / .25); }
-.disciplineRow { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: start; padding: 1.35rem 0; border-bottom: 1px solid rgb(9 11 13 / .25); }
+.disciplineList { margin-top: 3rem; border-top: 0; }
+.disciplineRow { position: relative; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: start; padding: 1.35rem 0; border-bottom: 0; }
 .disciplineRow > span { color: var(--color-brand-blue); font-size: var(--type-h4); letter-spacing: .1em; }
+.disciplineRowRule { position: absolute; right: 0; bottom: 0; left: 0; display: block; height: 1px; background: rgb(9 11 13 / .25); transform-origin: left center; }
 .disciplineRow h3 { margin: 0; font-size: var(--type-h3); line-height: 1; letter-spacing: -.04em; }
 .disciplineRow p { margin: .65rem 0 0; color: #5e6467; font-size: var(--type-h3); line-height: 1.45; }
 .disciplineRow i { color: var(--color-brand-blue); font-size: var(--type-h4); font-style: normal; }
@@ -50,7 +52,8 @@
 .processRow span { color: var(--color-brand-blue); font-size: var(--type-h4); }
 .processRow h2 { margin: 0; font-size: var(--type-h2); line-height: var(--type-h2-line-height); letter-spacing: var(--type-h2-letter-spacing); }
 .processRow p { max-width: 29ch; margin: .75rem 0 0; color: #b9bdc0; line-height: var(--type-h3-line-height); }
-.process .closing { margin-top: 0; padding-top: 0; border-top: 0; }
+.process .closing { position: relative; margin-top: 0; padding-top: 1.5rem; border-top: 0; }
+.processRule { position: absolute; top: 0; right: 0; left: 0; display: block; height: 1px; background: rgb(242 242 238 / .26); transform-origin: left center; }
 .process .closing a { display: inline-flex; min-height: 44px; align-items: center; color: var(--color-brand-mineral); font-weight: 650; text-decoration: underline; text-underline-offset: .3em; }
 .confidence { padding-block: 4.5rem; }
 .confidence h2 { max-width: 10ch; }
@@ -64,18 +67,26 @@
 .muted { margin: 1.5rem 0 0; color: #777b7c; font-size: var(--type-h4); letter-spacing: .1em; }
 .faq { padding-block: 5.5rem; }
 .faq h2 { max-width: 10ch; }
-.faqList { margin-top: 3rem; border-top: 1px solid rgb(9 11 13 / .3); }
-.faqItem { border-bottom: 1px solid rgb(9 11 13 / .3); }
+.faqList { position: relative; margin-top: 3rem; border-top: 0; }
+.faqItem { position: relative; border-bottom: 0; }
+.faqRule { position: absolute; top: 0; right: 0; left: 0; display: block; height: 1px; background: rgb(9 11 13 / .3); transform-origin: left center; }
+.faqItem::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: rgb(9 11 13 / .3); content: ""; }
 .faqItem button { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; padding: 1.2rem 0; border: 0; background: transparent; color: inherit; text-align: left; font-size: var(--type-h4); font-weight: 600; }
 .faqItem button:focus-visible { outline: 2px solid var(--color-brand-blue); outline-offset: 4px; }
 .faqItem button span:last-child { color: var(--color-brand-blue); font-size: var(--type-h4); }
 .faqItem div { padding: 0 2rem 1.2rem 0; }
 .faqItem div p { margin: 0; color: #505558; line-height: 1.55; }
-.cta { padding-block: 6rem 4rem; }
+.cta { position: relative; padding-block: 6rem 4rem; }
+.ctaRule { position: absolute; top: 0; right: var(--container-gutter); left: var(--container-gutter); display: block; height: 1px; background: rgb(74 112 204 / .5); transform-origin: left center; }
 .cta h2 { max-width: 9ch; }
 .cta > p:not(.eyebrow):not(.disciplineNote) { margin: 1.75rem 0 0; color: #b9bdc0; line-height: 1.55; }
 .cta a { margin-top: 1.75rem; background: var(--color-brand-blue); color: var(--color-brand-mineral); }
 .disciplineNote { margin: 3rem 0 0; color: #90979a; font-size: var(--type-h4); letter-spacing: .1em; }
 .footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.4rem var(--container-gutter); border-top: 1px solid rgb(74 112 204 / .5); background: var(--color-brand-charcoal); color: var(--color-brand-mineral); font-size: var(--type-h4); }
 .footer a { color: var(--color-brand-mineral); }
+.processRule,
+.ctaRule { transform-origin: left center; }
+@media (prefers-reduced-motion: reduce) {
+  .rowRule, .disciplineRowRule, .processRule, .faqRule, .ctaRule { transform: none !important; }
+}
 @media (prefers-reduced-motion: reduce) { .faqItem button span:last-child, .demoTrack { animation: none; transform: none; } }
